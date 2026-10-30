@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robert & Diana Wedding Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    assets/style.css
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="bgMusic" loop preload="auto">
+        bahandi.m4a
+    </audio>
+    <!-- Lightbox -->
+    <div id="lightbox">
+        <span id="closeLightbox">&times;</span>
+        <img id="lightboxImage" alt="Preview">
+    </div>
+    <!-- Landing Page -->
+    <section id="landing" class="page active">
+        <div class="welcome-box">
+            images/cover.png
+            <h2>Welcome</h2>
+            <input
+                type="text"
+                id="guestName"
+                placeholder="Enter Guest Name">
+            <button onclick="openInvitation()">
+                Open Invitation
+            </button>
+        </div>
+    </section>
+    <!-- Cover Page -->
+    <section id="cover" class="page">
+        images/cover.png
+        <div class="overlay-card">
+            <h1 id="typedName"></h1>
+            <p id="guestGreeting"></p>
+            <div id="countdown"></div>
+            <button onclick="showPage('invitation')">
+                View Invitation
+            </button>
+        </div>
+    </section>
+    <!-- Invitation -->
+    <section id="invitation" class="page image-page">
+        images/invitation.jfif
+        <button
+            class="next-btn"
+            onclick="showPage('entourage')">
+            Next →
+        </button>
+    </section>
+    <!-- Entourage -->
+    <section id="entourage" class="page image-page">
+        images/entourage.png
+        <button
+            class="next-btn"
+            onclick="showPage('venue')">
+            Next →
+        </button>
+    </section>
+    <!-- Venue -->
+    <section id="venue" class="page center-page">
+        <div class="content-card">
+            <h2>Wedding Venue</h2>
+            <h3>Garden of Envy Indoor Garden</h3>
+            <p>The Gallery Mabolo, Cebu City</p>
+            <a
+                class="venue-btn"
+                href="https://maps.app.goo.gl/cvZW7dEifomMjG9T9"
+                target="_blank">
+                Open Google Maps
+            </a>
+        </div>
+        <button
+            class="next-btn"
+            onclick="showPage('gallery')">
+            Next →
+        </button>
+    </section>
+    <!-- Gallery -->
+    <section id="gallery" class="page center-page">
+        <h2>Wedding Gallery</h2>
+        <div class="gallery">
+            images/cover.png">
+            images/invitation.jfif">
+            images/entourage.png">
+        </div>
+        <button
+            class="next-btn"
+            onclick="showPage('rsvp')">
+            Next →
+        </button>
+    </section>
+    <!-- RSVP -->
+    <section id="rsvp" class="page center-page">
+        <div class="content-card">
+            <h2>RSVP</h2>
+            <input
+                id="rsvpName"
+                placeholder="Guest Name">
+            <input
+                id="rsvpMobile"
+                placeholder="Mobile Number">
+            <select id="attendance">
+                <option>Attending</option>
+                <option>Not Attending</option>
+            </select>
+            <input
+                id="guestCount"
+                type="number"
+                value="1">
+            <textarea
+                id="message"
+                placeholder="Message"></textarea>
+            <button onclick="submitRSVP()">
+                Confirm Attendance
+            </button>
+        </div>
+    </section>
+    <!-- Thank You -->
+    <section id="thanks" class="page center-page">
+        <div class="content-card">
+            <h2>Thank You</h2>
+            <h1 id="thankYouName"></h1>
+            <p>Your attendance has been confirmed.</p>
+            <p>We look forward to celebrating our special day with you.</p>
+        </div>
+    </section>
+    assets/app.jsscript>
+</body>
+</html>
