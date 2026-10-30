@@ -318,10 +318,30 @@
                 <h2 class="font-cinzel text-3xl text-burgundy mb-2">Thank You</h2>
                 <h3 id="thankYouName" class="font-playfair text-2xl text-burgundy font-bold my-2"></h3>
                 <p id="thankYouMessageText" class="text-stone-700 text-xl font-medium mb-2">Your response has been saved.</p>
-                <p class="text-stone-600 text-lg">We look forward to celebrating our special day together!</p>
+                <p class="text-stone-600 text-lg mb-6">We look forward to celebrating our special day together!</p>
+                
+                <!-- CLOSE PAGE / EXIT INVITATION BUTTON -->
+                <button id="closePageBtn" type="button" class="btn-gold px-8 py-3.5 rounded-full text-base sm:text-lg font-cormorant font-semibold uppercase tracking-wider shadow-lg inline-flex items-center justify-center gap-2 hover:scale-105 transition-transform">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                    Close Invitation
+                </button>
             </div>
         </section>
     </main>
+
+    <!-- FAREWELL OVERLAY (FALLBACK IF WINDOW.CLOSE() IS BLOCKED BY BROWSER) -->
+    <div id="farewellOverlay" class="fixed inset-0 bg-stone-900/90 backdrop-blur-md z-[2500] flex justify-center items-center p-6 text-center" style="display: none;">
+        <div class="content-card p-8 sm:p-10 max-w-md w-full border-gold/60 shadow-2xl flex flex-col items-center gap-4">
+            <span class="text-4xl">💌</span>
+            <h2 class="font-cinzel text-2xl text-burgundy font-bold">Thank You for Visiting!</h2>
+            <p class="text-stone-700 text-lg leading-relaxed">
+                You may now safely close this browser tab or window.
+            </p>
+            <button id="reopenInvitationBtn" type="button" class="mt-2 text-sm text-burgundy underline hover:text-black font-semibold">
+                ← Re-open Invitation
+            </button>
+        </div>
+    </div>
 
     <!-- ADMIN DASHBOARD MODAL -->
     <div id="guestListModal" class="guest-modal fixed inset-0 bg-black/60 backdrop-blur-sm z-[2000] flex justify-center items-center p-4" style="display: none;" role="dialog" aria-modal="true">
@@ -431,6 +451,32 @@
         const exportJsonBtn = document.getElementById('exportJsonBtn');
         const clearDataBtn = document.getElementById('clearDataBtn');
         const manualRefreshBtn = document.getElementById('manualRefreshBtn');
+        const closePageBtn = document.getElementById('closePageBtn');
+        const farewellOverlay = document.getElementById('farewellOverlay');
+        const reopenInvitationBtn = document.getElementById('reopenInvitationBtn');
+
+        // Close Page Button Action with Browser Fallback
+        if (closePageBtn) {
+            closePageBtn.addEventListener('click', () => {
+                // Attempt window close
+                window.close();
+
+                // If window.close() is prevented/ignored by browser security rules:
+                setTimeout(() => {
+                    if (farewellOverlay) {
+                        farewellOverlay.style.display = 'flex';
+                    }
+                }, 150);
+            });
+        }
+
+        if (reopenInvitationBtn) {
+            reopenInvitationBtn.addEventListener('click', () => {
+                if (farewellOverlay) {
+                    farewellOverlay.style.display = 'none';
+                }
+            });
+        }
 
         // Show Toast Notification
         function showToast(msg) {
