@@ -327,7 +327,7 @@
         }
 
         /* =================================
-            RSVP FORM
+            RSVP FORM & PLUS ONE
         ================================= */
 
         .rsvp-form {
@@ -382,12 +382,33 @@
             min-height: 100px;
         }
 
+        /* Dynamic Plus One Field Styling */
+        #plusOneContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: left;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        #plusOneContainer label {
+            font-size: 1rem;
+            color: var(--primary-burgundy);
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* =================================
             BUTTONS
         ================================= */
 
         .submit-btn,
-        .venue-btn {
+        .venue-btn,
+        .view-list-btn {
 
             background: linear-gradient(
                 135deg,
@@ -432,7 +453,8 @@
         }
 
         .submit-btn:hover,
-        .venue-btn:hover {
+        .venue-btn:hover,
+        .view-list-btn:hover {
 
             background: linear-gradient(
                 135deg,
@@ -458,6 +480,87 @@
             padding: 12px 28px;
 
             font-size: clamp(0.95rem, 3vw, 1.1rem);
+        }
+
+        .view-list-btn {
+            background: transparent;
+            color: var(--primary-burgundy);
+            border: 1px solid var(--accent-gold);
+            margin-top: 10px;
+            box-shadow: none;
+        }
+
+        .view-list-btn:hover {
+            background: rgba(107, 20, 20, 0.05);
+            color: var(--primary-burgundy);
+        }
+
+        /* =================================
+            GUEST LIST MODAL
+        ================================= */
+
+        .guest-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .guest-modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-gold);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 80vh;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--primary-burgundy);
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .guest-list-container {
+            overflow-y: auto;
+            max-height: 55vh;
+            text-align: left;
+        }
+
+        .guest-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed #dcd1c4;
+        }
+
+        .guest-item:last-child {
+            border-bottom: none;
+        }
+
+        .guest-item-name {
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: var(--primary-burgundy);
+        }
+
+        .plus-one-tag {
+            font-size: 0.95rem;
+            color: #666;
+            margin-left: 10px;
         }
 
         /* =================================
@@ -513,7 +616,8 @@
             }
 
             .submit-btn,
-            .venue-btn {
+            .venue-btn,
+            .view-list-btn {
                 width: 100%;
                 max-width: 100%;
                 padding: 13px 18px;
@@ -685,7 +789,19 @@
                         type="number"
                         value="1"
                         min="1"
+                        onchange="togglePlusOneInput()"
+                        oninput="togglePlusOneInput()"
                     >
+
+                    <!-- PLUS ONE TEXTBOX (HIDDEN BY DEFAULT) -->
+                    <div id="plusOneContainer" style="display: none;">
+                        <label for="plusOneNames">Plus One Guest Name(s):</label>
+                        <input
+                            id="plusOneNames"
+                            type="text"
+                            placeholder="Full name of your plus one"
+                        >
+                    </div>
 
                     <textarea
                         id="message"
@@ -694,9 +810,18 @@
 
                     <button
                         class="submit-btn"
-                        onclick="submitRSVP()"
+                        onclick="handleRSVPSubmit()"
                     >
                         Confirm Attendance
+                    </button>
+
+                    <!-- VIEW GUEST LIST BUTTON -->
+                    <button
+                        type="button"
+                        class="view-list-btn"
+                        onclick="openGuestListModal()"
+                    >
+                        View Confirmed Guest List
                     </button>
 
                 </div>
@@ -734,12 +859,29 @@
 
     </div>
 
+    <!-- GUEST LIST MODAL -->
+    <div id="guestListModal" class="guest-modal" style="display: none;">
+        <div class="guest-modal-content">
+            <span class="close-modal" onclick="closeGuestListModal()">&times;</span>
+            <h2 style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy);">Confirmed Guests</h2>
+            <div id="guestListContainer" class="guest-list-container">
+                <!-- Guest list entries generated dynamically -->
+            </div>
+        </div>
+    </div>
+
     <!-- APPLICATION SCRIPT -->
 
     <script src="assets/app.js"></script>
 
-    <!-- TAP ANYWHERE & AUDIO 21-SECOND START SCRIPT -->
+    <!-- TAP ANYWHERE, PLUS ONE, GUEST LIST & AUDIO SCRIPT -->
     <script>
+        // Sample Guest List Data (Initial Mock Data)
+        let guestList = [
+            { name: "John Doe", plusOnes: ["Jane Doe"] },
+            { name: "Maria Santos", plusOnes: [] }
+        ];
+
         document.addEventListener('DOMContentLoaded', () => {
             const landing = document.getElementById('landing');
             const body = document.body;
@@ -775,6 +917,85 @@
                 landing.addEventListener('touchstart', handleFirstInteraction, { once: true });
             }
         });
+
+        // Toggle Plus One Name Box based on Guest Count
+        function togglePlusOneInput() {
+            const count = parseInt(document.getElementById('guestCount').value) || 1;
+            const plusOneContainer = document.getElementById('plusOneContainer');
+            
+            if (count > 1) {
+                plusOneContainer.style.display = 'flex';
+            } else {
+                plusOneContainer.style.display = 'none';
+            }
+        }
+
+        // Handle RSVP Form Submission
+        function handleRSVPSubmit() {
+            const name = document.getElementById('rsvpName').value.trim();
+            const guestCount = parseInt(document.getElementById('guestCount').value) || 1;
+            const plusOneName = document.getElementById('plusOneNames').value.trim();
+
+            if (!name) {
+                alert('Please enter your name before submitting.');
+                return;
+            }
+
+            // Collect Plus Ones
+            let plusOnesArr = [];
+            if (guestCount > 1 && plusOneName) {
+                plusOnesArr.push(plusOneName);
+            }
+
+            // Add to Local Guest List
+            guestList.push({
+                name: name,
+                plusOnes: plusOnesArr
+            });
+
+            // Set Thank You Name
+            const thankYouElem = document.getElementById('thankYouName');
+            if (thankYouElem) {
+                thankYouElem.innerText = name;
+            }
+
+            // Call external submit logic if exists
+            if (typeof submitRSVP === 'function') {
+                submitRSVP();
+            } else {
+                alert('Thank you for confirming your attendance!');
+            }
+        }
+
+        // Modal Controls
+        function openGuestListModal() {
+            const modal = document.getElementById('guestListModal');
+            const container = document.getElementById('guestListContainer');
+            
+            // Build List HTML
+            if (guestList.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:#777;">No confirmed guests yet.</p>';
+            } else {
+                let html = '';
+                guestList.forEach(guest => {
+                    html += `<div class="guest-item">
+                        <div class="guest-item-name">• ${guest.name}</div>`;
+                    if (guest.plusOnes && guest.plusOnes.length > 0) {
+                        guest.plusOnes.forEach(p => {
+                            html += `<div class="plus-one-tag">+ Plus One: ${p}</div>`;
+                        });
+                    }
+                    html += `</div>`;
+                });
+                container.innerHTML = html;
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        function closeGuestListModal() {
+            document.getElementById('guestListModal').style.display = 'none';
+        }
     </script>
 
 </body>
