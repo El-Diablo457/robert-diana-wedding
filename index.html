@@ -408,7 +408,8 @@
 
         .submit-btn,
         .venue-btn,
-        .view-list-btn {
+        .view-list-btn,
+        .close-btn {
 
             background: linear-gradient(
                 135deg,
@@ -454,7 +455,8 @@
 
         .submit-btn:hover,
         .venue-btn:hover,
-        .view-list-btn:hover {
+        .view-list-btn:hover,
+        .close-btn:hover {
 
             background: linear-gradient(
                 135deg,
@@ -470,8 +472,28 @@
             border-color: var(--soft-gold);
         }
 
-        .submit-btn {
+        .submit-btn,
+        .close-btn {
             width: 100%;
+        }
+
+        .close-btn {
+            background: linear-gradient(
+                135deg,
+                #c59b27 0%,
+                #9e7b1a 100%
+            );
+            border-color: #fff;
+            box-shadow: 0 6px 20px rgba(197, 155, 39, 0.35);
+        }
+
+        .close-btn:hover {
+            background: linear-gradient(
+                135deg,
+                #d8ac30 0%,
+                #c59b27 100%
+            );
+            box-shadow: 0 10px 25px rgba(197, 155, 39, 0.45);
         }
 
         .venue-btn {
@@ -617,7 +639,8 @@
 
             .submit-btn,
             .venue-btn,
-            .view-list-btn {
+            .view-list-btn,
+            .close-btn {
                 width: 100%;
                 max-width: 100%;
                 padding: 13px 18px;
@@ -808,7 +831,9 @@
                         placeholder="Well wishes or message for the couple..."
                     ></textarea>
 
+                    <!-- CONFIRM ATTENDANCE BUTTON -->
                     <button
+                        id="rsvpSubmitBtn"
                         class="submit-btn"
                         onclick="handleRSVPSubmit()"
                     >
@@ -832,7 +857,7 @@
 
         <!-- THANK YOU -->
 
-        <section class="scroll-section">
+        <section id="thankYouSection" class="scroll-section">
 
             <div class="content-card">
 
@@ -962,8 +987,22 @@
             // Call external submit logic if exists
             if (typeof submitRSVP === 'function') {
                 submitRSVP();
-            } else {
-                alert('Thank you for confirming your attendance!');
+            }
+
+            // REPLACE CONFIRM ATTENDANCE BUTTON WITH CLOSE / DONE BUTTON
+            const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
+            if (rsvpSubmitBtn) {
+                rsvpSubmitBtn.innerText = "Close / Done";
+                rsvpSubmitBtn.className = "close-btn";
+                rsvpSubmitBtn.onclick = scrollToThankYou;
+            }
+        }
+
+        // Scroll to Thank You Section
+        function scrollToThankYou() {
+            const thankYouSection = document.getElementById('thankYouSection');
+            if (thankYouSection) {
+                thankYouSection.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
