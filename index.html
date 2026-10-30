@@ -427,4 +427,680 @@
                 0 0 8px rgba(197, 155, 39, 0.3);
         }
 
-        .rsvp-
+        .rsvp-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Plus One Field Styling */
+        #plusOneContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: left;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        #plusOneContainer label {
+            font-size: 1rem;
+            color: var(--primary-burgundy);
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* =================================
+            BUTTONS
+        ================================= */
+
+        .submit-btn,
+        .venue-btn,
+        .view-list-btn,
+        .close-btn {
+
+            background: linear-gradient(
+                135deg,
+                #7a1c1c 0%,
+                #520f0f 100%
+            );
+
+            color: #ffffff;
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: clamp(1rem, 3vw, 1.25rem);
+
+            font-weight: 600;
+
+            letter-spacing: clamp(1px, 0.3vw, 2px);
+
+            text-transform: uppercase;
+
+            padding: 14px clamp(20px, 5vw, 40px);
+
+            border: 1px solid var(--accent-gold);
+
+            border-radius: 50px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 6px 20px rgba(122, 28, 28, 0.35);
+
+            transition: all 0.3s ease;
+
+            text-decoration: none;
+
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            max-width: 100%;
+        }
+
+        .submit-btn:hover,
+        .venue-btn:hover,
+        .view-list-btn:hover,
+        .close-btn:hover {
+
+            background: linear-gradient(
+                135deg,
+                #942323 0%,
+                #7a1c1c 100%
+            );
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px rgba(122, 28, 28, 0.45);
+
+            border-color: var(--soft-gold);
+        }
+
+        .submit-btn,
+        .close-btn {
+            width: 100%;
+        }
+
+        .close-btn {
+            background: linear-gradient(
+                135deg,
+                #c59b27 0%,
+                #9e7b1a 100%
+            );
+            border-color: #fff;
+            box-shadow: 0 6px 20px rgba(197, 155, 39, 0.35);
+        }
+
+        .close-btn:hover {
+            background: linear-gradient(
+                135deg,
+                #d8ac30 0%,
+                #c59b27 100%
+            );
+            box-shadow: 0 10px 25px rgba(197, 155, 39, 0.45);
+        }
+
+        .venue-btn {
+            margin-top: 18px;
+
+            padding: 12px 28px;
+
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+        }
+
+        .view-list-btn {
+            background: transparent;
+            color: var(--primary-burgundy);
+            border: 1px solid var(--accent-gold);
+            margin-top: 10px;
+            box-shadow: none;
+        }
+
+        .view-list-btn:hover {
+            background: rgba(107, 20, 20, 0.05);
+            color: var(--primary-burgundy);
+        }
+
+        /* =================================
+            GUEST LIST MODAL
+        ================================= */
+
+        .guest-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .guest-modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-gold);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 80vh;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--primary-burgundy);
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .guest-list-container {
+            overflow-y: auto;
+            max-height: 55vh;
+            text-align: left;
+        }
+
+        .guest-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed #dcd1c4;
+        }
+
+        .guest-item:last-child {
+            border-bottom: none;
+        }
+
+        .guest-item-name {
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: var(--primary-burgundy);
+        }
+
+        .plus-one-tag {
+            font-size: 0.95rem;
+            color: #666;
+            margin-left: 10px;
+        }
+
+        /* =================================
+            TABLET RESPONSIVENESS
+        ================================= */
+
+        @media screen and (max-width: 768px) {
+
+            #invitationContent {
+                padding: 15px 12px 40px;
+                gap: 25px;
+            }
+
+            .content-card {
+                padding: 25px 18px;
+            }
+        }
+
+        /* =================================
+            MOBILE PHONE RESPONSIVENESS
+        ================================= */
+
+        @media screen and (max-width: 480px) {
+
+            #invitationContent {
+                padding: 10px 8px 35px;
+                gap: 20px;
+            }
+
+            .welcome-box {
+                padding: 15px 15px 15px;
+                max-width: 90vw;
+            }
+
+            .content-card {
+                padding: 22px 15px;
+                border-radius: 12px;
+            }
+
+            .content-card h2 {
+                font-size: clamp(1.25rem, 6vw, 1.7rem);
+            }
+
+            .rsvp-form {
+                gap: 12px;
+            }
+
+            .rsvp-form input,
+            .rsvp-form select,
+            .rsvp-form textarea {
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .submit-btn,
+            .venue-btn,
+            .view-list-btn,
+            .close-btn {
+                width: 100%;
+                max-width: 100%;
+                padding: 13px 18px;
+            }
+        }
+
+        /* =================================
+            SHORT SCREEN / LANDSCAPE MODE
+        ================================= */
+
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+
+            .welcome-box {
+                padding: 10px 15px;
+                max-width: 380px;
+            }
+
+            .landing-cover-img {
+                max-height: 60vh;
+            }
+        }
+
+        /* =================================
+            LARGE DISPLAY SUPPORT
+        ================================= */
+
+        @media screen and (min-width: 1200px) {
+
+            #invitationContent {
+                max-width: 1100px;
+            }
+
+            .content-card {
+                max-width: 700px;
+            }
+        }
+
+        /* =================================
+            ACCESSIBILITY
+        ================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+
+    </style>
+</head>
+
+<body class="landing-active">
+
+    <!-- BACKGROUND MUSIC -->
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="bahandi.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- LANDING COVER (PINTEREST POP-UP MODAL) -->
+
+    <section id="landing">
+
+        <div class="welcome-box">
+
+            <img
+                src="images/cover.png"
+                alt="Robert & Diana Wedding"
+                class="landing-cover-img"
+            >
+
+        </div>
+
+    </section>
+
+    <!-- INVITATION CONTENT (PREVIEWED IN BACKGROUND WITH BLUR) -->
+
+    <div id="invitationContent">
+
+        <!-- INVITATION CARD -->
+
+        <section class="scroll-section">
+
+            <img
+                src="images/invitation.jfif"
+                alt="Wedding Invitation"
+                class="content-img"
+            >
+
+        </section>
+
+        <!-- ENTOURAGE -->
+
+        <section class="scroll-section">
+
+            <img
+                src="images/entourage.png"
+                alt="Wedding Entourage"
+                class="content-img"
+            >
+
+        </section>
+
+        <!-- WEDDING VENUE -->
+
+        <section class="scroll-section">
+
+            <div class="content-card">
+
+                <h2>Wedding Venue</h2>
+
+                <h3>Garden of Envy Indoor Garden</h3>
+
+                <p>The Gallery Mabolo, Cebu City</p>
+
+                <a
+                    class="venue-btn"
+                    href="https://maps.app.goo.gl/cvZW7dEifomMjG9T9"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Google Maps
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- RSVP -->
+
+        <section class="scroll-section">
+
+            <div class="content-card">
+
+                <h2>RSVP</h2>
+
+                <p style="font-size: 1.05rem; margin-bottom: 5px;">
+                    Kindly confirm your attendance below.
+                </p>
+
+                <div class="rsvp-form">
+
+                    <input
+                        id="rsvpName"
+                        type="text"
+                        placeholder="Guest Name"
+                    >
+
+                    <input
+                        id="rsvpMobile"
+                        type="tel"
+                        placeholder="Mobile Number"
+                    >
+
+                    <select id="attendance" onchange="updateRSVPState()">
+
+                        <option value="Attending">Attending</option>
+                        <option value="Not Attending">Not Attending</option>
+
+                    </select>
+
+                    <!-- PLUS ONE TEXTBOX (SHOWN ONLY WHEN ATTENDING) -->
+                    <div id="plusOneContainer">
+                        <input
+                            id="plusOneNames"
+                            type="text"
+                            placeholder="Plus One"
+                        >
+                    </div>
+
+                    <textarea
+                        id="message"
+                        placeholder="Well wishes or message for the couple..."
+                    ></textarea>
+
+                    <!-- SUBMIT BUTTON -->
+                    <button
+                        id="rsvpSubmitBtn"
+                        class="submit-btn"
+                        onclick="handleRSVPSubmit()"
+                    >
+                        Confirm Attendance
+                    </button>
+
+                    <!-- VIEW GUEST LIST BUTTON -->
+                    <button
+                        type="button"
+                        class="view-list-btn"
+                        onclick="openGuestListModal()"
+                    >
+                        View Confirmed Guest List
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- THANK YOU -->
+
+        <section id="thankYouSection" class="scroll-section">
+
+            <div class="content-card">
+
+                <h2>Thank You</h2>
+
+                <h1
+                    id="thankYouName"
+                    style="
+                        font-size: clamp(1.3rem, 4vw, 1.6rem);
+                        color: var(--primary-burgundy);
+                        margin: 10px 0;
+                    "
+                ></h1>
+
+                <p id="thankYouMessageText">Your attendance has been confirmed.</p>
+
+                <p>
+                    We look forward to celebrating our special day with you!
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- GUEST LIST MODAL -->
+    <div id="guestListModal" class="guest-modal" style="display: none;">
+        <div class="guest-modal-content">
+            <span class="close-modal" onclick="closeGuestListModal()">&times;</span>
+            <h2 style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy);">Confirmed Guests</h2>
+            <div id="guestListContainer" class="guest-list-container">
+                <!-- Guest list entries generated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLICATION SCRIPT -->
+
+    <script src="assets/app.js"></script>
+
+    <!-- TAP ANYWHERE, PLUS ONE, GUEST LIST & AUDIO SCRIPT -->
+    <script>
+        // Sample Guest List Data (Initial Mock Data)
+        let guestList = [
+            { name: "John Doe", plusOnes: ["Jane Doe"] },
+            { name: "Maria Santos", plusOnes: [] }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const landing = document.getElementById('landing');
+            const body = document.body;
+
+            function handleFirstInteraction(event) {
+                const audio = document.getElementById('bgMusic');
+                if (audio) {
+                    audio.currentTime = 21; // Jump to 21 seconds mark
+                    audio.play().catch(error => {
+                        console.log("Audio playback was prevented:", error);
+                    });
+                }
+
+                // Remove blur state and fade out modal
+                body.classList.remove('landing-active');
+                if (landing) {
+                    landing.style.transition = 'opacity 0.5s ease';
+                    landing.style.opacity = '0';
+                    setTimeout(() => {
+                        landing.style.display = 'none';
+                    }, 500);
+                }
+
+                // Trigger any custom openInvitation logic if defined in app.js
+                if (typeof openInvitation === 'function') {
+                    openInvitation();
+                }
+            }
+
+            // Tap anywhere on landing screen triggers audio & reveals invitation
+            if (landing) {
+                landing.addEventListener('click', handleFirstInteraction, { once: true });
+                landing.addEventListener('touchstart', handleFirstInteraction, { once: true });
+            }
+
+            // Initialize correct button and field state on load
+            updateRSVPState();
+        });
+
+        // Update UI based on Attending / Not Attending selection
+        function updateRSVPState() {
+            const attendance = document.getElementById('attendance').value;
+            const plusOneContainer = document.getElementById('plusOneContainer');
+            const submitBtn = document.getElementById('rsvpSubmitBtn');
+            const messageArea = document.getElementById('message');
+
+            if (attendance === "Attending") {
+                plusOneContainer.style.display = 'flex';
+                submitBtn.innerText = "Confirm Attendance";
+                messageArea.placeholder = "Well wishes or message for the couple...";
+                messageArea.required = false;
+            } else {
+                plusOneContainer.style.display = 'none';
+                submitBtn.innerText = "I Apologize";
+                messageArea.placeholder = "Please leave a message or reason for declining (Required)...";
+                messageArea.required = true;
+            }
+        }
+
+        // Handle RSVP Form Submission
+        function handleRSVPSubmit() {
+            const name = document.getElementById('rsvpName').value.trim();
+            const attendance = document.getElementById('attendance').value;
+            const plusOneName = document.getElementById('plusOneNames').value.trim();
+            const messageArea = document.getElementById('message').value.trim();
+
+            if (!name) {
+                alert('Please enter your name before submitting.');
+                return;
+            }
+
+            if (attendance === "Not Attending" && !messageArea) {
+                alert('Please leave a message or reason for declining before apologizing.');
+                return;
+            }
+
+            // Collect Plus Ones if Attending
+            let plusOnesArr = [];
+            if (attendance === "Attending" && plusOneName) {
+                plusOnesArr.push(plusOneName);
+            }
+
+            // Add to Local Guest List
+            guestList.push({
+                name: name,
+                plusOnes: plusOnesArr
+            });
+
+            // Set Thank You Name and text
+            const thankYouElem = document.getElementById('thankYouName');
+            const thankYouText = document.getElementById('thankYouMessageText');
+            if (thankYouElem) {
+                thankYouElem.innerText = name;
+            }
+            if (thankYouText) {
+                if (attendance === "Attending") {
+                    thankYouText.innerText = "Your attendance has been confirmed.";
+                } else {
+                    thankYouText.innerText = "Your apology and response have been received.";
+                }
+            }
+
+            // Call external submit logic if exists
+            if (typeof submitRSVP === 'function') {
+                submitRSVP();
+            }
+
+            // REPLACE BUTTON WITH CLOSE / DONE BUTTON
+            const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
+            if (rsvpSubmitBtn) {
+                rsvpSubmitBtn.innerText = "Close / Done";
+                rsvpSubmitBtn.className = "close-btn";
+                rsvpSubmitBtn.onclick = scrollToThankYou;
+            }
+        }
+
+        // Scroll to Thank You Section
+        function scrollToThankYou() {
+            const thankYouSection = document.getElementById('thankYouSection');
+            if (thankYouSection) {
+                thankYouSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Modal Controls
+        function openGuestListModal() {
+            const modal = document.getElementById('guestListModal');
+            const container = document.getElementById('guestListContainer');
+            
+            // Build List HTML
+            if (guestList.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:#777;">No confirmed guests yet.</p>';
+            } else {
+                let html = '';
+                guestList.forEach(guest => {
+                    html += `<div class="guest-item">
+                        <div class="guest-item-name">• ${guest.name}</div>`;
+                    if (guest.plusOnes && guest.plusOnes.length > 0) {
+                        guest.plusOnes.forEach(p => {
+                            html += `<div class="plus-one-tag">+ Plus One: ${p}</div>`;
+                        });
+                    }
+                    html += `</div>`;
+                });
+                container.innerHTML = html;
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        function closeGuestListModal() {
+            document.getElementById('guestListModal').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
