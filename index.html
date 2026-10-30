@@ -122,7 +122,6 @@
 
             border: 1px solid rgba(197, 155, 39, 0.4);
 
-            /* Entrance, Fast Glow, and Tilt Sway */
             transform-origin: center center;
             animation: 
                 popUpScale 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -141,13 +140,11 @@
             z-index: -1;
         }
 
-        /* First Wavy Ripple (Red / Burgundy) */
         .welcome-box::before {
             border: 1.5px solid rgba(107, 20, 20, 0.85);
             animation: wavyRippleRed 1.5s ease-in-out infinite 0.3s;
         }
 
-        /* Second Subsequent Wavy Ripple (White) */
         .welcome-box::after {
             border: 1.5px solid rgba(255, 255, 255, 0.9);
             animation: wavyRippleWhite 1.5s ease-in-out infinite 0.6s;
@@ -159,90 +156,40 @@
         }
 
         @keyframes pulseGlow {
-            0% {
-                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            }
-            50% {
-                box-shadow: 0 30px 60px rgba(107, 20, 20, 0.5);
-            }
-            100% {
-                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            }
+            0% { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
+            50% { box-shadow: 0 30px 60px rgba(107, 20, 20, 0.5); }
+            100% { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
         }
 
         @keyframes tiltSway {
-            0% {
-                transform: scale(1) rotate(0deg);
-            }
-            25% {
-                transform: scale(1.03) rotate(-2deg);
-            }
-            75% {
-                transform: scale(1.03) rotate(2deg);
-            }
-            100% {
-                transform: scale(1) rotate(0deg);
-            }
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.03) rotate(-2deg); }
+            75% { transform: scale(1.03) rotate(2deg); }
+            100% { transform: scale(1) rotate(0deg); }
         }
 
-        /* Wavy Undulating Red Ripple */
         @keyframes wavyRippleRed {
-            0% {
-                transform: scale(1) skewX(0deg);
-                border-radius: 24px;
-                opacity: 0.9;
-            }
-            33% {
-                transform: scale(1.12) skewX(1.5deg);
-                border-radius: 28px 20px 28px 20px;
-            }
-            66% {
-                transform: scale(1.22) skewX(-1.5deg);
-                border-radius: 20px 28px 20px 28px;
-            }
-            100% {
-                transform: scale(1.32) skewX(0deg);
-                border-radius: 32px;
-                opacity: 0;
-            }
+            0% { transform: scale(1) skewX(0deg); border-radius: 24px; opacity: 0.9; }
+            33% { transform: scale(1.12) skewX(1.5deg); border-radius: 28px 20px 28px 20px; }
+            66% { transform: scale(1.22) skewX(-1.5deg); border-radius: 20px 28px 20px 28px; }
+            100% { transform: scale(1.32) skewX(0deg); border-radius: 32px; opacity: 0; }
         }
 
-        /* Wavy Undulating White Ripple */
         @keyframes wavyRippleWhite {
-            0% {
-                transform: scale(1) skewX(0deg);
-                border-radius: 24px;
-                opacity: 0.9;
-            }
-            33% {
-                transform: scale(1.14) skewX(-1.5deg);
-                border-radius: 20px 28px 20px 28px;
-            }
-            66% {
-                transform: scale(1.24) skewX(1.5deg);
-                border-radius: 28px 20px 28px 20px;
-            }
-            100% {
-                transform: scale(1.35) skewX(0deg);
-                border-radius: 32px;
-                opacity: 0;
-            }
+            0% { transform: scale(1) skewX(0deg); border-radius: 24px; opacity: 0.9; }
+            33% { transform: scale(1.14) skewX(-1.5deg); border-radius: 20px 28px 20px 28px; }
+            66% { transform: scale(1.24) skewX(1.5deg); border-radius: 28px 20px 28px 20px; }
+            100% { transform: scale(1.35) skewX(0deg); border-radius: 32px; opacity: 0; }
         }
 
         .landing-cover-img {
             width: 100%;
             height: auto;
-
             max-height: 70vh;
-
             object-fit: contain;
             object-position: center;
-
             border-radius: 14px;
-
-            box-shadow:
-                0 8px 25px rgba(107, 20, 20, 0.15);
-
+            box-shadow: 0 8px 25px rgba(107, 20, 20, 0.15);
             border: 1px solid rgba(197, 155, 39, 0.3);
         }
 
@@ -267,112 +214,71 @@
         #invitationContent {
             width: 100%;
             max-width: 1100px;
-
             margin: 0 auto;
-
             padding: clamp(12px, 3vw, 35px);
-
             display: flex;
             flex-direction: column;
             align-items: center;
-
             gap: clamp(20px, 4vw, 40px);
             transition: filter 0.6s ease, opacity 0.6s ease;
         }
 
         .scroll-section {
             width: 100%;
-
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* =================================
-            RESPONSIVE CONTENT IMAGES
-        ================================= */
-
         .content-img {
             display: block;
-
             width: auto;
             height: auto;
-
             max-width: 100%;
             max-height: none;
-
             object-fit: contain;
             object-position: center;
-
             border-radius: 12px;
-
-            box-shadow:
-                0 8px 25px rgba(0, 0, 0, 0.08);
-
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(197, 155, 39, 0.25);
         }
-
-        /* =================================
-            CONTENT CARDS
-        ================================= */
 
         .content-card {
             width: 100%;
             max-width: 650px;
-
             background: var(--card-bg);
-
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-
             padding: clamp(20px, 5vw, 40px);
-
             border-radius: 16px;
-
-            box-shadow:
-                0 10px 30px rgba(107, 20, 20, 0.08);
-
+            box-shadow: 0 10px 30px rgba(107, 20, 20, 0.08);
             text-align: center;
-
             border: 1px solid rgba(197, 155, 39, 0.4);
-
             position: relative;
-
             overflow-wrap: anywhere;
         }
 
         .content-card h2 {
             font-family: 'Cinzel Decorative', serif;
-
             font-size: clamp(1.4rem, 5vw, 2.2rem);
-
             color: var(--primary-burgundy);
-
             margin-bottom: 15px;
-
             letter-spacing: 1px;
             line-height: 1.3;
         }
 
         .content-card h3 {
             font-family: 'Playfair Display', serif;
-
             font-size: clamp(1.15rem, 3.5vw, 1.5rem);
-
             font-weight: 600;
-
             margin: 12px 0;
-
             color: var(--text-dark);
-
             line-height: 1.4;
         }
 
         .content-card p {
             font-size: clamp(1rem, 3vw, 1.2rem);
-
             color: #4a3e3d;
-
             line-height: 1.6;
         }
 
@@ -383,11 +289,8 @@
         .rsvp-form {
             display: flex;
             flex-direction: column;
-
             gap: 16px;
-
             margin-top: 25px;
-
             width: 100%;
             min-width: 0;
         }
@@ -395,36 +298,25 @@
         .rsvp-form input,
         .rsvp-form select,
         .rsvp-form textarea {
-
             width: 100%;
             max-width: 100%;
             min-width: 0;
-
             padding: 14px 18px;
-
             border: 1px solid #dcd1c4;
             border-radius: 8px;
-
             font-family: 'Cormorant Garamond', serif;
-
             font-size: 1.1rem;
-
             background: #fff;
             color: var(--text-dark);
-
             outline: none;
-
             transition: all 0.3s ease;
         }
 
         .rsvp-form input:focus,
         .rsvp-form select:focus,
         .rsvp-form textarea:focus {
-
             border-color: var(--accent-gold);
-
-            box-shadow:
-                0 0 8px rgba(197, 155, 39, 0.3);
+            box-shadow: 0 0 8px rgba(197, 155, 39, 0.3);
         }
 
         .rsvp-form textarea {
@@ -432,19 +324,12 @@
             min-height: 100px;
         }
 
-        /* Plus One Field Styling */
         #plusOneContainer {
             display: flex;
             flex-direction: column;
             gap: 6px;
             text-align: left;
             animation: fadeIn 0.3s ease-in-out;
-        }
-
-        #plusOneContainer label {
-            font-size: 1rem;
-            color: var(--primary-burgundy);
-            font-weight: 600;
         }
 
         @keyframes fadeIn {
@@ -459,66 +344,37 @@
         .submit-btn,
         .venue-btn,
         .view-list-btn,
-        .close-btn {
-
-            background: linear-gradient(
-                135deg,
-                #7a1c1c 0%,
-                #520f0f 100%
-            );
-
+        .close-btn,
+        .admin-btn {
+            background: linear-gradient(135deg, #7a1c1c 0%, #520f0f 100%);
             color: #ffffff;
-
             font-family: 'Cormorant Garamond', serif;
-
             font-size: clamp(1rem, 3vw, 1.25rem);
-
             font-weight: 600;
-
             letter-spacing: clamp(1px, 0.3vw, 2px);
-
             text-transform: uppercase;
-
             padding: 14px clamp(20px, 5vw, 40px);
-
             border: 1px solid var(--accent-gold);
-
             border-radius: 50px;
-
             cursor: pointer;
-
-            box-shadow:
-                0 6px 20px rgba(122, 28, 28, 0.35);
-
+            box-shadow: 0 6px 20px rgba(122, 28, 28, 0.35);
             transition: all 0.3s ease;
-
             text-decoration: none;
-
             display: inline-flex;
             justify-content: center;
             align-items: center;
-
             text-align: center;
-
             max-width: 100%;
         }
 
         .submit-btn:hover,
         .venue-btn:hover,
         .view-list-btn:hover,
-        .close-btn:hover {
-
-            background: linear-gradient(
-                135deg,
-                #942323 0%,
-                #7a1c1c 100%
-            );
-
+        .close-btn:hover,
+        .admin-btn:hover {
+            background: linear-gradient(135deg, #942323 0%, #7a1c1c 100%);
             transform: translateY(-3px);
-
-            box-shadow:
-                0 10px 25px rgba(122, 28, 28, 0.45);
-
+            box-shadow: 0 10px 25px rgba(122, 28, 28, 0.45);
             border-color: var(--soft-gold);
         }
 
@@ -528,43 +384,45 @@
         }
 
         .close-btn {
-            background: linear-gradient(
-                135deg,
-                #c59b27 0%,
-                #9e7b1a 100%
-            );
+            background: linear-gradient(135deg, #c59b27 0%, #9e7b1a 100%);
             border-color: #fff;
             box-shadow: 0 6px 20px rgba(197, 155, 39, 0.35);
         }
 
-        .close-btn:hover {
-            background: linear-gradient(
-                135deg,
-                #d8ac30 0%,
-                #c59b27 100%
-            );
-            box-shadow: 0 10px 25px rgba(197, 155, 39, 0.45);
-        }
-
         .venue-btn {
             margin-top: 18px;
-
             padding: 12px 28px;
-
             font-size: clamp(0.95rem, 3vw, 1.1rem);
         }
 
         .view-list-btn {
             background: transparent;
-            color: var(--primary-burgundy);
-            border: 1px solid var(--accent-gold);
-            margin-top: 10px;
+            color: #888;
+            border: 1px dashed #dcd1c4;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            padding: 8px;
             box-shadow: none;
+            letter-spacing: 1px;
         }
 
         .view-list-btn:hover {
-            background: rgba(107, 20, 20, 0.05);
+            background: rgba(0, 0, 0, 0.03);
             color: var(--primary-burgundy);
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: space-between;
+        }
+
+        .admin-btn {
+            font-size: 0.85rem;
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-transform: none;
         }
 
         /* =================================
@@ -588,8 +446,8 @@
             border: 1px solid var(--accent-gold);
             border-radius: 16px;
             width: 100%;
-            max-width: 500px;
-            max-height: 80vh;
+            max-width: 550px;
+            max-height: 85vh;
             padding: 25px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             display: flex;
@@ -610,383 +468,213 @@
 
         .guest-list-container {
             overflow-y: auto;
-            max-height: 55vh;
+            max-height: 50vh;
             text-align: left;
         }
 
         .guest-item {
             padding: 10px 0;
             border-bottom: 1px dashed #dcd1c4;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .guest-item:last-child {
-            border-bottom: none;
+        .guest-info {
+            display: flex;
+            flex-direction: column;
         }
 
         .guest-item-name {
             font-weight: 600;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--primary-burgundy);
         }
 
-        .plus-one-tag {
-            font-size: 0.95rem;
-            color: #666;
-            margin-left: 10px;
+        .guest-detail {
+            font-size: 0.9rem;
+            color: #555;
         }
 
-        /* =================================
-            TABLET RESPONSIVENESS
-        ================================= */
+        .delete-btn {
+            background: #a92222;
+            color: #fff;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
 
         @media screen and (max-width: 768px) {
-
-            #invitationContent {
-                padding: 15px 12px 40px;
-                gap: 25px;
-            }
-
-            .content-card {
-                padding: 25px 18px;
-            }
+            #invitationContent { padding: 15px 12px 40px; gap: 25px; }
+            .content-card { padding: 25px 18px; }
         }
-
-        /* =================================
-            MOBILE PHONE RESPONSIVENESS
-        ================================= */
 
         @media screen and (max-width: 480px) {
-
-            #invitationContent {
-                padding: 10px 8px 35px;
-                gap: 20px;
-            }
-
-            .welcome-box {
-                padding: 15px 15px 15px;
-                max-width: 90vw;
-            }
-
-            .content-card {
-                padding: 22px 15px;
-                border-radius: 12px;
-            }
-
-            .content-card h2 {
-                font-size: clamp(1.25rem, 6vw, 1.7rem);
-            }
-
-            .rsvp-form {
-                gap: 12px;
-            }
-
-            .rsvp-form input,
-            .rsvp-form select,
-            .rsvp-form textarea {
-                padding: 12px;
-                font-size: 16px;
-            }
-
-            .submit-btn,
-            .venue-btn,
-            .view-list-btn,
-            .close-btn {
-                width: 100%;
-                max-width: 100%;
-                padding: 13px 18px;
-            }
+            #invitationContent { padding: 10px 8px 35px; gap: 20px; }
+            .welcome-box { padding: 15px; max-width: 90vw; }
+            .content-card { padding: 22px 15px; border-radius: 12px; }
+            .content-card h2 { font-size: clamp(1.25rem, 6vw, 1.7rem); }
+            .rsvp-form { gap: 12px; }
+            .rsvp-form input, .rsvp-form select, .rsvp-form textarea { padding: 12px; font-size: 16px; }
+            .submit-btn, .venue-btn, .view-list-btn, .close-btn { width: 100%; max-width: 100%; padding: 13px 18px; }
         }
-
-        /* =================================
-            SHORT SCREEN / LANDSCAPE MODE
-        ================================= */
 
         @media screen and (max-height: 500px) and (orientation: landscape) {
-
-            .welcome-box {
-                padding: 10px 15px;
-                max-width: 380px;
-            }
-
-            .landing-cover-img {
-                max-height: 60vh;
-            }
+            .welcome-box { padding: 10px 15px; max-width: 380px; }
+            .landing-cover-img { max-height: 60vh; }
         }
-
-        /* =================================
-            LARGE DISPLAY SUPPORT
-        ================================= */
 
         @media screen and (min-width: 1200px) {
-
-            #invitationContent {
-                max-width: 1100px;
-            }
-
-            .content-card {
-                max-width: 700px;
-            }
+            #invitationContent { max-width: 1100px; }
+            .content-card { max-width: 700px; }
         }
 
-        /* =================================
-            ACCESSIBILITY
-        ================================= */
-
         @media (prefers-reduced-motion: reduce) {
-
-            *,
-            *::before,
-            *::after {
+            *, *::before, *::after {
                 scroll-behavior: auto !important;
                 transition-duration: 0.01ms !important;
                 animation-duration: 0.01ms !important;
             }
         }
-
     </style>
 </head>
 
 <body class="landing-active">
 
     <!-- BACKGROUND MUSIC -->
-
     <audio id="bgMusic" loop preload="auto">
         <source src="bahandi.m4a" type="audio/mp4">
         Your browser does not support the audio element.
     </audio>
 
-    <!-- LANDING COVER (PINTEREST POP-UP MODAL) -->
-
+    <!-- LANDING COVER -->
     <section id="landing">
-
         <div class="welcome-box">
-
-            <img
-                src="images/cover.png"
-                alt="Robert & Diana Wedding"
-                class="landing-cover-img"
-            >
-
+            <img src="images/cover.png" alt="Robert & Diana Wedding" class="landing-cover-img">
         </div>
-
     </section>
 
-    <!-- INVITATION CONTENT (PREVIEWED IN BACKGROUND WITH BLUR) -->
-
+    <!-- INVITATION CONTENT -->
     <div id="invitationContent">
 
-        <!-- INVITATION CARD -->
-
         <section class="scroll-section">
-
-            <img
-                src="images/invitation.jfif"
-                alt="Wedding Invitation"
-                class="content-img"
-            >
-
+            <img src="images/invitation.jfif" alt="Wedding Invitation" class="content-img">
         </section>
 
-        <!-- ENTOURAGE -->
-
         <section class="scroll-section">
-
-            <img
-                src="images/entourage.png"
-                alt="Wedding Entourage"
-                class="content-img"
-            >
-
+            <img src="images/entourage.png" alt="Wedding Entourage" class="content-img">
         </section>
 
-        <!-- WEDDING VENUE -->
-
         <section class="scroll-section">
-
             <div class="content-card">
-
                 <h2>Wedding Venue</h2>
-
                 <h3>Garden of Envy Indoor Garden</h3>
-
                 <p>The Gallery Mabolo, Cebu City</p>
-
-                <a
-                    class="venue-btn"
-                    href="https://maps.app.goo.gl/cvZW7dEifomMjG9T9"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+                <a class="venue-btn" href="https://maps.app.goo.gl/cvZW7dEifomMjG9T9" target="_blank" rel="noopener noreferrer">
                     Open Google Maps
                 </a>
-
             </div>
-
         </section>
 
-        <!-- RSVP -->
-
         <section class="scroll-section">
-
             <div class="content-card">
-
                 <h2>RSVP</h2>
-
-                <p style="font-size: 1.05rem; margin-bottom: 5px;">
-                    Kindly confirm your attendance below.
-                </p>
-
+                <p style="font-size: 1.05rem; margin-bottom: 5px;">Kindly confirm your attendance below.</p>
                 <div class="rsvp-form">
-
-                    <input
-                        id="rsvpName"
-                        type="text"
-                        placeholder="Guest Name"
-                    >
-
-                    <input
-                        id="rsvpMobile"
-                        type="tel"
-                        placeholder="Mobile Number"
-                    >
-
+                    <input id="rsvpName" type="text" placeholder="Guest Name">
+                    <input id="rsvpMobile" type="tel" placeholder="Mobile Number">
                     <select id="attendance" onchange="updateRSVPState()">
-
                         <option value="Attending">Attending</option>
                         <option value="Not Attending">Not Attending</option>
-
                     </select>
 
-                    <!-- PLUS ONE TEXTBOX (SHOWN ONLY WHEN ATTENDING) -->
                     <div id="plusOneContainer">
-                        <input
-                            id="plusOneNames"
-                            type="text"
-                            placeholder="Plus One"
-                        >
+                        <input id="plusOneNames" type="text" placeholder="Plus One">
                     </div>
 
-                    <textarea
-                        id="message"
-                        placeholder="Well wishes or message for the couple..."
-                    ></textarea>
+                    <textarea id="message" placeholder="Well wishes or message for the couple..."></textarea>
 
-                    <!-- SUBMIT BUTTON -->
-                    <button
-                        id="rsvpSubmitBtn"
-                        class="submit-btn"
-                        onclick="handleRSVPSubmit()"
-                    >
+                    <button id="rsvpSubmitBtn" class="submit-btn" onclick="handleRSVPSubmit()">
                         Confirm Attendance
                     </button>
 
-                    <!-- VIEW GUEST LIST BUTTON -->
-                    <button
-                        type="button"
-                        class="view-list-btn"
-                        onclick="openGuestListModal()"
-                    >
-                        View Confirmed Guest List
+                    <!-- DISCREET ADMIN DASHBOARD BUTTON -->
+                    <button type="button" class="view-list-btn" onclick="verifyAdminAccess()">
+                        ⚙️ Admin Dashboard
                     </button>
-
                 </div>
-
             </div>
-
         </section>
 
-        <!-- THANK YOU -->
-
         <section id="thankYouSection" class="scroll-section">
-
             <div class="content-card">
-
                 <h2>Thank You</h2>
-
-                <h1
-                    id="thankYouName"
-                    style="
-                        font-size: clamp(1.3rem, 4vw, 1.6rem);
-                        color: var(--primary-burgundy);
-                        margin: 10px 0;
-                    "
-                ></h1>
-
+                <h1 id="thankYouName" style="font-size: clamp(1.3rem, 4vw, 1.6rem); color: var(--primary-burgundy); margin: 10px 0;"></h1>
                 <p id="thankYouMessageText">Your attendance has been confirmed.</p>
-
-                <p>
-                    We look forward to celebrating our special day with you!
-                </p>
-
+                <p>We look forward to celebrating our special day with you!</p>
             </div>
-
         </section>
 
     </div>
 
-    <!-- GUEST LIST MODAL -->
+    <!-- ADMIN DASHBOARD MODAL -->
     <div id="guestListModal" class="guest-modal" style="display: none;">
         <div class="guest-modal-content">
             <span class="close-modal" onclick="closeGuestListModal()">&times;</span>
-            <h2 style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy);">Confirmed Guests</h2>
-            <div id="guestListContainer" class="guest-list-container">
-                <!-- Guest list entries generated dynamically -->
+            <h2 style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy);">Admin RSVP Dashboard</h2>
+            
+            <div id="guestListContainer" class="guest-list-container"></div>
+
+            <div class="admin-actions">
+                <button class="admin-btn" onclick="exportToCSV()">Export to CSV</button>
+                <button class="admin-btn" style="background:#a92222;" onclick="clearAllData()">Clear All Data</button>
             </div>
         </div>
     </div>
 
     <!-- APPLICATION SCRIPT -->
-
     <script src="assets/app.js"></script>
 
-    <!-- TAP ANYWHERE, PLUS ONE, GUEST LIST & AUDIO SCRIPT -->
+    <!-- INTEGRATED SCRIPT LOGIC -->
     <script>
-        // Sample Guest List Data (Initial Mock Data)
-        let guestList = [
-            { name: "John Doe", plusOnes: ["Jane Doe"] },
-            { name: "Maria Santos", plusOnes: [] }
-        ];
+        // Load persistable guest list from LocalStorage
+        let guestList = JSON.parse(localStorage.getItem('weddingRSVPList')) || [];
 
         document.addEventListener('DOMContentLoaded', () => {
             const landing = document.getElementById('landing');
             const body = document.body;
 
-            function handleFirstInteraction(event) {
+            function handleFirstInteraction() {
                 const audio = document.getElementById('bgMusic');
                 if (audio) {
-                    audio.currentTime = 21; // Jump to 21 seconds mark
-                    audio.play().catch(error => {
-                        console.log("Audio playback was prevented:", error);
-                    });
+                    audio.currentTime = 21; // Start at 21 seconds mark
+                    audio.play().catch(error => console.log("Audio play blocked:", error));
                 }
 
-                // Remove blur state and fade out modal
                 body.classList.remove('landing-active');
                 if (landing) {
                     landing.style.transition = 'opacity 0.5s ease';
                     landing.style.opacity = '0';
-                    setTimeout(() => {
-                        landing.style.display = 'none';
-                    }, 500);
+                    setTimeout(() => { landing.style.display = 'none'; }, 500);
                 }
 
-                // Trigger any custom openInvitation logic if defined in app.js
-                if (typeof openInvitation === 'function') {
-                    openInvitation();
-                }
+                if (typeof openInvitation === 'function') openInvitation();
             }
 
-            // Tap anywhere on landing screen triggers audio & reveals invitation
             if (landing) {
                 landing.addEventListener('click', handleFirstInteraction, { once: true });
                 landing.addEventListener('touchstart', handleFirstInteraction, { once: true });
             }
 
-            // Initialize correct button and field state on load
             updateRSVPState();
         });
 
-        // Update UI based on Attending / Not Attending selection
+        function saveToLocalStorage() {
+            localStorage.setItem('weddingRSVPList', JSON.stringify(guestList));
+        }
+
         function updateRSVPState() {
             const attendance = document.getElementById('attendance').value;
             const plusOneContainer = document.getElementById('plusOneContainer');
@@ -1006,9 +694,9 @@
             }
         }
 
-        // Handle RSVP Form Submission
         function handleRSVPSubmit() {
             const name = document.getElementById('rsvpName').value.trim();
+            const mobile = document.getElementById('rsvpMobile').value.trim();
             const attendance = document.getElementById('attendance').value;
             const plusOneName = document.getElementById('plusOneNames').value.trim();
             const messageArea = document.getElementById('message').value.trim();
@@ -1023,84 +711,125 @@
                 return;
             }
 
-            // Collect Plus Ones if Attending
             let plusOnesArr = [];
             if (attendance === "Attending" && plusOneName) {
                 plusOnesArr.push(plusOneName);
             }
 
-            // Add to Local Guest List
+            // Push and Save to LocalStorage
             guestList.push({
                 name: name,
-                plusOnes: plusOnesArr
+                mobile: mobile,
+                status: attendance,
+                plusOnes: plusOnesArr,
+                message: messageArea
             });
+            saveToLocalStorage();
 
-            // Set Thank You Name and text
             const thankYouElem = document.getElementById('thankYouName');
             const thankYouText = document.getElementById('thankYouMessageText');
-            if (thankYouElem) {
-                thankYouElem.innerText = name;
-            }
+            if (thankYouElem) thankYouElem.innerText = name;
             if (thankYouText) {
-                if (attendance === "Attending") {
-                    thankYouText.innerText = "Your attendance has been confirmed.";
-                } else {
-                    thankYouText.innerText = "Your apology and response have been received.";
-                }
+                thankYouText.innerText = (attendance === "Attending") 
+                    ? "Your attendance has been confirmed." 
+                    : "Your apology and response have been received.";
             }
 
-            // Call external submit logic if exists
-            if (typeof submitRSVP === 'function') {
-                submitRSVP();
-            }
+            // Lock Form Inputs for One-Time User Session
+            document.getElementById('rsvpName').disabled = true;
+            document.getElementById('rsvpMobile').disabled = true;
+            document.getElementById('attendance').disabled = true;
+            document.getElementById('plusOneNames').disabled = true;
+            document.getElementById('message').disabled = true;
 
-            // REPLACE BUTTON WITH CLOSE / DONE BUTTON
             const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
             if (rsvpSubmitBtn) {
                 rsvpSubmitBtn.innerText = "Close / Done";
                 rsvpSubmitBtn.className = "close-btn";
                 rsvpSubmitBtn.onclick = scrollToThankYou;
             }
+
+            if (typeof submitRSVP === 'function') submitRSVP();
         }
 
-        // Scroll to Thank You Section
         function scrollToThankYou() {
             const thankYouSection = document.getElementById('thankYouSection');
-            if (thankYouSection) {
-                thankYouSection.scrollIntoView({ behavior: 'smooth' });
+            if (thankYouSection) thankYouSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Optional Simple PIN Protection for Admin Panel
+        function verifyAdminAccess() {
+            const pin = prompt("Enter Admin PIN to view responses (Default PIN: 1234):");
+            if (pin === "1234") {
+                openGuestListModal();
+            } else if (pin !== null) {
+                alert("Incorrect PIN.");
             }
         }
 
-        // Modal Controls
         function openGuestListModal() {
             const modal = document.getElementById('guestListModal');
             const container = document.getElementById('guestListContainer');
             
-            // Build List HTML
             if (guestList.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color:#777;">No confirmed guests yet.</p>';
+                container.innerHTML = '<p style="text-align:center; color:#777;">No saved responses yet.</p>';
             } else {
                 let html = '';
-                guestList.forEach(guest => {
-                    html += `<div class="guest-item">
-                        <div class="guest-item-name">• ${guest.name}</div>`;
-                    if (guest.plusOnes && guest.plusOnes.length > 0) {
-                        guest.plusOnes.forEach(p => {
-                            html += `<div class="plus-one-tag">+ Plus One: ${p}</div>`;
-                        });
-                    }
-                    html += `</div>`;
+                guestList.forEach((guest, index) => {
+                    html += `
+                    <div class="guest-item">
+                        <div class="guest-info">
+                            <span class="guest-item-name">• ${guest.name} (${guest.status})</span>
+                            <span class="guest-detail">Mobile: ${guest.mobile || 'N/A'}</span>
+                            ${guest.plusOnes && guest.plusOnes.length ? `<span class="plus-one-tag">+ Plus One: ${guest.plusOnes.join(', ')}</span>` : ''}
+                            ${guest.message ? `<span class="guest-detail">Note: "${guest.message}"</span>` : ''}
+                        </div>
+                        <button class="delete-btn" onclick="deleteEntry(${index})">Delete</button>
+                    </div>`;
                 });
                 container.innerHTML = html;
             }
-
             modal.style.display = 'flex';
         }
 
         function closeGuestListModal() {
             document.getElementById('guestListModal').style.display = 'none';
         }
-    </script>
 
+        function deleteEntry(index) {
+            guestList.splice(index, 1);
+            saveToLocalStorage();
+            openGuestListModal();
+        }
+
+        function clearAllData() {
+            if (confirm("Are you sure you want to delete all saved RSVP data?")) {
+                guestList = [];
+                saveToLocalStorage();
+                openGuestListModal();
+            }
+        }
+
+        function exportToCSV() {
+            if (guestList.length === 0) {
+                alert("No data to export.");
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,Name,Mobile,Status,Plus Ones,Message\n";
+            guestList.forEach(g => {
+                let row = `"${g.name}","${g.mobile || ''}","${g.status}","${g.plusOnes.join('; ')}","${g.message || ''}"`;
+                csvContent += row + "\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "wedding_rsvps.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
 </body>
 </html>
