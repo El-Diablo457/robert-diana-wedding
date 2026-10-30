@@ -27,7 +27,7 @@
         <img id="lightboxImage" alt="Preview">
     </div>
 
-    <!-- Landing Page (Only this shows initially) -->
+    <!-- 1. Landing Page (Shown initially) -->
     <section id="landing" class="page active">
         <div class="welcome-box">
             <img src="images/cover.png" alt="Robert & Diana Wedding" class="landing-cover-img">
@@ -40,102 +40,81 @@
         </div>
     </section>
 
-    <!-- Cover Page (Unlocked after clicking Open Invitation) -->
-    <section id="cover" class="page">
-        <img src="images/cover.png" alt="Cover Background" class="bg-img">
+    <!-- 2. Continuous Scrollable Content (Hidden until Open Invitation is clicked) -->
+    <div id="invitationContent" class="invitation-scroll-container" style="display: none;">
+        
+        <!-- Cover Section -->
+        <section class="scroll-section">
+            <img src="images/cover.png" alt="Cover" class="content-img">
+        </section>
 
-        <div class="overlay-card">
-            <h1 id="typedName"></h1>
-            <p id="guestGreeting"></p>
-            <div id="countdown"></div>
-            <button class="nav-btn" onclick="showPage('invitation')">
-                View Invitation
-            </button>
-        </div>
-    </section>
+        <!-- Invitation Image Section -->
+        <section class="scroll-section">
+            <img src="images/invitation.jfif" alt="Wedding Invitation" class="content-img">
+        </section>
 
-    <!-- Invitation Page -->
-    <section id="invitation" class="page image-page">
-        <img src="images/invitation.jfif" alt="Wedding Invitation">
+        <!-- Entourage Image Section -->
+        <section class="scroll-section">
+            <img src="images/entourage.png" alt="Wedding Entourage" class="content-img">
+        </section>
 
-        <button class="next-btn" onclick="showPage('entourage')">
-            Next →
-        </button>
-    </section>
+        <!-- Venue Section -->
+        <section class="scroll-section center-page">
+            <div class="content-card">
+                <h2>Wedding Venue</h2>
+                <h3>Garden of Envy Indoor Garden</h3>
+                <p>The Gallery Mabolo, Cebu City</p>
 
-    <!-- Entourage Page -->
-    <section id="entourage" class="page image-page">
-        <img src="images/entourage.png" alt="Wedding Entourage">
+                <a class="venue-btn" href="https://maps.app.goo.gl/cvZW7dEifomMjG9T9" target="_blank">
+                    Open Google Maps
+                </a>
+            </div>
+        </section>
 
-        <button class="next-btn" onclick="showPage('venue')">
-            Next →
-        </button>
-    </section>
+        <!-- Gallery Section -->
+        <section class="scroll-section center-page">
+            <h2>Wedding Gallery</h2>
+            <div class="gallery">
+                <img src="images/cover.png" alt="Gallery 1" onclick="openLightbox(this)">
+                <img src="images/invitation.jfif" alt="Gallery 2" onclick="openLightbox(this)">
+                <img src="images/entourage.png" alt="Gallery 3" onclick="openLightbox(this)">
+            </div>
+        </section>
 
-    <!-- Venue Page -->
-    <section id="venue" class="page center-page">
-        <div class="content-card">
-            <h2>Wedding Venue</h2>
-            <h3>Garden of Envy Indoor Garden</h3>
-            <p>The Gallery Mabolo, Cebu City</p>
+        <!-- RSVP Section -->
+        <section class="scroll-section center-page">
+            <div class="content-card">
+                <h2>RSVP</h2>
 
-            <a class="venue-btn" href="https://maps.app.goo.gl/cvZW7dEifomMjG9T9" target="_blank">
-                Open Google Maps
-            </a>
-        </div>
+                <input id="rsvpName" placeholder="Guest Name">
+                <input id="rsvpMobile" placeholder="Mobile Number">
 
-        <button class="next-btn" onclick="showPage('gallery')">
-            Next →
-        </button>
-    </section>
+                <select id="attendance">
+                    <option>Attending</option>
+                    <option>Not Attending</option>
+                </select>
 
-    <!-- Gallery Page -->
-    <section id="gallery" class="page center-page">
-        <h2>Wedding Gallery</h2>
+                <input id="guestCount" type="number" value="1" min="1">
 
-        <div class="gallery">
-            <img src="images/cover.png" alt="Gallery 1" onclick="openLightbox(this)">
-            <img src="images/invitation.jfif" alt="Gallery 2" onclick="openLightbox(this)">
-            <img src="images/entourage.png" alt="Gallery 3" onclick="openLightbox(this)">
-        </div>
+                <textarea id="message" placeholder="Message"></textarea>
 
-        <button class="next-btn" onclick="showPage('rsvp')">
-            Next →
-        </button>
-    </section>
+                <button class="submit-btn" onclick="submitRSVP()">
+                    Confirm Attendance
+                </button>
+            </div>
+        </section>
 
-    <!-- RSVP Page -->
-    <section id="rsvp" class="page center-page">
-        <div class="content-card">
-            <h2>RSVP</h2>
+        <!-- Thank You Section -->
+        <section class="scroll-section center-page">
+            <div class="content-card">
+                <h2>Thank You</h2>
+                <h1 id="thankYouName"></h1>
+                <p>Your attendance has been confirmed.</p>
+                <p>We look forward to celebrating our special day with you.</p>
+            </div>
+        </section>
 
-            <input id="rsvpName" placeholder="Guest Name">
-            <input id="rsvpMobile" placeholder="Mobile Number">
-
-            <select id="attendance">
-                <option>Attending</option>
-                <option>Not Attending</option>
-            </select>
-
-            <input id="guestCount" type="number" value="1" min="1">
-
-            <textarea id="message" placeholder="Message"></textarea>
-
-            <button class="submit-btn" onclick="submitRSVP()">
-                Confirm Attendance
-            </button>
-        </div>
-    </section>
-
-    <!-- Thank You Page -->
-    <section id="thanks" class="page center-page">
-        <div class="content-card">
-            <h2>Thank You</h2>
-            <h1 id="thankYouName"></h1>
-            <p>Your attendance has been confirmed.</p>
-            <p>We look forward to celebrating our special day with you.</p>
-        </div>
-    </section>
+    </div>
 
     <!-- Application Script -->
     <script src="assets/app.js"></script>
