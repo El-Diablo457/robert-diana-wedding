@@ -122,8 +122,12 @@
 
             border: 1px solid rgba(197, 155, 39, 0.4);
 
-            /* Pulsating and entrance animation */
-            animation: popUpScale 0.4s cubic-bezier(0.16, 1, 0.3, 1), pulseGlow 3s ease-in-out infinite 0.4s;
+            /* Combined Entrance, Pulsating Glow, and Left-to-Right Tilt Animation */
+            transform-origin: center center;
+            animation: 
+                popUpScale 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                pulseGlow 3s ease-in-out infinite 0.4s, 
+                tiltSway 4s ease-in-out infinite 0.4s;
         }
 
         @keyframes popUpScale {
@@ -133,16 +137,28 @@
 
         @keyframes pulseGlow {
             0% {
-                transform: scale(1);
                 box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 0 rgba(197, 155, 39, 0);
             }
             50% {
-                transform: scale(1.025);
                 box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35), 0 0 25px rgba(197, 155, 39, 0.45);
             }
             100% {
-                transform: scale(1);
                 box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 0 rgba(197, 155, 39, 0);
+            }
+        }
+
+        @keyframes tiltSway {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+            25% {
+                transform: scale(1.02) rotate(-1.5deg);
+            }
+            75% {
+                transform: scale(1.02) rotate(1.5deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
             }
         }
 
