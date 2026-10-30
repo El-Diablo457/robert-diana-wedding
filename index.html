@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +19,7 @@
 
     <style>
         /* =================================
-           UNIVERSAL RESPONSIVE SETTINGS
+            UNIVERSAL RESPONSIVE SETTINGS
         ================================= */
 
         * {
@@ -67,7 +66,7 @@
         }
 
         /* =================================
-           LANDING COVER
+            LANDING COVER
         ================================= */
 
         #landing {
@@ -131,7 +130,7 @@
         }
 
         /* =================================
-           OPEN INVITATION BUTTON
+            OPEN INVITATION BUTTON
         ================================= */
 
         .action-bar {
@@ -151,7 +150,7 @@
         }
 
         /* =================================
-           MAIN INVITATION CONTENT
+            MAIN INVITATION CONTENT
         ================================= */
 
         #invitationContent {
@@ -178,7 +177,7 @@
         }
 
         /* =================================
-           RESPONSIVE CONTENT IMAGES
+            RESPONSIVE CONTENT IMAGES
         ================================= */
 
         .content-img {
@@ -202,7 +201,7 @@
         }
 
         /* =================================
-           CONTENT CARDS
+            CONTENT CARDS
         ================================= */
 
         .content-card {
@@ -266,7 +265,7 @@
         }
 
         /* =================================
-           RSVP FORM
+            RSVP FORM
         ================================= */
 
         .rsvp-form {
@@ -322,7 +321,7 @@
         }
 
         /* =================================
-           BUTTONS
+            BUTTONS
         ================================= */
 
         .open-btn,
@@ -402,7 +401,7 @@
         }
 
         /* =================================
-           TABLET RESPONSIVENESS
+            TABLET RESPONSIVENESS
         ================================= */
 
         @media screen and (max-width: 768px) {
@@ -423,7 +422,7 @@
         }
 
         /* =================================
-           MOBILE PHONE RESPONSIVENESS
+            MOBILE PHONE RESPONSIVENESS
         ================================= */
 
         @media screen and (max-width: 480px) {
@@ -476,7 +475,7 @@
         }
 
         /* =================================
-           SHORT SCREEN / LANDSCAPE MODE
+            SHORT SCREEN / LANDSCAPE MODE
         ================================= */
 
         @media screen and (max-height: 500px) and (orientation: landscape) {
@@ -500,7 +499,7 @@
         }
 
         /* =================================
-           LARGE DISPLAY SUPPORT
+            LARGE DISPLAY SUPPORT
         ================================= */
 
         @media screen and (min-width: 1200px) {
@@ -515,7 +514,7 @@
         }
 
         /* =================================
-           ACCESSIBILITY
+            ACCESSIBILITY
         ================================= */
 
         @media (prefers-reduced-motion: reduce) {
@@ -708,6 +707,28 @@
     <!-- APPLICATION SCRIPT -->
 
     <script src="assets/app.js"></script>
+
+    <!-- AUDIO 21-SECOND START SCRIPT -->
+    <script>
+        const originalOpenInvitation = window.openInvitation;
+        window.openInvitation = function() {
+            const audio = document.getElementById('bgMusic');
+            if (audio) {
+                audio.currentTime = 21; // Jump to 21 seconds mark
+                audio.play().catch(error => {
+                    console.log("Audio playback was prevented:", error);
+                });
+            }
+
+            // Run original logic if defined in app.js
+            if (typeof originalOpenInvitation === 'function') {
+                originalOpenInvitation();
+            } else {
+                document.getElementById('landing').style.display = 'none';
+                document.getElementById('invitationContent').style.display = 'block';
+            }
+        };
+    </script>
 
 </body>
 </html>
