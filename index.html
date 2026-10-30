@@ -351,25 +351,42 @@
             <div class="flex justify-between items-center border-b border-gold/30 pb-3">
                 <div>
                     <h2 class="font-cinzel text-xl sm:text-2xl text-burgundy font-bold">Admin RSVP Dashboard</h2>
-                    <p class="text-xs sm:text-sm text-stone-600">Consolidated RSVP list from all devices & users</p>
+                    <p class="text-xs sm:text-sm text-stone-600">Consolidated RSVP responses & metrics</p>
                 </div>
                 <button id="closeModalBtn" class="text-3xl text-burgundy hover:opacity-70 font-bold px-2">&times;</button>
             </div>
 
             <!-- Sync Indicator Bar -->
-            <div class="flex flex-wrap items-center justify-between bg-stone-100 p-3 rounded-lg border border-stone-200 text-xs sm:text-sm gap-2">
+            <div class="flex flex-wrap items-center justify-between bg-stone-100 p-2.5 rounded-lg border border-stone-200 text-xs sm:text-sm gap-2">
                 <div class="flex items-center gap-2">
                     <span id="syncDot" class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
-                    <span id="syncStatusText" class="font-semibold text-stone-700">🟢 Cloud Sync Active - Connected across devices</span>
+                    <span id="syncStatusText" class="font-semibold text-stone-700">🟢 Cloud Sync Active</span>
                 </div>
-                <div class="text-stone-500 flex items-center gap-3">
-                    <span id="totalStatsText">Total: 0 | Attending: 0</span>
-                    <button id="manualRefreshBtn" class="text-burgundy underline hover:text-black font-semibold">Manual Sync / Refresh</button>
+                <button id="manualRefreshBtn" class="text-burgundy underline hover:text-black font-semibold text-xs sm:text-sm">Refresh Responses</button>
+            </div>
+
+            <!-- SUMMARY METRICS CARDS -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <div class="bg-green-50 border border-green-200 rounded-xl p-3 text-center">
+                    <span class="block text-2xl font-bold text-green-700" id="metricAttending">0</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-green-800">Attending</span>
+                </div>
+                <div class="bg-red-50 border border-red-200 rounded-xl p-3 text-center">
+                    <span class="block text-2xl font-bold text-red-700" id="metricDeclined">0</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-red-800">Declined</span>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-center">
+                    <span class="block text-2xl font-bold text-amber-700" id="metricPlusOnes">0</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-amber-800">Plus Ones</span>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-center">
+                    <span class="block text-2xl font-bold text-blue-700" id="metricMessages">0</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-blue-800">Messages</span>
                 </div>
             </div>
 
             <!-- Filter and Actions Bar -->
-            <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                 <div class="relative w-full sm:col-span-2">
                     <input id="adminSearchInput" type="text" placeholder="Search name, mobile, note..." class="w-full p-2.5 pr-8 border border-stone-300 rounded-lg text-sm outline-none focus:border-gold bg-white">
                     <button id="clearSearchBtn" type="button" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 text-sm font-bold" title="Clear Search">&times;</button>
@@ -379,30 +396,27 @@
                     <option value="Attending">Attending Only</option>
                     <option value="Not Attending">Not Attending Only</option>
                 </select>
-                <button id="addDemoDataBtn" type="button" class="bg-amber-600 hover:bg-amber-700 text-white text-xs sm:text-sm font-semibold rounded-lg p-2.5 transition">
-                    ⚡ Add Demo Samples
-                </button>
+            </div>
+
+            <!-- Guest List Header Bar -->
+            <div class="hidden sm:grid grid-cols-12 gap-2 text-xs font-bold text-stone-500 uppercase px-3 py-1 border-b border-stone-200">
+                <div class="col-span-3">Guest & Mobile</div>
+                <div class="col-span-2 text-center">Status</div>
+                <div class="col-span-3">Plus One</div>
+                <div class="col-span-3">Message / Note</div>
+                <div class="col-span-1 text-right">Action</div>
             </div>
 
             <!-- Guest List Container -->
-            <div id="guestListContainer" class="guest-list-container overflow-y-auto max-h-[45vh] border border-stone-200 rounded-lg bg-white p-3 divide-y divide-stone-100">
+            <div id="guestListContainer" class="guest-list-container overflow-y-auto max-h-[40vh] border border-stone-200 rounded-lg bg-white p-3 divide-y divide-stone-100">
                 <p class="text-center text-stone-500 py-6">Loading responses...</p>
             </div>
 
-            <!-- Admin Actions Bar -->
-            <div class="flex flex-wrap items-center justify-between gap-3 border-t border-gold/30 pt-3">
-                <div class="flex items-center gap-2">
-                    <button id="exportCsvBtn" type="button" class="bg-burgundy hover:bg-burgundyDark text-white text-xs sm:text-sm px-4 py-2 rounded-lg font-semibold transition">
-                        Export CSV
-                    </button>
-                    <button id="exportJsonBtn" type="button" class="bg-gold hover:bg-amber-600 text-white text-xs sm:text-sm px-4 py-2 rounded-lg font-semibold transition">
-                        Export JSON
-                    </button>
-                    <label class="cursor-pointer bg-stone-800 hover:bg-black text-white text-xs sm:text-sm font-semibold rounded-lg px-4 py-2 transition inline-flex items-center">
-                        <span>📥 Merge JSON File</span>
-                        <input id="importJsonFileInput" type="file" accept=".json" class="hidden">
-                    </label>
-                </div>
+            <!-- Admin Actions Footer Bar -->
+            <div class="flex items-center justify-between border-t border-gold/30 pt-3">
+                <button id="addDemoDataBtn" type="button" class="bg-amber-600 hover:bg-amber-700 text-white text-xs sm:text-sm font-semibold rounded-lg px-4 py-2 transition">
+                    ⚡ Add Sample Demo Data
+                </button>
                 <button id="clearDataBtn" type="button" class="bg-red-700 hover:bg-red-800 text-white text-xs sm:text-sm px-4 py-2 rounded-lg font-semibold transition">
                     Clear All Data
                 </button>
@@ -435,20 +449,22 @@
         const closeModalBtn = document.getElementById('closeModalBtn');
         const syncDot = document.getElementById('syncDot');
         const syncStatusText = document.getElementById('syncStatusText');
-        const totalStatsText = document.getElementById('totalStatsText');
         const guestListContainer = document.getElementById('guestListContainer');
         const adminSearchInput = document.getElementById('adminSearchInput');
         const clearSearchBtn = document.getElementById('clearSearchBtn');
         const adminStatusFilter = document.getElementById('adminStatusFilter');
-        const importJsonFileInput = document.getElementById('importJsonFileInput');
-        const exportCsvBtn = document.getElementById('exportCsvBtn');
-        const exportJsonBtn = document.getElementById('exportJsonBtn');
         const clearDataBtn = document.getElementById('clearDataBtn');
         const manualRefreshBtn = document.getElementById('manualRefreshBtn');
         const addDemoDataBtn = document.getElementById('addDemoDataBtn');
         const closePageBtn = document.getElementById('closePageBtn');
         const farewellOverlay = document.getElementById('farewellOverlay');
         const reopenInvitationBtn = document.getElementById('reopenInvitationBtn');
+
+        // Metrics elements
+        const metricAttending = document.getElementById('metricAttending');
+        const metricDeclined = document.getElementById('metricDeclined');
+        const metricPlusOnes = document.getElementById('metricPlusOnes');
+        const metricMessages = document.getElementById('metricMessages');
 
         // Toast Helper
         function showToast(msg) {
@@ -692,6 +708,24 @@
             const searchTerm = adminSearchInput.value.toLowerCase().trim();
             const filterStatus = adminStatusFilter.value;
 
+            // Calculate actual summary metrics
+            const attendingCount = consolidatedList.filter(i => i.status === 'Attending').length;
+            const declinedCount = consolidatedList.filter(i => i.status === 'Not Attending').length;
+            
+            let totalPlusOnes = 0;
+            consolidatedList.forEach(i => {
+                if (i.status === 'Attending' && Array.isArray(i.plusOnes)) {
+                    totalPlusOnes += i.plusOnes.length;
+                }
+            });
+
+            const messagesCount = consolidatedList.filter(i => i.message && i.message.trim().length > 0).length;
+
+            if (metricAttending) metricAttending.textContent = attendingCount;
+            if (metricDeclined) metricDeclined.textContent = declinedCount;
+            if (metricPlusOnes) metricPlusOnes.textContent = totalPlusOnes;
+            if (metricMessages) metricMessages.textContent = messagesCount;
+
             let filtered = consolidatedList.filter(item => {
                 const nameMatch = (item.name || '').toLowerCase().includes(searchTerm);
                 const mobileMatch = (item.mobile || '').toLowerCase().includes(searchTerm);
@@ -704,13 +738,8 @@
                 return matchesSearch && matchesStatus;
             });
 
-            // Update stats
-            const totalCount = consolidatedList.length;
-            const attendingCount = consolidatedList.filter(i => i.status === 'Attending').length;
-            totalStatsText.textContent = `Total: ${totalCount} | Attending: ${attendingCount}`;
-
             if (filtered.length === 0) {
-                if (totalCount > 0 && (searchTerm || filterStatus !== 'ALL')) {
+                if (consolidatedList.length > 0 && (searchTerm || filterStatus !== 'ALL')) {
                     guestListContainer.innerHTML = `
                         <div class="text-center py-8 flex flex-col items-center gap-2">
                             <p class="text-stone-500">No responses match your filter query.</p>
@@ -727,7 +756,7 @@
                         });
                     }
                 } else {
-                    guestListContainer.innerHTML = `<p class="text-center text-stone-500 py-8">No RSVP responses saved yet. Click "⚡ Add Demo Samples" above to test.</p>`;
+                    guestListContainer.innerHTML = `<p class="text-center text-stone-500 py-8">No RSVP responses saved yet. Click "⚡ Add Sample Demo Data" below to test.</p>`;
                 }
                 return;
             }
@@ -735,22 +764,35 @@
             let html = '';
             filtered.forEach((item) => {
                 const isAttending = item.status === 'Attending';
+                const plusOneNames = (item.plusOnes && item.plusOnes.length > 0) ? item.plusOnes.join(', ') : 'None';
+                const plusOneCount = (item.plusOnes && item.plusOnes.length > 0) ? item.plusOnes.length : 0;
+
                 html += `
-                <div class="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div class="flex flex-col text-sm">
-                        <div class="flex items-center gap-2">
-                            <span class="font-bold text-base text-burgundy">${escapeHtml(item.name)}</span>
-                            <span class="px-2 py-0.5 text-xs font-semibold rounded-full ${isAttending ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
-                                ${item.status}
-                            </span>
-                        </div>
-                        <span class="text-stone-600">📱 Mobile: ${escapeHtml(item.mobile || 'N/A')}</span>
-                        ${item.plusOnes && item.plusOnes.length > 0 ? `<span class="text-amber-700 font-medium">👥 Plus One: ${escapeHtml(item.plusOnes.join(', '))}</span>` : ''}
-                        ${item.message ? `<span class="text-stone-500 italic mt-0.5">💬 "${escapeHtml(item.message)}"</span>` : ''}
+                <div class="py-3 grid grid-cols-1 sm:grid-cols-12 gap-2 items-center text-sm">
+                    <div class="sm:col-span-3">
+                        <div class="font-bold text-burgundy">${escapeHtml(item.name)}</div>
+                        <div class="text-xs text-stone-500">📱 ${escapeHtml(item.mobile || 'N/A')}</div>
                     </div>
-                    <button data-id="${item.id}" class="delete-btn text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-md self-start sm:self-center transition">
-                        Delete
-                    </button>
+                    
+                    <div class="sm:col-span-2 sm:text-center">
+                        <span class="inline-block px-2.5 py-0.5 text-xs font-semibold rounded-full ${isAttending ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                            ${item.status}
+                        </span>
+                    </div>
+
+                    <div class="sm:col-span-3 text-xs sm:text-sm text-stone-700">
+                        ${plusOneCount > 0 ? `<span class="font-semibold text-amber-800">+${plusOneCount} (${escapeHtml(plusOneNames)})</span>` : '<span class="text-stone-400">None</span>'}
+                    </div>
+
+                    <div class="sm:col-span-3 text-xs sm:text-sm text-stone-600 italic">
+                        ${item.message ? `"${escapeHtml(item.message)}"` : '<span class="text-stone-400 font-normal">No message</span>'}
+                    </div>
+
+                    <div class="sm:col-span-1 text-right">
+                        <button data-id="${item.id}" class="delete-btn text-xs bg-red-600 hover:bg-red-700 text-white px-2.5 py-1 rounded-md transition">
+                            Delete
+                        </button>
+                    </div>
                 </div>`;
             });
 
@@ -791,81 +833,10 @@
             showToast("All RSVP records cleared.");
         });
 
-        // Import JSON File for Consolidation across devices
-        importJsonFileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                try {
-                    const importedData = JSON.parse(event.target.result);
-                    if (!Array.isArray(importedData)) {
-                        showToast("Invalid JSON format. Must be an array of RSVPs.");
-                        return;
-                    }
-
-                    const beforeCount = consolidatedList.length;
-                    consolidatedList = mergeListsWithoutDuplicates(consolidatedList, importedData);
-                    localGuestList = mergeListsWithoutDuplicates(localGuestList, importedData);
-                    localStorage.setItem('weddingRSVPList', JSON.stringify(localGuestList));
-
-                    const addedCount = consolidatedList.length - beforeCount;
-                    renderDashboardList();
-                    showToast(`Consolidated! Added ${addedCount} new response(s).`);
-                } catch (err) {
-                    showToast("Failed to parse JSON file.");
-                }
-            };
-            reader.readAsText(file);
-            importJsonFileInput.value = '';
-        });
-
-        // Export CSV
-        exportCsvBtn.addEventListener('click', () => {
-            if (consolidatedList.length === 0) {
-                showToast("No RSVP responses to export.");
-                return;
-            }
-
-            let csvContent = "data:text/csv;charset=utf-8,ID,Name,Mobile,Status,Plus Ones,Message,Timestamp\n";
-            consolidatedList.forEach(g => {
-                const plusOneStr = g.plusOnes ? g.plusOnes.join('; ') : '';
-                const row = `"${g.id || ''}","${g.name || ''}","${g.mobile || ''}","${g.status || ''}","${plusOneStr}","${(g.message || '').replace(/"/g, '""')}","${g.timestamp || ''}"`;
-                csvContent += row + "\n";
-            });
-
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "robert_diana_rsvps.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            showToast("CSV file exported!");
-        });
-
-        // Export JSON
-        exportJsonBtn.addEventListener('click', () => {
-            if (consolidatedList.length === 0) {
-                showToast("No RSVP responses to export.");
-                return;
-            }
-
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(consolidatedList, null, 2));
-            const link = document.createElement("a");
-            link.setAttribute("href", dataStr);
-            link.setAttribute("download", "robert_diana_rsvps_consolidated.json");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            showToast("JSON export downloaded!");
-        });
-
         // Manual Refresh
         manualRefreshBtn.addEventListener('click', () => {
             fetchCloudResponses();
-            showToast("Refreshed & synchronized responses!");
+            showToast("Refreshed responses!");
         });
 
         // Auto-fetch on load
