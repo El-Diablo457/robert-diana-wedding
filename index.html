@@ -126,3 +126,203 @@
             border: 1px solid rgba(197, 155, 39, 0.4);
             position: relative;
         }
+
+        .content-card h2 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.2rem;
+            color: var(--primary-burgundy);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .content-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 12px 0;
+            color: var(--text-dark);
+        }
+
+        .content-card p {
+            font-size: 1.2rem;
+            color: #4a3e3d;
+            line-height: 1.6;
+        }
+
+        /* Form Inputs */
+        .rsvp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 25px;
+            width: 100%;
+        }
+
+        .rsvp-form input, 
+        .rsvp-form select, 
+        .rsvp-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #dcd1c4;
+            border-radius: 8px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            background: #fff;
+            color: var(--text-dark);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .rsvp-form input:focus, 
+        .rsvp-form select:focus, 
+        .rsvp-form textarea:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 8px rgba(197, 155, 39, 0.3);
+        }
+
+        .rsvp-form textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        /* Stylish Buttons */
+        .open-btn, .submit-btn, .venue-btn {
+            background: linear-gradient(135deg, #7a1c1c 0%, #520f0f 100%);
+            color: #ffffff;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 15px 40px;
+            border: 1px solid var(--accent-gold);
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(122, 28, 28, 0.35);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .open-btn:hover, .submit-btn:hover, .venue-btn:hover {
+            background: linear-gradient(135deg, #942323 0%, #7a1c1c 100%);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(122, 28, 28, 0.45);
+            border-color: var(--soft-gold);
+        }
+
+        .venue-btn {
+            margin-top: 18px;
+            padding: 12px 28px;
+            font-size: 1.1rem;
+        }
+
+        /* Mobile Adjustments */
+        @media screen and (max-width: 768px) {
+            #invitationContent {
+                padding: 10px 10px 40px 10px;
+                gap: 25px;
+            }
+            .content-card {
+                padding: 25px 18px;
+            }
+            .content-card h2 {
+                font-size: 1.8rem;
+            }
+            .landing-cover-img {
+                max-height: 75vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="bahandi.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- 1. Landing Cover -->
+    <section id="landing">
+        <div class="welcome-box">
+            <img src="images/cover.png" alt="Robert & Diana Wedding" class="landing-cover-img">
+
+            <div class="action-bar">
+                <button class="open-btn" onclick="openInvitation()">
+                    Open Invitation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Continuous Scrollable Content -->
+    <div id="invitationContent" style="display: none;">
+        
+        <!-- Invitation Card Section -->
+        <section class="scroll-section">
+            <img src="images/invitation.jfif" alt="Wedding Invitation" class="content-img">
+        </section>
+
+        <!-- Entourage Section -->
+        <section class="scroll-section">
+            <img src="images/entourage.png" alt="Wedding Entourage" class="content-img">
+        </section>
+
+        <!-- Venue Section -->
+        <section class="scroll-section">
+            <div class="content-card">
+                <h2>Wedding Venue</h2>
+                <h3>Garden of Envy Indoor Garden</h3>
+                <p>The Gallery Mabolo, Cebu City</p>
+
+                <a class="venue-btn" href="https://maps.app.goo.gl/cvZW7dEifomMjG9T9" target="_blank">
+                    Open Google Maps
+                </a>
+            </div>
+        </section>
+
+        <!-- RSVP Section -->
+        <section class="scroll-section">
+            <div class="content-card">
+                <h2>RSVP</h2>
+                <p style="font-size: 1.05rem; margin-bottom: 5px;">Kindly confirm your attendance below.</p>
+
+                <div class="rsvp-form">
+                    <input id="rsvpName" placeholder="Guest Name">
+                    <input id="rsvpMobile" placeholder="Mobile Number">
+
+                    <select id="attendance">
+                        <option>Attending</option>
+                        <option>Not Attending</option>
+                    </select>
+
+                    <input id="guestCount" type="number" value="1" min="1">
+
+                    <textarea id="message" placeholder="Well wishes or message for the couple..."></textarea>
+
+                    <button class="submit-btn" onclick="submitRSVP()">
+                        Confirm Attendance
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thank You Section -->
+        <section class="scroll-section">
+            <div class="content-card">
+                <h2>Thank You</h2>
+                <h1 id="thankYouName" style="font-size: 1.6rem; color: var(--primary-burgundy); margin: 10px 0;"></h1>
+                <p>Your attendance has been confirmed.</p>
+                <p>We look forward to celebrating our special day with you!</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Application Script -->
+    <script src="assets/app.js"></script>
+
+</body>
+</html>
