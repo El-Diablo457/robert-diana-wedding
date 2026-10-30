@@ -122,12 +122,35 @@
 
             border: 1px solid rgba(197, 155, 39, 0.4);
 
+            /* Entrance, Fast Glow, and Tilt Sway */
             transform-origin: center center;
             animation: 
                 popUpScale 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
                 pulseGlow 1s ease-in-out infinite 0.3s, 
-                tiltSway 1.33s ease-in-out infinite 0.3s,
-                ripplePulse 1.2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite 0.3s;
+                tiltSway 1.33s ease-in-out infinite 0.3s;
+        }
+
+        /* Subsequent Thinner Red and White Ripple Layers */
+        .welcome-box::before,
+        .welcome-box::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* First Thin Ripple (Red / Burgundy) */
+        .welcome-box::before {
+            border: 1.5px solid rgba(107, 20, 20, 0.85);
+            animation: thinRedRipple 1.4s cubic-bezier(0.215, 0.61, 0.355, 1) infinite 0.3s;
+        }
+
+        /* Second Subsequent Thin Ripple (White) */
+        .welcome-box::after {
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            animation: thinWhiteRipple 1.4s cubic-bezier(0.215, 0.61, 0.355, 1) infinite 0.55s;
         }
 
         @keyframes popUpScale {
@@ -162,18 +185,27 @@
             }
         }
 
-        @keyframes ripplePulse {
+        /* Thin Red Wave */
+        @keyframes thinRedRipple {
             0% {
-                outline: 0px solid rgba(107, 20, 20, 0.8);
-                outline-offset: 0px;
-            }
-            50% {
-                outline: 12px solid rgba(255, 255, 255, 0.85);
-                outline-offset: 14px;
+                transform: scale(1);
+                opacity: 0.9;
             }
             100% {
-                outline: 24px solid rgba(107, 20, 20, 0);
-                outline-offset: 28px;
+                transform: scale(1.18);
+                opacity: 0;
+            }
+        }
+
+        /* Subsequent Thin White Wave */
+        @keyframes thinWhiteRipple {
+            0% {
+                transform: scale(1);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(1.25);
+                opacity: 0;
             }
         }
 
@@ -728,327 +760,3 @@
         <section class="scroll-section">
 
             <img
-                src="images/invitation.jfif"
-                alt="Wedding Invitation"
-                class="content-img"
-            >
-
-        </section>
-
-        <!-- ENTOURAGE -->
-
-        <section class="scroll-section">
-
-            <img
-                src="images/entourage.png"
-                alt="Wedding Entourage"
-                class="content-img"
-            >
-
-        </section>
-
-        <!-- WEDDING VENUE -->
-
-        <section class="scroll-section">
-
-            <div class="content-card">
-
-                <h2>Wedding Venue</h2>
-
-                <h3>Garden of Envy Indoor Garden</h3>
-
-                <p>The Gallery Mabolo, Cebu City</p>
-
-                <a
-                    class="venue-btn"
-                    href="https://maps.app.goo.gl/cvZW7dEifomMjG9T9"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Open Google Maps
-                </a>
-
-            </div>
-
-        </section>
-
-        <!-- RSVP -->
-
-        <section class="scroll-section">
-
-            <div class="content-card">
-
-                <h2>RSVP</h2>
-
-                <p style="font-size: 1.05rem; margin-bottom: 5px;">
-                    Kindly confirm your attendance below.
-                </p>
-
-                <div class="rsvp-form">
-
-                    <input
-                        id="rsvpName"
-                        type="text"
-                        placeholder="Guest Name"
-                    >
-
-                    <input
-                        id="rsvpMobile"
-                        type="tel"
-                        placeholder="Mobile Number"
-                    >
-
-                    <select id="attendance" onchange="updateRSVPState()">
-
-                        <option value="Attending">Attending</option>
-                        <option value="Not Attending">Not Attending</option>
-
-                    </select>
-
-                    <!-- PLUS ONE TEXTBOX (SHOWN ONLY WHEN ATTENDING) -->
-                    <div id="plusOneContainer">
-                        <input
-                            id="plusOneNames"
-                            type="text"
-                            placeholder="Plus One"
-                        >
-                    </div>
-
-                    <textarea
-                        id="message"
-                        placeholder="Well wishes or message for the couple..."
-                    ></textarea>
-
-                    <!-- SUBMIT BUTTON -->
-                    <button
-                        id="rsvpSubmitBtn"
-                        class="submit-btn"
-                        onclick="handleRSVPSubmit()"
-                    >
-                        Confirm Attendance
-                    </button>
-
-                    <!-- VIEW GUEST LIST BUTTON -->
-                    <button
-                        type="button"
-                        class="view-list-btn"
-                        onclick="openGuestListModal()"
-                    >
-                        View Confirmed Guest List
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- THANK YOU -->
-
-        <section id="thankYouSection" class="scroll-section">
-
-            <div class="content-card">
-
-                <h2>Thank You</h2>
-
-                <h1
-                    id="thankYouName"
-                    style="
-                        font-size: clamp(1.3rem, 4vw, 1.6rem);
-                        color: var(--primary-burgundy);
-                        margin: 10px 0;
-                    "
-                ></h1>
-
-                <p id="thankYouMessageText">Your attendance has been confirmed.</p>
-
-                <p>
-                    We look forward to celebrating our special day with you!
-                </p>
-
-            </div>
-
-        </section>
-
-    </div>
-
-    <!-- GUEST LIST MODAL -->
-    <div id="guestListModal" class="guest-modal" style="display: none;">
-        <div class="guest-modal-content">
-            <span class="close-modal" onclick="closeGuestListModal()">&times;</span>
-            <h2 style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy);">Confirmed Guests</h2>
-            <div id="guestListContainer" class="guest-list-container">
-                <!-- Guest list entries generated dynamically -->
-            </div>
-        </div>
-    </div>
-
-    <!-- APPLICATION SCRIPT -->
-
-    <script src="assets/app.js"></script>
-
-    <!-- TAP ANYWHERE, PLUS ONE, GUEST LIST & AUDIO SCRIPT -->
-    <script>
-        // Sample Guest List Data (Initial Mock Data)
-        let guestList = [
-            { name: "John Doe", plusOnes: ["Jane Doe"] },
-            { name: "Maria Santos", plusOnes: [] }
-        ];
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const landing = document.getElementById('landing');
-            const body = document.body;
-
-            function handleFirstInteraction(event) {
-                const audio = document.getElementById('bgMusic');
-                if (audio) {
-                    audio.currentTime = 21; // Jump to 21 seconds mark
-                    audio.play().catch(error => {
-                        console.log("Audio playback was prevented:", error);
-                    });
-                }
-
-                // Remove blur state and fade out modal
-                body.classList.remove('landing-active');
-                if (landing) {
-                    landing.style.transition = 'opacity 0.5s ease';
-                    landing.style.opacity = '0';
-                    setTimeout(() => {
-                        landing.style.display = 'none';
-                    }, 500);
-                }
-
-                // Trigger any custom openInvitation logic if defined in app.js
-                if (typeof openInvitation === 'function') {
-                    openInvitation();
-                }
-            }
-
-            // Tap anywhere on landing screen triggers audio & reveals invitation
-            if (landing) {
-                landing.addEventListener('click', handleFirstInteraction, { once: true });
-                landing.addEventListener('touchstart', handleFirstInteraction, { once: true });
-            }
-
-            // Initialize correct button and field state on load
-            updateRSVPState();
-        });
-
-        // Update UI based on Attending / Not Attending selection
-        function updateRSVPState() {
-            const attendance = document.getElementById('attendance').value;
-            const plusOneContainer = document.getElementById('plusOneContainer');
-            const submitBtn = document.getElementById('rsvpSubmitBtn');
-            const messageArea = document.getElementById('message');
-
-            if (attendance === "Attending") {
-                plusOneContainer.style.display = 'flex';
-                submitBtn.innerText = "Confirm Attendance";
-                messageArea.placeholder = "Well wishes or message for the couple...";
-                messageArea.required = false;
-            } else {
-                plusOneContainer.style.display = 'none';
-                submitBtn.innerText = "I Apologize";
-                messageArea.placeholder = "Please leave a message or reason for declining (Required)...";
-                messageArea.required = true;
-            }
-        }
-
-        // Handle RSVP Form Submission
-        function handleRSVPSubmit() {
-            const name = document.getElementById('rsvpName').value.trim();
-            const attendance = document.getElementById('attendance').value;
-            const plusOneName = document.getElementById('plusOneNames').value.trim();
-            const messageArea = document.getElementById('message').value.trim();
-
-            if (!name) {
-                alert('Please enter your name before submitting.');
-                return;
-            }
-
-            if (attendance === "Not Attending" && !messageArea) {
-                alert('Please leave a message or reason for declining before apologizing.');
-                return;
-            }
-
-            // Collect Plus Ones if Attending
-            let plusOnesArr = [];
-            if (attendance === "Attending" && plusOneName) {
-                plusOnesArr.push(plusOneName);
-            }
-
-            // Add to Local Guest List
-            guestList.push({
-                name: name,
-                plusOnes: plusOnesArr
-            });
-
-            // Set Thank You Name and text
-            const thankYouElem = document.getElementById('thankYouName');
-            const thankYouText = document.getElementById('thankYouMessageText');
-            if (thankYouElem) {
-                thankYouElem.innerText = name;
-            }
-            if (thankYouText) {
-                if (attendance === "Attending") {
-                    thankYouText.innerText = "Your attendance has been confirmed.";
-                } else {
-                    thankYouText.innerText = "Your apology and response have been received.";
-                }
-            }
-
-            // Call external submit logic if exists
-            if (typeof submitRSVP === 'function') {
-                submitRSVP();
-            }
-
-            // REPLACE BUTTON WITH CLOSE / DONE BUTTON
-            const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
-            if (rsvpSubmitBtn) {
-                rsvpSubmitBtn.innerText = "Close / Done";
-                rsvpSubmitBtn.className = "close-btn";
-                rsvpSubmitBtn.onclick = scrollToThankYou;
-            }
-        }
-
-        // Scroll to Thank You Section
-        function scrollToThankYou() {
-            const thankYouSection = document.getElementById('thankYouSection');
-            if (thankYouSection) {
-                thankYouSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Modal Controls
-        function openGuestListModal() {
-            const modal = document.getElementById('guestListModal');
-            const container = document.getElementById('guestListContainer');
-            
-            // Build List HTML
-            if (guestList.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color:#777;">No confirmed guests yet.</p>';
-            } else {
-                let html = '';
-                guestList.forEach(guest => {
-                    html += `<div class="guest-item">
-                        <div class="guest-item-name">• ${guest.name}</div>`;
-                    if (guest.plusOnes && guest.plusOnes.length > 0) {
-                        guest.plusOnes.forEach(p => {
-                            html += `<div class="plus-one-tag">+ Plus One: ${p}</div>`;
-                        });
-                    }
-                    html += `</div>`;
-                });
-                container.innerHTML = html;
-            }
-
-            modal.style.display = 'flex';
-        }
-
-        function closeGuestListModal() {
-            document.getElementById('guestListModal').style.display = 'none';
-        }
-    </script>
-
-</body>
-</html>
