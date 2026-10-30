@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="theme-color" content="#fdfbf7">
     <meta name="description" content="Robert and Diana Wedding Invitation">
 
@@ -12,7 +11,6 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/style.css">
@@ -21,7 +19,6 @@
         /* =================================
             UNIVERSAL RESPONSIVE SETTINGS
         ================================= */
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -48,16 +45,11 @@
             width: 100%;
             min-height: 100vh;
             min-height: 100dvh;
-
             background-color: var(--cream-bg);
             color: var(--text-dark);
-
             font-family: 'Cormorant Garamond', serif;
-
             overflow-x: clip;
         }
-
-        /* Make all images responsive */
 
         img {
             display: block;
@@ -68,29 +60,18 @@
         /* =================================
             LANDING COVER (PINTEREST POP-UP MODAL)
         ================================= */
-
         #landing {
             position: fixed;
             inset: 0;
-
             width: 100%;
             height: 100vh;
             height: 100dvh;
-
             display: flex;
             justify-content: center;
             align-items: center;
-
-            padding:
-                env(safe-area-inset-top)
-                env(safe-area-inset-right)
-                env(safe-area-inset-bottom)
-                env(safe-area-inset-left);
-
             background: rgba(44, 34, 30, 0.55);
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
-
             z-index: 1000;
             cursor: pointer;
             padding: 20px;
@@ -98,30 +79,19 @@
 
         .welcome-box {
             position: relative;
-
             width: 100%;
             max-width: 440px;
-
             background: var(--card-bg);
-
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-
-            padding: 20px 20px 20px;
-
+            padding: 20px;
             border-radius: 24px;
-
-            box-shadow:
-                0 25px 50px rgba(0, 0, 0, 0.3);
-
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
-
             justify-content: center;
             align-items: center;
-
             border: 1px solid rgba(197, 155, 39, 0.4);
-
             transform-origin: center center;
             animation: 
                 popUpScale 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -129,7 +99,6 @@
                 tiltSway 1.33s ease-in-out infinite 0.3s;
         }
 
-        /* Wavy Subsequent Ripple Layers */
         .welcome-box::before,
         .welcome-box::after {
             content: "";
@@ -196,7 +165,6 @@
         /* =================================
             BLURRED PREVIEW STATE FOR BACKGROUND
         ================================= */
-
         body.landing-active #invitationContent {
             display: flex !important;
             filter: blur(12px);
@@ -210,7 +178,6 @@
         /* =================================
             MAIN INVITATION CONTENT
         ================================= */
-
         #invitationContent {
             width: 100%;
             max-width: 1100px;
@@ -285,7 +252,6 @@
         /* =================================
             RSVP FORM & PLUS ONE
         ================================= */
-
         .rsvp-form {
             display: flex;
             flex-direction: column;
@@ -340,7 +306,6 @@
         /* =================================
             BUTTONS
         ================================= */
-
         .submit-btn,
         .venue-btn,
         .view-list-btn,
@@ -428,7 +393,6 @@
         /* =================================
             GUEST LIST MODAL
         ================================= */
-
         .guest-modal {
             position: fixed;
             inset: 0;
@@ -550,17 +514,16 @@
     </audio>
 
     <!-- LANDING COVER -->
-    <section id="landing">
+    <section id="landing" role="region" aria-label="Welcome Cover">
         <div class="welcome-box">
-            <img src="images/cover.png" alt="Robert & Diana Wedding" class="landing-cover-img">
+            <img src="images/cover.png" alt="Robert & Diana Wedding Cover" class="landing-cover-img">
         </div>
     </section>
 
     <!-- INVITATION CONTENT -->
-    <div id="invitationContent">
-
+    <main id="invitationContent">
         <section class="scroll-section">
-            <img src="images/invitation.jfif" alt="Wedding Invitation" class="content-img">
+            <img src="images/invitation.jfif" alt="Wedding Invitation Details" class="content-img">
         </section>
 
         <section class="scroll-section">
@@ -582,29 +545,29 @@
             <div class="content-card">
                 <h2>RSVP</h2>
                 <p style="font-size: 1.05rem; margin-bottom: 5px;">Kindly confirm your attendance below.</p>
-                <div class="rsvp-form">
-                    <input id="rsvpName" type="text" placeholder="Guest Name">
+                <form class="rsvp-form" onsubmit="event.preventDefault();">
+                    <input id="rsvpName" type="text" placeholder="Guest Name" required>
                     <input id="rsvpMobile" type="tel" placeholder="Mobile Number">
-                    <select id="attendance" onchange="updateRSVPState()">
+                    <select id="attendance" aria-label="Attendance Status">
                         <option value="Attending">Attending</option>
                         <option value="Not Attending">Not Attending</option>
                     </select>
 
                     <div id="plusOneContainer">
-                        <input id="plusOneNames" type="text" placeholder="Plus One">
+                        <input id="plusOneNames" type="text" placeholder="Plus One Name">
                     </div>
 
                     <textarea id="message" placeholder="Well wishes or message for the couple..."></textarea>
 
-                    <button id="rsvpSubmitBtn" class="submit-btn" onclick="handleRSVPSubmit()">
+                    <button id="rsvpSubmitBtn" type="button" class="submit-btn">
                         Confirm Attendance
                     </button>
 
                     <!-- DISCREET ADMIN DASHBOARD BUTTON -->
-                    <button type="button" class="view-list-btn" onclick="verifyAdminAccess()">
+                    <button type="button" class="view-list-btn">
                         ⚙️ Admin Dashboard
                     </button>
-                </div>
+                </form>
             </div>
         </section>
 
@@ -616,20 +579,19 @@
                 <p>We look forward to celebrating our special day with you!</p>
             </div>
         </section>
-
-    </div>
+    </main>
 
     <!-- ADMIN DASHBOARD MODAL -->
-    <div id="guestListModal" class="guest-modal" style="display: none;">
+    <div id="guestListModal" class="guest-modal" style="display: none;" role="dialog" aria-modal="true" aria-label="Admin RSVP Dashboard">
         <div class="guest-modal-content">
-            <span class="close-modal" onclick="closeGuestListModal()">&times;</span>
+            <span class="close-modal" id="closeModalBtn" role="button" tabindex="0">&times;</span>
             <h2 style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy);">Admin RSVP Dashboard</h2>
             
             <div id="guestListContainer" class="guest-list-container"></div>
 
             <div class="admin-actions">
-                <button class="admin-btn" onclick="exportToCSV()">Export to CSV</button>
-                <button class="admin-btn" style="background:#a92222;" onclick="clearAllData()">Clear All Data</button>
+                <button type="button" class="admin-btn" id="exportCsvBtn">Export to CSV</button>
+                <button type="button" class="admin-btn" style="background:#a92222;" id="clearDataBtn">Clear All Data</button>
             </div>
         </div>
     </div>
@@ -639,17 +601,22 @@
 
     <!-- INTEGRATED SCRIPT LOGIC -->
     <script>
-        // Load persistable guest list from LocalStorage
         let guestList = JSON.parse(localStorage.getItem('weddingRSVPList')) || [];
 
         document.addEventListener('DOMContentLoaded', () => {
             const landing = document.getElementById('landing');
             const body = document.body;
+            const attendanceSelect = document.getElementById('attendance');
+            const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
+            const adminBtn = document.querySelector('.view-list-btn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const exportCsvBtn = document.getElementById('exportCsvBtn');
+            const clearDataBtn = document.getElementById('clearDataBtn');
 
             function handleFirstInteraction() {
                 const audio = document.getElementById('bgMusic');
                 if (audio) {
-                    audio.currentTime = 21; // Start at 21 seconds mark
+                    audio.currentTime = 21;
                     audio.play().catch(error => console.log("Audio play blocked:", error));
                 }
 
@@ -666,6 +633,30 @@
             if (landing) {
                 landing.addEventListener('click', handleFirstInteraction, { once: true });
                 landing.addEventListener('touchstart', handleFirstInteraction, { once: true });
+            }
+
+            if (attendanceSelect) {
+                attendanceSelect.addEventListener('change', updateRSVPState);
+            }
+
+            if (rsvpSubmitBtn) {
+                rsvpSubmitBtn.addEventListener('click', handleRSVPSubmit);
+            }
+
+            if (adminBtn) {
+                adminBtn.addEventListener('click', verifyAdminAccess);
+            }
+
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeGuestListModal);
+            }
+
+            if (exportCsvBtn) {
+                exportCsvBtn.addEventListener('click', exportToCSV);
+            }
+
+            if (clearDataBtn) {
+                clearDataBtn.addEventListener('click', clearAllData);
             }
 
             updateRSVPState();
@@ -716,7 +707,6 @@
                 plusOnesArr.push(plusOneName);
             }
 
-            // Push and Save to LocalStorage
             guestList.push({
                 name: name,
                 mobile: mobile,
@@ -735,7 +725,6 @@
                     : "Your apology and response have been received.";
             }
 
-            // Lock Form Inputs for One-Time User Session
             document.getElementById('rsvpName').disabled = true;
             document.getElementById('rsvpMobile').disabled = true;
             document.getElementById('attendance').disabled = true;
@@ -746,7 +735,10 @@
             if (rsvpSubmitBtn) {
                 rsvpSubmitBtn.innerText = "Close / Done";
                 rsvpSubmitBtn.className = "close-btn";
-                rsvpSubmitBtn.onclick = scrollToThankYou;
+                // Remove old listeners and reassign click to scroll
+                const newBtn = rsvpSubmitBtn.cloneNode(true);
+                rsvpSubmitBtn.parentNode.replaceChild(newBtn, rsvpSubmitBtn);
+                newBtn.addEventListener('click', scrollToThankYou);
             }
 
             if (typeof submitRSVP === 'function') submitRSVP();
@@ -757,7 +749,6 @@
             if (thankYouSection) thankYouSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Admin PIN Protection without hints
         function verifyAdminAccess() {
             const pin = prompt("Enter Admin PIN:");
             if (pin === "021093") {
@@ -784,7 +775,7 @@
                             ${guest.plusOnes && guest.plusOnes.length ? `<span class="plus-one-tag">+ Plus One: ${guest.plusOnes.join(', ')}</span>` : ''}
                             ${guest.message ? `<span class="guest-detail">Note: "${guest.message}"</span>` : ''}
                         </div>
-                        <button class="delete-btn" onclick="deleteEntry(${index})">Delete</button>
+                        <button type="button" class="delete-btn" onclick="deleteEntry(${index})">Delete</button>
                     </div>`;
                 });
                 container.innerHTML = html;
