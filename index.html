@@ -11,6 +11,43 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="assets/style.css">
+    
+    <style>
+        /* Responsive Auto-Fitting Styles for Images and Sections */
+        .scroll-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            box-sizing: border-box;
+        }
+
+        .content-img {
+            width: 100%;
+            max-width: 800px; /* Keeps images from becoming too wide on desktops */
+            height: auto;
+            display: block;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .landing-cover-img {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #faf6f0;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,11 +65,11 @@
     </div>
 
     <!-- 1. Landing Page (Shown initially) -->
-    <section id="landing" class="page active">
-        <div class="welcome-box">
+    <section id="landing" class="page active" style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+        <div class="welcome-box" style="text-align: center; width: 90%; max-width: 600px;">
             <img src="images/cover.png" alt="Robert & Diana Wedding" class="landing-cover-img">
 
-            <div class="action-bar">
+            <div class="action-bar" style="margin-top: 25px;">
                 <button class="open-btn" onclick="openInvitation()">
                     Open Invitation
                 </button>
@@ -43,11 +80,6 @@
     <!-- 2. Continuous Scrollable Content (Hidden until Open Invitation is clicked) -->
     <div id="invitationContent" class="invitation-scroll-container" style="display: none;">
         
-        <!-- Cover Section -->
-        <section class="scroll-section">
-            <img src="images/cover.png" alt="Cover" class="content-img">
-        </section>
-
         <!-- Invitation Image Section -->
         <section class="scroll-section">
             <img src="images/invitation.jfif" alt="Wedding Invitation" class="content-img">
@@ -60,7 +92,7 @@
 
         <!-- Venue Section -->
         <section class="scroll-section center-page">
-            <div class="content-card">
+            <div class="content-card" style="text-align: center; padding: 30px;">
                 <h2>Wedding Venue</h2>
                 <h3>Garden of Envy Indoor Garden</h3>
                 <p>The Gallery Mabolo, Cebu City</p>
@@ -72,41 +104,43 @@
         </section>
 
         <!-- Gallery Section -->
-        <section class="scroll-section center-page">
+        <section class="scroll-section center-page" style="flex-direction: column;">
             <h2>Wedding Gallery</h2>
-            <div class="gallery">
-                <img src="images/cover.png" alt="Gallery 1" onclick="openLightbox(this)">
-                <img src="images/invitation.jfif" alt="Gallery 2" onclick="openLightbox(this)">
-                <img src="images/entourage.png" alt="Gallery 3" onclick="openLightbox(this)">
+            <div class="gallery" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; width: 90%; max-width: 900px;">
+                <img src="images/cover.png" alt="Gallery 1" style="width: 100%; max-width: 250px; height: auto; cursor: pointer; border-radius: 6px;" onclick="openLightbox(this)">
+                <img src="images/invitation.jfif" alt="Gallery 2" style="width: 100%; max-width: 250px; height: auto; cursor: pointer; border-radius: 6px;" onclick="openLightbox(this)">
+                <img src="images/entourage.png" alt="Gallery 3" style="width: 100%; max-width: 250px; height: auto; cursor: pointer; border-radius: 6px;" onclick="openLightbox(this)">
             </div>
         </section>
 
         <!-- RSVP Section -->
         <section class="scroll-section center-page">
-            <div class="content-card">
+            <div class="content-card" style="text-align: center; padding: 30px; width: 100%; max-width: 500px;">
                 <h2>RSVP</h2>
 
-                <input id="rsvpName" placeholder="Guest Name">
-                <input id="rsvpMobile" placeholder="Mobile Number">
+                <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+                    <input id="rsvpName" placeholder="Guest Name" style="padding: 10px; width: 100%; box-sizing: border-box;">
+                    <input id="rsvpMobile" placeholder="Mobile Number" style="padding: 10px; width: 100%; box-sizing: border-box;">
 
-                <select id="attendance">
-                    <option>Attending</option>
-                    <option>Not Attending</option>
-                </select>
+                    <select id="attendance" style="padding: 10px; width: 100%; box-sizing: border-box;">
+                        <option>Attending</option>
+                        <option>Not Attending</option>
+                    </select>
 
-                <input id="guestCount" type="number" value="1" min="1">
+                    <input id="guestCount" type="number" value="1" min="1" style="padding: 10px; width: 100%; box-sizing: border-box;">
 
-                <textarea id="message" placeholder="Message"></textarea>
+                    <textarea id="message" placeholder="Message" style="padding: 10px; width: 100%; height: 80px; box-sizing: border-box;"></textarea>
 
-                <button class="submit-btn" onclick="submitRSVP()">
-                    Confirm Attendance
-                </button>
+                    <button class="submit-btn" onclick="submitRSVP()" style="padding: 12px; cursor: pointer;">
+                        Confirm Attendance
+                    </button>
+                </div>
             </div>
         </section>
 
         <!-- Thank You Section -->
-        <section class="scroll-section center-page">
-            <div class="content-card">
+        <section class="scroll-section center-page" style="padding-bottom: 60px;">
+            <div class="content-card" style="text-align: center; padding: 30px;">
                 <h2>Thank You</h2>
                 <h1 id="thankYouName"></h1>
                 <p>Your attendance has been confirmed.</p>
