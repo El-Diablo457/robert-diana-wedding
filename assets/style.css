@@ -1,0 +1,232 @@
+:root{
+    --gold:#b8860b;
+    --cream:#fdf8ef;
+    --dark:#5c4033;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:var(--cream);
+    color:var(--dark);
+    font-family:'Cormorant Garamond', serif;
+    overflow-x:hidden;
+}
+
+.page{
+    min-height:100vh;
+    display:none;
+    position:relative;
+}
+
+.page.active{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.envelope-container{
+    text-align:center;
+}
+
+.envelope{
+    width:320px;
+    height:220px;
+    position:relative;
+    margin-bottom:20px;
+}
+
+.envelope-back{
+    width:100%;
+    height:100%;
+    background:#ffffff;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.envelope-flap{
+    width:100%;
+    height:120px;
+    background:#eadbc7;
+    position:absolute;
+    top:0;
+    clip-path:polygon(0 0,100% 0,50% 100%);
+    transform-origin:top;
+    transition:1s;
+}
+
+.open .envelope-flap{
+    transform:rotateX(180deg);
+}
+
+.seal{
+    width:70px;
+    height:70px;
+    background:var(--gold);
+    color:white;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    position:absolute;
+    left:50%;
+    top:65px;
+
+    transform:translateX(-50%);
+}
+
+.welcome-box,
+.content-card,
+.overlay-card{
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(12px);
+    padding:25px;
+    border-radius:20px;
+    text-align:center;
+    margin:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,.1);
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+button{
+    background:var(--gold);
+    color:white;
+    border:none;
+    border-radius:30px;
+    padding:12px 24px;
+    cursor:pointer;
+}
+
+.full-image{
+    width:100%;
+    max-width:800px;
+    display:block;
+}
+
+.image-page{
+    background:#fff;
+    text-align:center;
+}
+
+.next-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    padding:20px;
+    width:100%;
+    max-width:1000px;
+}
+
+.gallery img{
+    width:100%;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+#lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.95);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+}
+
+#lightboxImage{
+    max-width:95%;
+    max-height:95%;
+}
+
+#closeLightbox{
+    position:absolute;
+    top:20px;
+    right:30px;
+    color:white;
+    font-size:40px;
+    cursor:pointer;
+}
+
+#typedName{
+    font-family:'Great Vibes', cursive;
+    font-size:72px;
+    color:var(--gold);
+}
+
+#countdown{
+    margin-top:15px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.venue-btn{
+    display:inline-block;
+    margin-top:20px;
+    background:#4285f4;
+    color:white;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:30px;
+}
+
+.particle{
+    position:fixed;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:#fff1a8;
+    animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-100px);
+    }
+}
+
+.petal{
+    position:fixed;
+    top:-50px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(120vh) rotate(360deg);
+    }
+}
+
+@media(max-width:768px){
+
+    #typedName{
+        font-size:50px;
+    }
+
+    .envelope{
+        width:280px;
+    }
+}
