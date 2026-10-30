@@ -1,32 +1,29 @@
-To ensure the images automatically scale, adjust, and fit seamlessly across all mobile devices, tablets, desktop monitors, and web browsers, we can optimize the CSS styling rules for .landing-cover-img and .content-img.
 
-Key Enhancements Made:
-1. Responsive Max Dimensions: Set max-width: 100% and height: auto on .content-img and .landing-cover-img to ensure images never overflow their parent containers regardless of aspect ratio or screen width.
-2. 
-3. Dynamic Viewport Scaling (dvh): Used svh / dvh (small/dynamic viewport height) for .welcome-box and cover image constraints to handle mobile browser address bar visibility seamlessly across iOS Safari and Android Chrome.
-4. 
-5. Flexbox & Object-Fit Precision: Preserved image aspect ratios with object-fit: contain so images are never stretched or distorted.
-6. 
-Updated Code
-Here is your updated HTML file with optimized image CSS styling:
-HTML
-
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#fdfbf7">
+    <meta name="description" content="Robert and Diana Wedding Invitation">
+
     <title>Robert & Diana Wedding Invitation</title>
 
-    <!-- Google Fonts for Luxury Aesthetic -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
 
-    <!-- External Stylesheet -->
     <link rel="stylesheet" href="assets/style.css">
-    
+
     <style>
-        /* Universal Reset & Warm Color Grading */
-- {
+        /* =================================
+           UNIVERSAL RESPONSIVE SETTINGS
+        ================================= */
+
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -41,299 +38,676 @@ HTML
             --text-dark: #2c221e;
         }
 
-        body {
-            background-color: var(--cream-bg);
-            color: var(--text-dark);
-            font-family: 'Cormorant Garamond', serif;
-            min-height: 100vh;
-            min-height: 100dvh;
+        html {
             width: 100%;
-            overflow-x: hidden;
+            min-height: 100%;
+            scroll-behavior: smooth;
+            overflow-x: clip;
         }
 
-        /* Full-Screen Landing Cover */
+        body {
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+
+            background-color: var(--cream-bg);
+            color: var(--text-dark);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            overflow-x: clip;
+        }
+
+        /* Make all images responsive */
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* =================================
+           LANDING COVER
+        ================================= */
+
         #landing {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
+
             width: 100%;
             height: 100vh;
             height: 100dvh;
+
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle, #ffffff 0%, #f7f1e5 100%);
+
+            padding:
+                env(safe-area-inset-top)
+                env(safe-area-inset-right)
+                env(safe-area-inset-bottom)
+                env(safe-area-inset-left);
+
+            background: radial-gradient(
+                circle,
+                #ffffff 0%,
+                #f7f1e5 100%
+            );
+
             z-index: 1000;
         }
 
         .welcome-box {
             position: relative;
+
             width: 100%;
             height: 100%;
+
             display: flex;
             flex-direction: column;
+
             justify-content: center;
             align-items: center;
-            padding: 20px 15px 90px 15px; /* Extra bottom padding so action bar doesn't overlap image */
+
+            padding: 15px 12px 100px;
         }
 
-        /* Auto-adjusting Responsive Cover Image */
         .landing-cover-img {
-            max-width: 92vw;
-            max-height: calc(100dvh - 120px);
             width: auto;
             height: auto;
+
+            max-width: min(95vw, 100%);
+            max-height: calc(100dvh - 125px);
+
             object-fit: contain;
+            object-position: center;
+
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(107, 20, 20, 0.15);
+
+            box-shadow:
+                0 10px 30px rgba(107, 20, 20, 0.15);
+
             border: 1px solid rgba(197, 155, 39, 0.3);
         }
 
+        /* =================================
+           OPEN INVITATION BUTTON
+        ================================= */
+
         .action-bar {
             position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1010;
+
+            bottom: max(25px, env(safe-area-inset-bottom));
+
+            left: 0;
             width: 100%;
-            text-align: center;
+
+            display: flex;
+            justify-content: center;
+
+            padding: 0 12px;
+
+            z-index: 1010;
         }
 
-        /* Responsive Main Scroll Area */
+        /* =================================
+           MAIN INVITATION CONTENT
+        ================================= */
+
         #invitationContent {
             width: 100%;
-            max-width: 900px;
+            max-width: 1100px;
+
             margin: 0 auto;
-            padding: 20px 15px 60px 15px;
+
+            padding: clamp(12px, 3vw, 35px);
+
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 35px;
+
+            gap: clamp(20px, 4vw, 40px);
         }
 
         .scroll-section {
             width: 100%;
+
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Auto-adjusting Content Images */
+        /* =================================
+           RESPONSIVE CONTENT IMAGES
+        ================================= */
+
         .content-img {
-            max-width: 100%;
-            height: auto;
             display: block;
+
+            width: auto;
+            height: auto;
+
+            max-width: 100%;
+            max-height: none;
+
             object-fit: contain;
+            object-position: center;
+
             border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.08);
+
             border: 1px solid rgba(197, 155, 39, 0.25);
         }
 
-        /* Glassmorphism Content Cards (Venue, RSVP, Thank You) */
+        /* =================================
+           CONTENT CARDS
+        ================================= */
+
         .content-card {
             width: 100%;
             max-width: 650px;
+
             background: var(--card-bg);
+
             backdrop-filter: blur(8px);
-            padding: 40px 30px;
+            -webkit-backdrop-filter: blur(8px);
+
+            padding: clamp(20px, 5vw, 40px);
+
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(107, 20, 20, 0.08);
+
+            box-shadow:
+                0 10px 30px rgba(107, 20, 20, 0.08);
+
             text-align: center;
+
             border: 1px solid rgba(197, 155, 39, 0.4);
+
             position: relative;
+
+            overflow-wrap: anywhere;
         }
 
         .content-card h2 {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 2.2rem;
+
+            font-size: clamp(1.4rem, 5vw, 2.2rem);
+
             color: var(--primary-burgundy);
+
             margin-bottom: 15px;
+
             letter-spacing: 1px;
+            line-height: 1.3;
         }
 
         .content-card h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+
+            font-size: clamp(1.15rem, 3.5vw, 1.5rem);
+
             font-weight: 600;
+
             margin: 12px 0;
+
             color: var(--text-dark);
+
+            line-height: 1.4;
         }
 
         .content-card p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+
             color: #4a3e3d;
+
             line-height: 1.6;
         }
 
-        /* Form Inputs */
+        /* =================================
+           RSVP FORM
+        ================================= */
+
         .rsvp-form {
             display: flex;
             flex-direction: column;
+
             gap: 16px;
+
             margin-top: 25px;
+
             width: 100%;
+            min-width: 0;
         }
 
-        .rsvp-form input, 
-        .rsvp-form select, 
+        .rsvp-form input,
+        .rsvp-form select,
         .rsvp-form textarea {
+
             width: 100%;
+            max-width: 100%;
+            min-width: 0;
+
             padding: 14px 18px;
+
             border: 1px solid #dcd1c4;
             border-radius: 8px;
+
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
+
+            font-size: 1.1rem;
+
             background: #fff;
             color: var(--text-dark);
+
             outline: none;
+
             transition: all 0.3s ease;
         }
 
-        .rsvp-form input:focus, 
-        .rsvp-form select:focus, 
+        .rsvp-form input:focus,
+        .rsvp-form select:focus,
         .rsvp-form textarea:focus {
+
             border-color: var(--accent-gold);
-            box-shadow: 0 0 8px rgba(197, 155, 39, 0.3);
+
+            box-shadow:
+                0 0 8px rgba(197, 155, 39, 0.3);
         }
 
         .rsvp-form textarea {
             resize: vertical;
-            height: 100px;
+            min-height: 100px;
         }
 
-        /* Stylish Buttons */
-        .open-btn, .submit-btn, .venue-btn {
-            background: linear-gradient(135deg, #7a1c1c 0%, #520f0f 100%);
+        /* =================================
+           BUTTONS
+        ================================= */
+
+        .open-btn,
+        .submit-btn,
+        .venue-btn {
+
+            background: linear-gradient(
+                135deg,
+                #7a1c1c 0%,
+                #520f0f 100%
+            );
+
             color: #ffffff;
+
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.25rem;
+
+            font-size: clamp(1rem, 3vw, 1.25rem);
+
             font-weight: 600;
-            letter-spacing: 2px;
+
+            letter-spacing: clamp(1px, 0.3vw, 2px);
+
             text-transform: uppercase;
-            padding: 15px 40px;
+
+            padding: 14px clamp(20px, 5vw, 40px);
+
             border: 1px solid var(--accent-gold);
+
             border-radius: 50px;
+
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(122, 28, 28, 0.35);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+            box-shadow:
+                0 6px 20px rgba(122, 28, 28, 0.35);
+
+            transition: all 0.3s ease;
+
             text-decoration: none;
-            display: inline-block;
+
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            max-width: 100%;
         }
 
-        .open-btn:hover, .submit-btn:hover, .venue-btn:hover {
-            background: linear-gradient(135deg, #942323 0%, #7a1c1c 100%);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(122, 28, 28, 0.45);
+        .open-btn:hover,
+        .submit-btn:hover,
+        .venue-btn:hover {
+
+            background: linear-gradient(
+                135deg,
+                #942323 0%,
+                #7a1c1c 100%
+            );
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px rgba(122, 28, 28, 0.45);
+
             border-color: var(--soft-gold);
+        }
+
+        .submit-btn {
+            width: 100%;
         }
 
         .venue-btn {
             margin-top: 18px;
+
             padding: 12px 28px;
-            font-size: 1.1rem;
+
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
         }
 
-        /* Mobile Adjustments */
+        /* =================================
+           TABLET RESPONSIVENESS
+        ================================= */
+
         @media screen and (max-width: 768px) {
+
             #invitationContent {
-                padding: 10px 10px 40px 10px;
+                padding: 15px 12px 40px;
                 gap: 25px;
             }
+
             .content-card {
                 padding: 25px 18px;
             }
-            .content-card h2 {
-                font-size: 1.8rem;
-            }
+
             .landing-cover-img {
                 max-width: 95vw;
-                max-height: calc(100dvh - 110px);
+                max-height: calc(100dvh - 120px);
             }
         }
-    </style></head><body>
 
-    <!-- Background Music -->
+        /* =================================
+           MOBILE PHONE RESPONSIVENESS
+        ================================= */
+
+        @media screen and (max-width: 480px) {
+
+            #invitationContent {
+                padding: 10px 8px 35px;
+                gap: 20px;
+            }
+
+            .welcome-box {
+                padding-bottom: 95px;
+            }
+
+            .landing-cover-img {
+                max-width: 96vw;
+                max-height: calc(100dvh - 115px);
+            }
+
+            .content-card {
+                padding: 22px 15px;
+                border-radius: 12px;
+            }
+
+            .content-card h2 {
+                font-size: clamp(1.25rem, 6vw, 1.7rem);
+            }
+
+            .rsvp-form {
+                gap: 12px;
+            }
+
+            .rsvp-form input,
+            .rsvp-form select,
+            .rsvp-form textarea {
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .open-btn,
+            .submit-btn,
+            .venue-btn {
+                width: 100%;
+                max-width: 100%;
+                padding: 13px 18px;
+            }
+
+            .action-bar {
+                padding: 0 20px;
+            }
+        }
+
+        /* =================================
+           SHORT SCREEN / LANDSCAPE MODE
+        ================================= */
+
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+
+            .welcome-box {
+                padding: 8px 10px 65px;
+            }
+
+            .landing-cover-img {
+                max-height: calc(100dvh - 80px);
+                max-width: 80vw;
+            }
+
+            .action-bar {
+                bottom: 8px;
+            }
+
+            .open-btn {
+                padding: 8px 24px;
+            }
+        }
+
+        /* =================================
+           LARGE DISPLAY SUPPORT
+        ================================= */
+
+        @media screen and (min-width: 1200px) {
+
+            #invitationContent {
+                max-width: 1100px;
+            }
+
+            .content-card {
+                max-width: 700px;
+            }
+        }
+
+        /* =================================
+           ACCESSIBILITY
+        ================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- BACKGROUND MUSIC -->
+
     <audio id="bgMusic" loop preload="auto">
         <source src="bahandi.m4a" type="audio/mp4">
         Your browser does not support the audio element.
     </audio>
 
-    <!-- 1. Landing Cover -->
+    <!-- LANDING COVER -->
+
     <section id="landing">
+
         <div class="welcome-box">
-            <img src="images/cover.png" alt="Robert & Diana Wedding" class="landing-cover-img">
+
+            <img
+                src="images/cover.png"
+                alt="Robert & Diana Wedding"
+                class="landing-cover-img"
+            >
 
             <div class="action-bar">
+
                 <button class="open-btn" onclick="openInvitation()">
                     Open Invitation
                 </button>
+
             </div>
+
         </div>
+
     </section>
 
-    <!-- 2. Continuous Scrollable Content -->
+    <!-- INVITATION CONTENT -->
+
     <div id="invitationContent" style="display: none;">
-        
-        <!-- Invitation Card Section -->
+
+        <!-- INVITATION CARD -->
+
         <section class="scroll-section">
-            <img src="images/invitation.jfif" alt="Wedding Invitation" class="content-img">
+
+            <img
+                src="images/invitation.jfif"
+                alt="Wedding Invitation"
+                class="content-img"
+            >
+
         </section>
 
-        <!-- Entourage Section -->
+        <!-- ENTOURAGE -->
+
         <section class="scroll-section">
-            <img src="images/entourage.png" alt="Wedding Entourage" class="content-img">
+
+            <img
+                src="images/entourage.png"
+                alt="Wedding Entourage"
+                class="content-img"
+            >
+
         </section>
 
-        <!-- Venue Section -->
+        <!-- WEDDING VENUE -->
+
         <section class="scroll-section">
+
             <div class="content-card">
+
                 <h2>Wedding Venue</h2>
+
                 <h3>Garden of Envy Indoor Garden</h3>
+
                 <p>The Gallery Mabolo, Cebu City</p>
 
-                <a class="venue-btn" href="https://maps.app.goo.gl/cvZW7dEifomMjG9T9" target="_blank">
+                <a
+                    class="venue-btn"
+                    href="https://maps.app.goo.gl/cvZW7dEifomMjG9T9"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     Open Google Maps
                 </a>
+
             </div>
+
         </section>
 
-        <!-- RSVP Section -->
+        <!-- RSVP -->
+
         <section class="scroll-section">
+
             <div class="content-card">
+
                 <h2>RSVP</h2>
-                <p style="font-size: 1.05rem; margin-bottom: 5px;">Kindly confirm your attendance below.</p>
+
+                <p style="font-size: 1.05rem; margin-bottom: 5px;">
+                    Kindly confirm your attendance below.
+                </p>
 
                 <div class="rsvp-form">
-                    <input id="rsvpName" placeholder="Guest Name">
-                    <input id="rsvpMobile" placeholder="Mobile Number">
+
+                    <input
+                        id="rsvpName"
+                        type="text"
+                        placeholder="Guest Name"
+                    >
+
+                    <input
+                        id="rsvpMobile"
+                        type="tel"
+                        placeholder="Mobile Number"
+                    >
 
                     <select id="attendance">
+
                         <option>Attending</option>
                         <option>Not Attending</option>
+
                     </select>
 
-                    <input id="guestCount" type="number" value="1" min="1">
+                    <input
+                        id="guestCount"
+                        type="number"
+                        value="1"
+                        min="1"
+                    >
 
-                    <textarea id="message" placeholder="Well wishes or message for the couple..."></textarea>
+                    <textarea
+                        id="message"
+                        placeholder="Well wishes or message for the couple..."
+                    ></textarea>
 
-                    <button class="submit-btn" onclick="submitRSVP()">
+                    <button
+                        class="submit-btn"
+                        onclick="submitRSVP()"
+                    >
                         Confirm Attendance
                     </button>
+
                 </div>
+
             </div>
+
         </section>
 
-        <!-- Thank You Section -->
+        <!-- THANK YOU -->
+
         <section class="scroll-section">
+
             <div class="content-card">
+
                 <h2>Thank You</h2>
-                <h1 id="thankYouName" style="font-size: 1.6rem; color: var(--primary-burgundy); margin: 10px 0;"></h1>
+
+                <h1
+                    id="thankYouName"
+                    style="
+                        font-size: clamp(1.3rem, 4vw, 1.6rem);
+                        color: var(--primary-burgundy);
+                        margin: 10px 0;
+                    "
+                ></h1>
+
                 <p>Your attendance has been confirmed.</p>
-                <p>We look forward to celebrating our special day with you!</p>
+
+                <p>
+                    We look forward to celebrating our special day with you!
+                </p>
+
             </div>
+
         </section>
 
     </div>
 
-    <!-- Application Script -->
-    <script src="assets/app.js"></script></body></html>
+    <!-- APPLICATION SCRIPT -->
+
+    <script src="assets/app.js"></script>
+
+</body>
+</html>
