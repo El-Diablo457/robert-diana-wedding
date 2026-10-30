@@ -107,7 +107,7 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
 
-            padding: 25px 20px 30px;
+            padding: 25px 20px 25px;
 
             border-radius: 24px;
 
@@ -120,7 +120,7 @@
             justify-content: center;
             align-items: center;
 
-            gap: 20px;
+            gap: 15px;
             text-align: center;
 
             border: 1px solid rgba(197, 155, 39, 0.4);
@@ -137,7 +137,7 @@
             width: 100%;
             height: auto;
 
-            max-height: 60vh;
+            max-height: 65vh;
 
             object-fit: contain;
             object-position: center;
@@ -150,21 +150,14 @@
             border: 1px solid rgba(197, 155, 39, 0.3);
         }
 
-        /* =================================
-            OPEN INVITATION BUTTON
-        ================================= */
-
-        .action-bar {
-            position: relative;
-            bottom: auto;
-            left: auto;
-            width: 100%;
-
-            display: flex;
-            justify-content: center;
-
-            padding: 0;
-            z-index: 1010;
+        /* Subtle tap hint text for user experience */
+        .tap-hint {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            color: var(--primary-burgundy);
+            letter-spacing: 1px;
+            opacity: 0.85;
+            margin-top: 5px;
         }
 
         /* =================================
@@ -357,7 +350,6 @@
             BUTTONS
         ================================= */
 
-        .open-btn,
         .submit-btn,
         .venue-btn {
 
@@ -403,7 +395,6 @@
             max-width: 100%;
         }
 
-        .open-btn:hover,
         .submit-btn:hover,
         .venue-btn:hover {
 
@@ -461,7 +452,7 @@
             }
 
             .welcome-box {
-                padding: 20px 15px 25px;
+                padding: 20px 15px 20px;
                 max-width: 90vw;
             }
 
@@ -485,7 +476,6 @@
                 font-size: 16px;
             }
 
-            .open-btn,
             .submit-btn,
             .venue-btn {
                 width: 100%;
@@ -502,15 +492,11 @@
 
             .welcome-box {
                 padding: 10px 15px;
-                max-width: 400px;
+                max-width: 380px;
             }
 
             .landing-cover-img {
-                max-height: 45vh;
-            }
-
-            .open-btn {
-                padding: 8px 24px;
+                max-height: 50vh;
             }
         }
 
@@ -568,13 +554,7 @@
                 class="landing-cover-img"
             >
 
-            <div class="action-bar">
-
-                <button class="open-btn">
-                    Open Invitation
-                </button>
-
-            </div>
+            <p class="tap-hint">Tap anywhere to open</p>
 
         </div>
 
