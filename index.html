@@ -94,6 +94,7 @@
             );
 
             z-index: 1000;
+            cursor: pointer;
         }
 
         .welcome-box {
@@ -554,7 +555,7 @@
 
             <div class="action-bar">
 
-                <button class="open-btn" onclick="openInvitation()">
+                <button class="open-btn">
                     Open Invitation
                 </button>
 
@@ -708,26 +709,36 @@
 
     <script src="assets/app.js"></script>
 
-    <!-- AUDIO 21-SECOND START SCRIPT -->
+    <!-- TAP ANYWHERE & AUDIO 21-SECOND START SCRIPT -->
     <script>
-        const originalOpenInvitation = window.openInvitation;
-        window.openInvitation = function() {
-            const audio = document.getElementById('bgMusic');
-            if (audio) {
-                audio.currentTime = 21; // Jump to 21 seconds mark
-                audio.play().catch(error => {
-                    console.log("Audio playback was prevented:", error);
-                });
+        document.addEventListener('DOMContentLoaded', () => {
+            const landing = document.getElementById('landing');
+
+            function handleFirstInteraction(event) {
+                const audio = document.getElementById('bgMusic');
+                if (audio) {
+                    audio.currentTime = 21; // Jump to 21 seconds mark
+                    audio.play().catch(error => {
+                        console.log("Audio playback was prevented:", error);
+                    });
+                }
+
+                // Trigger the open invitation logic
+                if (typeof openInvitation === 'function') {
+                    openInvitation();
+                } else {
+                    if (landing) landing.style.display = 'none';
+                    const content = document.getElementById('invitationContent');
+                    if (content) content.style.display = 'block';
+                }
             }
 
-            // Run original logic if defined in app.js
-            if (typeof originalOpenInvitation === 'function') {
-                originalOpenInvitation();
-            } else {
-                document.getElementById('landing').style.display = 'none';
-                document.getElementById('invitationContent').style.display = 'block';
+            // Attach listener to the landing section for both clicks and mobile touches
+            if (landing) {
+                landing.addEventListener('click', handleFirstInteraction, { once: true });
+                landing.addEventListener('touchstart', handleFirstInteraction, { once: true });
             }
-        };
+        });
     </script>
 
 </body>
