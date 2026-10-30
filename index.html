@@ -1,12 +1,3 @@
-Here is your updated HTML code.
-
-### What changed:
-
-* **Placeholder Updates Dynamically:** When **"Attending"** is selected, the placeholder text changes to **`"Plus One"`** (and reverts to asking for name(s) if multiple guest numbers are selected).
-* **Default Plus One Set to 1:** Selecting 2 guests defaults the Plus One field input placeholder to `"Plus One"` immediately.
-* **Auto-Toggle on Attendance Change:** Changing the dropdown between "Attending" and "Not Attending" will re-evaluate and adjust the Plus One field state and placeholders automatically.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,7 +122,6 @@ Here is your updated HTML code.
 
             border: 1px solid rgba(197, 155, 39, 0.4);
 
-            /* Combined Entrance, Fast Pulsating Glow, Fast Tilt Sway & Red/White Ripples */
             transform-origin: center center;
             animation: 
                 popUpScale 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -172,7 +162,6 @@ Here is your updated HTML code.
             }
         }
 
-        /* Red and White Dual Ripple Effect */
         @keyframes ripplePulse {
             0% {
                 outline: 0px solid rgba(107, 20, 20, 0.8);
@@ -391,7 +380,7 @@ Here is your updated HTML code.
             min-height: 100px;
         }
 
-        /* Dynamic Plus One Field Styling */
+        /* Plus One Field Styling */
         #plusOneContainer {
             display: flex;
             flex-direction: column;
@@ -809,25 +798,15 @@ Here is your updated HTML code.
                         placeholder="Mobile Number"
                     >
 
-                    <select id="attendance" onchange="togglePlusOneInput()">
+                    <select id="attendance" onchange="updateRSVPState()">
 
                         <option value="Attending">Attending</option>
                         <option value="Not Attending">Not Attending</option>
 
                     </select>
 
-                    <input
-                        id="guestCount"
-                        type="number"
-                        value="1"
-                        min="1"
-                        onchange="togglePlusOneInput()"
-                        oninput="togglePlusOneInput()"
-                    >
-
-                    <!-- PLUS ONE TEXTBOX (HIDDEN BY DEFAULT) -->
-                    <div id="plusOneContainer" style="display: none;">
-                        <label id="plusOneLabel" for="plusOneNames">Plus One Guest Name:</label>
+                    <!-- PLUS ONE TEXTBOX (SHOWN ONLY WHEN ATTENDING) -->
+                    <div id="plusOneContainer">
                         <input
                             id="plusOneNames"
                             type="text"
@@ -840,7 +819,7 @@ Here is your updated HTML code.
                         placeholder="Well wishes or message for the couple..."
                     ></textarea>
 
-                    <!-- CONFIRM ATTENDANCE BUTTON -->
+                    <!-- SUBMIT BUTTON -->
                     <button
                         id="rsvpSubmitBtn"
                         class="submit-btn"
@@ -881,7 +860,7 @@ Here is your updated HTML code.
                     "
                 ></h1>
 
-                <p>Your attendance has been confirmed.</p>
+                <p id="thankYouMessageText">Your attendance has been confirmed.</p>
 
                 <p>
                     We look forward to celebrating our special day with you!
@@ -950,45 +929,51 @@ Here is your updated HTML code.
                 landing.addEventListener('click', handleFirstInteraction, { once: true });
                 landing.addEventListener('touchstart', handleFirstInteraction, { once: true });
             }
+
+            // Initialize correct button and field state on load
+            updateRSVPState();
         });
 
-        // Toggle Plus One Name Box & Placeholder behavior
-        function togglePlusOneInput() {
-            const count = parseInt(document.getElementById('guestCount').value) || 1;
+        // Update UI based on Attending / Not Attending selection
+        function updateRSVPState() {
             const attendance = document.getElementById('attendance').value;
             const plusOneContainer = document.getElementById('plusOneContainer');
-            const plusOneInput = document.getElementById('plusOneNames');
-            const plusOneLabel = document.getElementById('plusOneLabel');
+            const submitBtn = document.getElementById('rsvpSubmitBtn');
+            const messageArea = document.getElementById('message');
 
-            if (count > 1 && attendance === "Attending") {
+            if (attendance === "Attending") {
                 plusOneContainer.style.display = 'flex';
-                
-                if (count === 2) {
-                    plusOneLabel.innerText = "Plus One Guest Name:";
-                    plusOneInput.placeholder = "Plus One";
-                } else {
-                    plusOneLabel.innerText = "Plus One Guest Name(s):";
-                    plusOneInput.placeholder = "Full name(s) of your plus ones";
-                }
+                submitBtn.innerText = "Confirm Attendance";
+                messageArea.placeholder = "Well wishes or message for the couple...";
+                messageArea.required = false;
             } else {
                 plusOneContainer.style.display = 'none';
+                submitBtn.innerText = "I Apologize";
+                messageArea.placeholder = "Please leave a message or reason for declining (Required)...";
+                messageArea.required = true;
             }
         }
 
         // Handle RSVP Form Submission
         function handleRSVPSubmit() {
             const name = document.getElementById('rsvpName').value.trim();
-            const guestCount = parseInt(document.getElementById('guestCount').value) || 1;
+            const attendance = document.getElementById('attendance').value;
             const plusOneName = document.getElementById('plusOneNames').value.trim();
+            const messageArea = document.getElementById('message').value.trim();
 
             if (!name) {
                 alert('Please enter your name before submitting.');
                 return;
             }
 
-            // Collect Plus Ones
+            if (attendance === "Not Attending" && !messageArea) {
+                alert('Please leave a message or reason for declining before apologizing.');
+                return;
+            }
+
+            // Collect Plus Ones if Attending
             let plusOnesArr = [];
-            if (guestCount > 1 && plusOneName) {
+            if (attendance === "Attending" && plusOneName) {
                 plusOnesArr.push(plusOneName);
             }
 
@@ -998,10 +983,18 @@ Here is your updated HTML code.
                 plusOnes: plusOnesArr
             });
 
-            // Set Thank You Name
+            // Set Thank You Name and text
             const thankYouElem = document.getElementById('thankYouName');
+            const thankYouText = document.getElementById('thankYouMessageText');
             if (thankYouElem) {
                 thankYouElem.innerText = name;
+            }
+            if (thankYouText) {
+                if (attendance === "Attending") {
+                    thankYouText.innerText = "Your attendance has been confirmed.";
+                } else {
+                    thankYouText.innerText = "Your apology and response have been received.";
+                }
             }
 
             // Call external submit logic if exists
@@ -1009,7 +1002,7 @@ Here is your updated HTML code.
                 submitRSVP();
             }
 
-            // REPLACE CONFIRM ATTENDANCE BUTTON WITH CLOSE / DONE BUTTON
+            // REPLACE BUTTON WITH CLOSE / DONE BUTTON
             const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
             if (rsvpSubmitBtn) {
                 rsvpSubmitBtn.innerText = "Close / Done";
@@ -1059,5 +1052,3 @@ Here is your updated HTML code.
 
 </body>
 </html>
-
-```
