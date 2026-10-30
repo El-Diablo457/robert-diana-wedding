@@ -1,42 +1,46 @@
-/* Ensure the landing section centers its contents */
-#landing.page.active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Elegant "Open Invitation" Button */
+.open-btn {
+    background: linear-gradient(135deg, #7a1c1c, #a32a2a); /* Elegant deep rose / burgundy gradient */
+    color: #ffffff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    border: 1px solid #d4af37; /* Soft metallic gold border */
+    border-radius: 50px; /* Rounded pill shape */
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(122, 28, 28, 0.3), 0 0 10px rgba(212, 175, 55, 0.2);
+    transition: all 0.4s ease;
+    outline: none;
     position: relative;
-    width: 100%;
-    min-height: 100vh;
+    overflow: hidden;
 }
 
-/* Style and center the welcome/action container */
-.welcome-box {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 600px; /* Adjust as needed to match your image width */
-    margin: 0 auto;
-    text-align: center;
+/* Hover Effect - Subtle Glow & Lift */
+.open-btn:hover {
+    background: linear-gradient(135deg, #a32a2a, #7a1c1c);
+    color: #fff8e7;
+    border-color: #f3e5ab;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(122, 28, 28, 0.45), 0 0 15px rgba(212, 175, 55, 0.5);
 }
 
-/* Position the cover image nicely */
-.landing-cover-img {
-    width: 100%;
-    height: auto;
-    display: block;
+/* Click / Active Press Effect */
+.open-btn:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 3px 10px rgba(122, 28, 28, 0.3);
 }
 
-/* Center the action bar holding the button */
+/* Optional Pulse Animation to Draw Guest's Attention */
+@keyframes goldPulse {
+    0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
+    70% { box-shadow: 0 0 0 14px rgba(212, 175, 55, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+
 .action-bar {
-    position: absolute; /* Place it directly over or below the image */
-    bottom: 10%; /* Adjust this percentage to move it up or down on the card */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
+    margin-top: 20px;
+    text-align: center;
 }
