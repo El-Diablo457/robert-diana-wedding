@@ -4,21 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fdfbf7">
-    <meta name="description" content="Robert and Diana Wedding Invitation">
+    <meta name="description" content="Robert and Diana Wedding Invitation & RSVP">
 
     <title>Robert & Diana Wedding Invitation</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/style.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        burgundy: '#6b1414',
+                        burgundyDark: '#4a0d0d',
+                        gold: '#c59b27',
+                        softGold: '#e5c158',
+                        cream: '#fdfbf7',
+                        cardBg: 'rgba(255, 255, 255, 0.95)',
+                        textDark: '#2c221e'
+                    },
+                    fontFamily: {
+                        cinzel: ['"Cinzel Decorative"', 'serif'],
+                        playfair: ['"Playfair Display"', 'serif'],
+                        cormorant: ['"Cormorant Garamond"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
 
     <style>
-        /* =================================
-            UNIVERSAL RESPONSIVE SETTINGS
-        ================================= */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -57,9 +77,7 @@
             height: auto;
         }
 
-        /* =================================
-            LANDING COVER (PINTEREST POP-UP MODAL)
-        ================================= */
+        /* LANDING COVER MODAL */
         #landing {
             position: fixed;
             inset: 0;
@@ -69,9 +87,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(44, 34, 30, 0.55);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            background: rgba(44, 34, 30, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 1000;
             cursor: pointer;
             padding: 20px;
@@ -80,23 +98,23 @@
         .welcome-box {
             position: relative;
             width: 100%;
-            max-width: 440px;
+            max-width: 420px;
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 20px;
+            padding: 24px;
             border-radius: 24px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border: 1px solid rgba(197, 155, 39, 0.4);
+            border: 1px solid rgba(197, 155, 39, 0.5);
             transform-origin: center center;
             animation: 
-                popUpScale 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-                pulseGlow 1s ease-in-out infinite 0.3s, 
-                tiltSway 1.33s ease-in-out infinite 0.3s;
+                popUpScale 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                pulseGlow 2s ease-in-out infinite 0.4s, 
+                tiltSway 2.5s ease-in-out infinite 0.4s;
         }
 
         .welcome-box::before,
@@ -111,12 +129,12 @@
 
         .welcome-box::before {
             border: 1.5px solid rgba(107, 20, 20, 0.85);
-            animation: wavyRippleRed 1.5s ease-in-out infinite 0.3s;
+            animation: wavyRippleRed 1.8s ease-in-out infinite 0.3s;
         }
 
         .welcome-box::after {
             border: 1.5px solid rgba(255, 255, 255, 0.9);
-            animation: wavyRippleWhite 1.5s ease-in-out infinite 0.6s;
+            animation: wavyRippleWhite 1.8s ease-in-out infinite 0.6s;
         }
 
         @keyframes popUpScale {
@@ -125,549 +143,471 @@
         }
 
         @keyframes pulseGlow {
-            0% { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
-            50% { box-shadow: 0 30px 60px rgba(107, 20, 20, 0.5); }
-            100% { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
+            0% { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35); }
+            50% { box-shadow: 0 30px 60px rgba(107, 20, 20, 0.55); }
+            100% { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35); }
         }
 
         @keyframes tiltSway {
             0% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.03) rotate(-2deg); }
-            75% { transform: scale(1.03) rotate(2deg); }
+            25% { transform: scale(1.02) rotate(-1.5deg); }
+            75% { transform: scale(1.02) rotate(1.5deg); }
             100% { transform: scale(1) rotate(0deg); }
         }
 
         @keyframes wavyRippleRed {
             0% { transform: scale(1) skewX(0deg); border-radius: 24px; opacity: 0.9; }
-            33% { transform: scale(1.12) skewX(1.5deg); border-radius: 28px 20px 28px 20px; }
-            66% { transform: scale(1.22) skewX(-1.5deg); border-radius: 20px 28px 20px 28px; }
-            100% { transform: scale(1.32) skewX(0deg); border-radius: 32px; opacity: 0; }
+            33% { transform: scale(1.08) skewX(1deg); border-radius: 28px 20px 28px 20px; }
+            66% { transform: scale(1.15) skewX(-1deg); border-radius: 20px 28px 20px 28px; }
+            100% { transform: scale(1.22) skewX(0deg); border-radius: 32px; opacity: 0; }
         }
 
         @keyframes wavyRippleWhite {
             0% { transform: scale(1) skewX(0deg); border-radius: 24px; opacity: 0.9; }
-            33% { transform: scale(1.14) skewX(-1.5deg); border-radius: 20px 28px 20px 28px; }
-            66% { transform: scale(1.24) skewX(1.5deg); border-radius: 28px 20px 28px 20px; }
-            100% { transform: scale(1.35) skewX(0deg); border-radius: 32px; opacity: 0; }
+            33% { transform: scale(1.1) skewX(-1deg); border-radius: 20px 28px 20px 28px; }
+            66% { transform: scale(1.18) skewX(1deg); border-radius: 28px 20px 28px 20px; }
+            100% { transform: scale(1.25) skewX(0deg); border-radius: 32px; opacity: 0; }
         }
 
-        .landing-cover-img {
-            width: 100%;
-            height: auto;
-            max-height: 70vh;
-            object-fit: contain;
-            object-position: center;
-            border-radius: 14px;
-            box-shadow: 0 8px 25px rgba(107, 20, 20, 0.15);
-            border: 1px solid rgba(197, 155, 39, 0.3);
-        }
-
-        /* =================================
-            BLURRED PREVIEW STATE FOR BACKGROUND
-        ================================= */
+        /* BLURRED BACKGROUND STATE */
         body.landing-active #invitationContent {
-            display: flex !important;
             filter: blur(12px);
             -webkit-filter: blur(12px);
-            opacity: 0.4;
+            opacity: 0.35;
             pointer-events: none;
             user-select: none;
             transition: filter 0.6s ease, opacity 0.6s ease;
         }
 
-        /* =================================
-            MAIN INVITATION CONTENT
-        ================================= */
         #invitationContent {
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: clamp(12px, 3vw, 35px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: clamp(20px, 4vw, 40px);
             transition: filter 0.6s ease, opacity 0.6s ease;
         }
 
-        .scroll-section {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .content-img {
-            display: block;
-            width: auto;
-            height: auto;
-            max-width: 100%;
-            max-height: none;
-            object-fit: contain;
-            object-position: center;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(197, 155, 39, 0.25);
-        }
-
         .content-card {
-            width: 100%;
-            max-width: 650px;
             background: var(--card-bg);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            padding: clamp(20px, 5vw, 40px);
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(107, 20, 20, 0.08);
-            text-align: center;
             border: 1px solid rgba(197, 155, 39, 0.4);
-            position: relative;
-            overflow-wrap: anywhere;
+            box-shadow: 0 10px 30px rgba(107, 20, 20, 0.08);
+            border-radius: 16px;
         }
 
-        .content-card h2 {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: clamp(1.4rem, 5vw, 2.2rem);
-            color: var(--primary-burgundy);
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            line-height: 1.3;
-        }
-
-        .content-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.15rem, 3.5vw, 1.5rem);
-            font-weight: 600;
-            margin: 12px 0;
-            color: var(--text-dark);
-            line-height: 1.4;
-        }
-
-        .content-card p {
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            color: #4a3e3d;
-            line-height: 1.6;
-        }
-
-        /* =================================
-            RSVP FORM & PLUS ONE
-        ================================= */
-        .rsvp-form {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-top: 25px;
-            width: 100%;
-            min-width: 0;
-        }
-
-        .rsvp-form input,
-        .rsvp-form select,
-        .rsvp-form textarea {
-            width: 100%;
-            max-width: 100%;
-            min-width: 0;
-            padding: 14px 18px;
-            border: 1px solid #dcd1c4;
-            border-radius: 8px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            background: #fff;
-            color: var(--text-dark);
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .rsvp-form input:focus,
-        .rsvp-form select:focus,
-        .rsvp-form textarea:focus {
-            border-color: var(--accent-gold);
-            box-shadow: 0 0 8px rgba(197, 155, 39, 0.3);
-        }
-
-        .rsvp-form textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        #plusOneContainer {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            text-align: left;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* =================================
-            BUTTONS
-        ================================= */
-        .submit-btn,
-        .venue-btn,
-        .view-list-btn,
-        .close-btn,
-        .admin-btn {
+        .btn-gold {
             background: linear-gradient(135deg, #7a1c1c 0%, #520f0f 100%);
-            color: #ffffff;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1rem, 3vw, 1.25rem);
-            font-weight: 600;
-            letter-spacing: clamp(1px, 0.3vw, 2px);
-            text-transform: uppercase;
-            padding: 14px clamp(20px, 5vw, 40px);
             border: 1px solid var(--accent-gold);
-            border-radius: 50px;
-            cursor: pointer;
+            color: white;
             box-shadow: 0 6px 20px rgba(122, 28, 28, 0.35);
             transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            max-width: 100%;
         }
 
-        .submit-btn:hover,
-        .venue-btn:hover,
-        .view-list-btn:hover,
-        .close-btn:hover,
-        .admin-btn:hover {
+        .btn-gold:hover {
             background: linear-gradient(135deg, #942323 0%, #7a1c1c 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(122, 28, 28, 0.45);
-            border-color: var(--soft-gold);
-        }
-
-        .submit-btn,
-        .close-btn {
-            width: 100%;
-        }
-
-        .close-btn {
-            background: linear-gradient(135deg, #c59b27 0%, #9e7b1a 100%);
-            border-color: #fff;
-            box-shadow: 0 6px 20px rgba(197, 155, 39, 0.35);
-        }
-
-        .venue-btn {
-            margin-top: 18px;
-            padding: 12px 28px;
-            font-size: clamp(0.95rem, 3vw, 1.1rem);
-        }
-
-        .view-list-btn {
-            background: transparent;
-            color: #888;
-            border: 1px dashed #dcd1c4;
-            margin-top: 15px;
-            font-size: 0.85rem;
-            padding: 8px;
-            box-shadow: none;
-            letter-spacing: 1px;
-        }
-
-        .view-list-btn:hover {
-            background: rgba(0, 0, 0, 0.03);
-            color: var(--primary-burgundy);
-        }
-
-        .admin-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-            justify-content: space-between;
-        }
-
-        .admin-btn {
-            font-size: 0.85rem;
-            padding: 8px 14px;
-            border-radius: 8px;
-            text-transform: none;
-        }
-
-        /* =================================
-            GUEST LIST MODAL
-        ================================= */
-        .guest-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .guest-modal-content {
-            background: var(--card-bg);
-            border: 1px solid var(--accent-gold);
-            border-radius: 16px;
-            width: 100%;
-            max-width: 550px;
-            max-height: 85vh;
-            padding: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.8rem;
-            color: var(--primary-burgundy);
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        .guest-list-container {
-            overflow-y: auto;
-            max-height: 50vh;
-            text-align: left;
-        }
-
-        .guest-item {
-            padding: 10px 0;
-            border-bottom: 1px dashed #dcd1c4;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .guest-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .guest-item-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--primary-burgundy);
-        }
-
-        .guest-detail {
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        .delete-btn {
-            background: #a92222;
-            color: #fff;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-
-        @media screen and (max-width: 768px) {
-            #invitationContent { padding: 15px 12px 40px; gap: 25px; }
-            .content-card { padding: 25px 18px; }
-        }
-
-        @media screen and (max-width: 480px) {
-            #invitationContent { padding: 10px 8px 35px; gap: 20px; }
-            .welcome-box { padding: 15px; max-width: 90vw; }
-            .content-card { padding: 22px 15px; border-radius: 12px; }
-            .content-card h2 { font-size: clamp(1.25rem, 6vw, 1.7rem); }
-            .rsvp-form { gap: 12px; }
-            .rsvp-form input, .rsvp-form select, .rsvp-form textarea { padding: 12px; font-size: 16px; }
-            .submit-btn, .venue-btn, .view-list-btn, .close-btn { width: 100%; max-width: 100%; padding: 13px 18px; }
-        }
-
-        @media screen and (max-height: 500px) and (orientation: landscape) {
-            .welcome-box { padding: 10px 15px; max-width: 380px; }
-            .landing-cover-img { max-height: 60vh; }
-        }
-
-        @media screen and (min-width: 1200px) {
-            #invitationContent { max-width: 1100px; }
-            .content-card { max-width: 700px; }
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(122, 28, 28, 0.45);
         }
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
-                scroll-behavior: auto !important;
-                transition-duration: 0.01ms !important;
                 animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
 
-<body class="landing-active">
+<body class="landing-active antialiased selection:bg-gold selection:text-white">
 
-    <!-- BACKGROUND MUSIC -->
+    <!-- AUDIO PLAYER -->
     <audio id="bgMusic" loop preload="auto">
         <source src="bahandi.m4a" type="audio/mp4">
-        Your browser does not support the audio element.
     </audio>
 
-    <!-- LANDING COVER -->
-    <section id="landing" role="region" aria-label="Welcome Cover">
-        <div class="welcome-box">
-            <img src="images/cover.png" alt="Robert & Diana Wedding Cover" class="landing-cover-img">
+    <!-- LANDING OVERLAY -->
+    <section id="landing" role="button" aria-label="Click to open wedding invitation">
+        <div class="welcome-box text-center">
+            <div class="relative w-full rounded-2xl overflow-hidden shadow-lg border border-gold/30">
+                <svg viewBox="0 0 400 520" class="w-full h-auto bg-stone-900">
+                    <rect width="100%" height="100%" fill="#1c1313"/>
+                    <!-- Decorative Floral SVG Background -->
+                    <circle cx="200" cy="260" r="170" fill="none" stroke="#c59b27" stroke-width="1" stroke-dasharray="4,4" opacity="0.6"/>
+                    <circle cx="200" cy="260" r="155" fill="none" stroke="#c59b27" stroke-width="1.5" opacity="0.8"/>
+                    
+                    <text x="200" y="160" text-anchor="middle" fill="#e5c158" font-family="'Cinzel Decorative', serif" font-size="18" letter-spacing="3">THE WEDDING OF</text>
+                    
+                    <text x="200" y="240" text-anchor="middle" fill="#ffffff" font-family="'Playfair Display', serif" font-size="42" font-weight="600" font-style="italic">Robert</text>
+                    <text x="200" y="280" text-anchor="middle" fill="#c59b27" font-family="'Cinzel Decorative', serif" font-size="22">&</text>
+                    <text x="200" y="330" text-anchor="middle" fill="#ffffff" font-family="'Playfair Display', serif" font-size="42" font-weight="600" font-style="italic">Diana</text>
+                    
+                    <text x="200" y="400" text-anchor="middle" fill="#e5c158" font-family="'Cormorant Garamond', serif" font-size="16" letter-spacing="4">DECEMBER 12, 2026</text>
+                    <text x="200" y="430" text-anchor="middle" fill="#d1d5db" font-family="'Cormorant Garamond', serif" font-size="14">CEBU CITY, PHILIPPINES</text>
+                </svg>
+            </div>
+            <p class="mt-4 text-burgundy font-playfair italic font-medium text-lg tracking-wide">
+                ✨ Tap anywhere to open invitation ✨
+            </p>
         </div>
     </section>
 
-    <!-- INVITATION CONTENT -->
-    <main id="invitationContent">
-        <section class="scroll-section">
-            <img src="images/invitation.jfif" alt="Wedding Invitation Details" class="content-img">
+    <!-- MAIN INVITATION CONTENT -->
+    <main id="invitationContent" class="w-full max-w-4xl mx-auto px-4 py-8 flex flex-col items-center gap-10">
+
+        <!-- HEADER HERO -->
+        <section class="text-center py-6 px-4">
+            <p class="text-gold font-cinzel text-sm sm:text-base tracking-widest uppercase mb-2">Together with their families</p>
+            <h1 class="text-4xl sm:text-6xl font-playfair font-bold text-burgundy my-2">Robert & Diana</h1>
+            <p class="text-stone-600 font-cormorant text-lg sm:text-xl italic">Request the honor of your presence as they unite in marriage</p>
         </section>
 
-        <section class="scroll-section">
-            <img src="images/entourage.png" alt="Wedding Entourage" class="content-img">
+        <!-- CARD IMAGE SECTION -->
+        <section class="w-full flex justify-center">
+            <div class="content-card p-4 sm:p-6 w-full max-w-2xl text-center">
+                <div class="border border-gold/30 rounded-xl p-6 bg-cream/50">
+                    <h2 class="font-cinzel text-2xl sm:text-3xl text-burgundy mb-4">Official Invitation</h2>
+                    <svg viewBox="0 0 600 350" class="w-full h-auto rounded-lg shadow-inner bg-stone-900 border border-gold/40 my-2">
+                        <rect width="100%" height="100%" fill="#231717"/>
+                        <rect x="20" y="20" width="560" height="310" fill="none" stroke="#c59b27" stroke-width="1.5" rx="8"/>
+                        <text x="300" y="80" text-anchor="middle" fill="#e5c158" font-family="'Cinzel Decorative', serif" font-size="20">SAVE THE DATE</text>
+                        <text x="300" y="140" text-anchor="middle" fill="#ffffff" font-family="'Playfair Display', serif" font-size="36" font-style="italic">Robert & Diana</text>
+                        <text x="300" y="195" text-anchor="middle" fill="#fdfbf7" font-family="'Cormorant Garamond', serif" font-size="20">Saturday, December 12, 2026</text>
+                        <text x="300" y="225" text-anchor="middle" fill="#c59b27" font-family="'Cormorant Garamond', serif" font-size="18">Ceremony & Reception to Follow</text>
+                        <text x="300" y="275" text-anchor="middle" fill="#9ca3af" font-family="'Cormorant Garamond', serif" font-size="15">Garden of Envy Indoor Garden, Cebu City</text>
+                    </svg>
+                </div>
+            </div>
         </section>
 
-        <section class="scroll-section">
-            <div class="content-card">
-                <h2>Wedding Venue</h2>
-                <h3>Garden of Envy Indoor Garden</h3>
-                <p>The Gallery Mabolo, Cebu City</p>
-                <a class="venue-btn" href="https://maps.app.goo.gl/cvZW7dEifomMjG9T9" target="_blank" rel="noopener noreferrer">
+        <!-- ENTOURAGE CARD -->
+        <section class="w-full flex justify-center">
+            <div class="content-card p-6 sm:p-8 w-full max-w-2xl text-center">
+                <h2 class="font-cinzel text-2xl sm:text-3xl text-burgundy mb-4">Wedding Entourage</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left border-t border-gold/20 pt-6">
+                    <div>
+                        <h3 class="font-playfair text-xl font-bold text-burgundy mb-2">Parents of the Groom</h3>
+                        <p class="text-stone-700 text-lg">Mr. & Mrs. Robert Sr. Smith</p>
+                    </div>
+                    <div>
+                        <h3 class="font-playfair text-xl font-bold text-burgundy mb-2">Parents of the Bride</h3>
+                        <p class="text-stone-700 text-lg">Mr. & Mrs. Diana Sr. Santos</p>
+                    </div>
+                    <div>
+                        <h3 class="font-playfair text-xl font-bold text-burgundy mb-2">Maid of Honor</h3>
+                        <p class="text-stone-700 text-lg">Elena Rostova</p>
+                    </div>
+                    <div>
+                        <h3 class="font-playfair text-xl font-bold text-burgundy mb-2">Best Man</h3>
+                        <p class="text-stone-700 text-lg">Alexander Vance</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VENUE SECTION -->
+        <section class="w-full flex justify-center">
+            <div class="content-card p-6 sm:p-8 w-full max-w-2xl text-center">
+                <h2 class="font-cinzel text-2xl sm:text-3xl text-burgundy mb-2">Wedding Venue</h2>
+                <h3 class="font-playfair text-xl sm:text-2xl font-semibold text-stone-800 mb-1">Garden of Envy Indoor Garden</h3>
+                <p class="text-stone-600 text-lg mb-6">The Gallery Mabolo, Cebu City, Philippines</p>
+                <a class="btn-gold inline-flex items-center gap-2 px-8 py-3 rounded-full text-lg font-cormorant tracking-wider uppercase font-semibold" href="https://maps.app.goo.gl/cvZW7dEifomMjG9T9" target="_blank" rel="noopener noreferrer">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                     Open Google Maps
                 </a>
             </div>
         </section>
 
-        <section class="scroll-section">
-            <div class="content-card">
-                <h2>RSVP</h2>
-                <p style="font-size: 1.05rem; margin-bottom: 5px;">Kindly confirm your attendance below.</p>
-                <form class="rsvp-form" onsubmit="event.preventDefault();">
-                    <input id="rsvpName" type="text" placeholder="Guest Name" required>
-                    <input id="rsvpMobile" type="tel" placeholder="Mobile Number">
-                    <select id="attendance" aria-label="Attendance Status">
-                        <option value="Attending">Attending</option>
-                        <option value="Not Attending">Not Attending</option>
-                    </select>
-
-                    <div id="plusOneContainer">
-                        <input id="plusOneNames" type="text" placeholder="Plus One Name">
+        <!-- RSVP FORM SECTION -->
+        <section class="w-full flex justify-center">
+            <div class="content-card p-6 sm:p-10 w-full max-w-2xl text-center">
+                <h2 class="font-cinzel text-2xl sm:text-3xl text-burgundy mb-2">RSVP</h2>
+                <p class="text-stone-600 text-lg mb-6">Kindly confirm your attendance on or before November 15, 2026.</p>
+                
+                <form id="rsvpForm" class="flex flex-col gap-4 text-left">
+                    <div>
+                        <label class="block text-stone-700 font-semibold mb-1 text-base">Full Name *</label>
+                        <input id="rsvpName" type="text" placeholder="e.g. John Doe" class="w-full p-3 border border-stone-300 rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 outline-none text-lg bg-white" required>
                     </div>
 
-                    <textarea id="message" placeholder="Well wishes or message for the couple..."></textarea>
+                    <div>
+                        <label class="block text-stone-700 font-semibold mb-1 text-base">Mobile Number</label>
+                        <input id="rsvpMobile" type="tel" placeholder="e.g. +63 917 123 4567" class="w-full p-3 border border-stone-300 rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 outline-none text-lg bg-white">
+                    </div>
 
-                    <button id="rsvpSubmitBtn" type="button" class="submit-btn">
+                    <div>
+                        <label class="block text-stone-700 font-semibold mb-1 text-base">Attendance Status *</label>
+                        <select id="attendance" class="w-full p-3 border border-stone-300 rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 outline-none text-lg bg-white">
+                            <option value="Attending">Joyfully Accepts (Attending)</option>
+                            <option value="Not Attending">Regretfully Declines (Not Attending)</option>
+                        </select>
+                    </div>
+
+                    <div id="plusOneContainer" class="flex flex-col gap-1">
+                        <label class="block text-stone-700 font-semibold mb-1 text-base">Plus One Name(s)</label>
+                        <input id="plusOneNames" type="text" placeholder="e.g. Jane Doe" class="w-full p-3 border border-stone-300 rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 outline-none text-lg bg-white">
+                    </div>
+
+                    <div>
+                        <label id="messageLabel" class="block text-stone-700 font-semibold mb-1 text-base">Message / Well Wishes</label>
+                        <textarea id="message" placeholder="Well wishes or message for the couple..." class="w-full p-3 border border-stone-300 rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 outline-none text-lg bg-white min-h-[100px]"></textarea>
+                    </div>
+
+                    <button id="rsvpSubmitBtn" type="submit" class="btn-gold w-full py-3.5 rounded-full text-lg font-cormorant font-semibold uppercase tracking-wider mt-2">
                         Confirm Attendance
                     </button>
 
                     <!-- DISCREET ADMIN DASHBOARD BUTTON -->
-                    <button type="button" class="view-list-btn">
-                        ⚙️ Admin Dashboard
+                    <button id="adminAccessBtn" type="button" class="w-full mt-4 py-2 text-sm text-stone-500 hover:text-burgundy border border-dashed border-stone-300 rounded-lg hover:bg-stone-50 transition">
+                        ⚙️ Admin Dashboard & Sync
                     </button>
                 </form>
             </div>
         </section>
 
-        <section id="thankYouSection" class="scroll-section">
-            <div class="content-card">
-                <h2>Thank You</h2>
-                <h1 id="thankYouName" style="font-size: clamp(1.3rem, 4vw, 1.6rem); color: var(--primary-burgundy); margin: 10px 0;"></h1>
-                <p id="thankYouMessageText">Your attendance has been confirmed.</p>
-                <p>We look forward to celebrating our special day with you!</p>
+        <!-- THANK YOU SECTION -->
+        <section id="thankYouSection" class="w-full flex justify-center">
+            <div class="content-card p-8 sm:p-10 w-full max-w-2xl text-center">
+                <h2 class="font-cinzel text-3xl text-burgundy mb-2">Thank You</h2>
+                <h3 id="thankYouName" class="font-playfair text-2xl text-burgundy font-bold my-2"></h3>
+                <p id="thankYouMessageText" class="text-stone-700 text-xl font-medium mb-2">Your response has been saved.</p>
+                <p class="text-stone-600 text-lg">We look forward to celebrating our special day together!</p>
             </div>
         </section>
     </main>
 
     <!-- ADMIN DASHBOARD MODAL -->
-    <div id="guestListModal" class="guest-modal" style="display: none;" role="dialog" aria-modal="true" aria-label="Admin RSVP Dashboard">
-        <div class="guest-modal-content">
-            <span class="close-modal" id="closeModalBtn" role="button" tabindex="0">&times;</span>
-            <h2 style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy);">Admin RSVP Dashboard</h2>
+    <div id="guestListModal" class="guest-modal fixed inset-0 bg-black/60 backdrop-blur-sm z-[2000] flex justify-center items-center p-4" style="display: none;" role="dialog" aria-modal="true">
+        <div class="guest-modal-content bg-cream border border-gold/60 rounded-2xl w-full max-w-4xl max-h-[90vh] p-6 shadow-2xl flex flex-col gap-4 relative overflow-hidden">
             
-            <div id="guestListContainer" class="guest-list-container"></div>
+            <!-- Header -->
+            <div class="flex justify-between items-center border-b border-gold/30 pb-3">
+                <div>
+                    <h2 class="font-cinzel text-xl sm:text-2xl text-burgundy font-bold">Admin RSVP Dashboard</h2>
+                    <p class="text-xs sm:text-sm text-stone-600">Consolidated RSVP list from all devices & users</p>
+                </div>
+                <button id="closeModalBtn" class="text-3xl text-burgundy hover:opacity-70 font-bold px-2">&times;</button>
+            </div>
 
-            <div class="admin-actions">
-                <button type="button" class="admin-btn" id="exportCsvBtn">Export to CSV</button>
-                <button type="button" class="admin-btn" style="background:#a92222;" id="clearDataBtn">Clear All Data</button>
+            <!-- Sync Indicator Bar -->
+            <div class="flex flex-wrap items-center justify-between bg-stone-100 p-3 rounded-lg border border-stone-200 text-xs sm:text-sm gap-2">
+                <div class="flex items-center gap-2">
+                    <span id="syncDot" class="w-3 h-3 rounded-full bg-amber-500 animate-pulse"></span>
+                    <span id="syncStatusText" class="font-semibold text-stone-700">Checking cloud connection...</span>
+                </div>
+                <div class="text-stone-500 flex items-center gap-3">
+                    <span id="totalStatsText">Total: 0 | Attending: 0</span>
+                    <button id="manualRefreshBtn" class="text-burgundy underline hover:text-black font-semibold">Refresh Now</button>
+                </div>
+            </div>
+
+            <!-- Filter and Search Bar -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input id="adminSearchInput" type="text" placeholder="Search by name..." class="p-2.5 border border-stone-300 rounded-lg text-sm outline-none focus:border-gold bg-white">
+                <select id="adminStatusFilter" class="p-2.5 border border-stone-300 rounded-lg text-sm outline-none focus:border-gold bg-white">
+                    <option value="ALL">All Statuses</option>
+                    <option value="Attending">Attending Only</option>
+                    <option value="Not Attending">Not Attending Only</option>
+                </select>
+                <!-- File Input for JSON Import Consolidation -->
+                <label class="cursor-pointer bg-stone-800 hover:bg-black text-white text-xs sm:text-sm font-semibold rounded-lg flex items-center justify-center p-2.5 transition text-center">
+                    <span>📥 Merge / Import JSON File</span>
+                    <input id="importJsonFileInput" type="file" accept=".json" class="hidden">
+                </label>
+            </div>
+
+            <!-- Guest List Container -->
+            <div id="guestListContainer" class="guest-list-container overflow-y-auto max-h-[45vh] border border-stone-200 rounded-lg bg-white p-3 divide-y divide-stone-100">
+                <p class="text-center text-stone-500 py-6">Loading responses...</p>
+            </div>
+
+            <!-- Admin Actions Bar -->
+            <div class="flex flex-wrap items-center justify-between gap-3 border-t border-gold/30 pt-3">
+                <div class="flex items-center gap-2">
+                    <button id="exportCsvBtn" type="button" class="bg-burgundy hover:bg-burgundyDark text-white text-xs sm:text-sm px-4 py-2 rounded-lg font-semibold transition">
+                        Export CSV
+                    </button>
+                    <button id="exportJsonBtn" type="button" class="bg-gold hover:bg-amber-600 text-white text-xs sm:text-sm px-4 py-2 rounded-lg font-semibold transition">
+                        Export JSON
+                    </button>
+                </div>
+                <button id="clearDataBtn" type="button" class="bg-red-700 hover:bg-red-800 text-white text-xs sm:text-sm px-4 py-2 rounded-lg font-semibold transition">
+                    Clear All Data
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- APPLICATION SCRIPT -->
-    <script src="assets/app.js"></script>
+    <!-- Notification Toast Modal (Replaces browser alert) -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-[3000] bg-stone-900 text-white px-5 py-3 rounded-xl shadow-2xl transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none max-w-sm text-sm border border-gold/40">
+        <span id="toastMessage">Notification message</span>
+    </div>
 
-    <!-- INTEGRATED SCRIPT LOGIC -->
-    <script>
-        let guestList = JSON.parse(localStorage.getItem('weddingRSVPList')) || [];
+    <!-- FIREBASE MODULE & CONSOLIDATION SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const landing = document.getElementById('landing');
-            const body = document.body;
-            const attendanceSelect = document.getElementById('attendance');
-            const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
-            const adminBtn = document.querySelector('.view-list-btn');
-            const closeModalBtn = document.getElementById('closeModalBtn');
-            const exportCsvBtn = document.getElementById('exportCsvBtn');
-            const clearDataBtn = document.getElementById('clearDataBtn');
-
-            function handleFirstInteraction() {
-                const audio = document.getElementById('bgMusic');
-                if (audio) {
-                    audio.currentTime = 21;
-                    audio.play().catch(error => console.log("Audio play blocked:", error));
-                }
-
-                body.classList.remove('landing-active');
-                if (landing) {
-                    landing.style.transition = 'opacity 0.5s ease';
-                    landing.style.opacity = '0';
-                    setTimeout(() => { landing.style.display = 'none'; }, 500);
-                }
-
-                if (typeof openInvitation === 'function') openInvitation();
-            }
-
-            if (landing) {
-                landing.addEventListener('click', handleFirstInteraction, { once: true });
-                landing.addEventListener('touchstart', handleFirstInteraction, { once: true });
-            }
-
-            if (attendanceSelect) {
-                attendanceSelect.addEventListener('change', updateRSVPState);
-            }
-
-            if (rsvpSubmitBtn) {
-                rsvpSubmitBtn.addEventListener('click', handleRSVPSubmit);
-            }
-
-            if (adminBtn) {
-                adminBtn.addEventListener('click', verifyAdminAccess);
-            }
-
-            if (closeModalBtn) {
-                closeModalBtn.addEventListener('click', closeGuestListModal);
-            }
-
-            if (exportCsvBtn) {
-                exportCsvBtn.addEventListener('click', exportToCSV);
-            }
-
-            if (clearDataBtn) {
-                clearDataBtn.addEventListener('click', clearAllData);
-            }
-
-            updateRSVPState();
-        });
-
-        function saveToLocalStorage() {
-            localStorage.setItem('weddingRSVPList', JSON.stringify(guestList));
+        // Global State & Firebase Initialization
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'robert-diana-wedding';
+        let firebaseConfig = null;
+        if (typeof __firebase_config !== 'undefined') {
+            try { firebaseConfig = JSON.parse(__firebase_config); } catch (e) { console.error("Firebase config parse error", e); }
         }
 
+        let db = null;
+        let auth = null;
+        let currentUser = null;
+        let isCloudAvailable = false;
+
+        // Local Storage Fallback Array
+        let localGuestList = JSON.parse(localStorage.getItem('weddingRSVPList')) || [];
+        let consolidatedList = [];
+
+        // UI Element References
+        const landing = document.getElementById('landing');
+        const bgMusic = document.getElementById('bgMusic');
+        const attendanceSelect = document.getElementById('attendance');
+        const rsvpForm = document.getElementById('rsvpForm');
+        const adminAccessBtn = document.getElementById('adminAccessBtn');
+        const guestListModal = document.getElementById('guestListModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const syncDot = document.getElementById('syncDot');
+        const syncStatusText = document.getElementById('syncStatusText');
+        const totalStatsText = document.getElementById('totalStatsText');
+        const guestListContainer = document.getElementById('guestListContainer');
+        const adminSearchInput = document.getElementById('adminSearchInput');
+        const adminStatusFilter = document.getElementById('adminStatusFilter');
+        const importJsonFileInput = document.getElementById('importJsonFileInput');
+        const exportCsvBtn = document.getElementById('exportCsvBtn');
+        const exportJsonBtn = document.getElementById('exportJsonBtn');
+        const clearDataBtn = document.getElementById('clearDataBtn');
+        const manualRefreshBtn = document.getElementById('manualRefreshBtn');
+
+        // Show Toast Notification
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            if (!toast || !toastMsg) return;
+            toastMsg.textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3500);
+        }
+
+        // Initialize Firebase Backend Sync
+        async function initFirebaseSync() {
+            if (!firebaseConfig) {
+                console.warn("No Firebase Config found. Using LocalStorage mode.");
+                updateSyncStatus(false, "Offline / LocalStorage Mode");
+                consolidatedList = [...localGuestList];
+                renderDashboardList();
+                return;
+            }
+
+            try {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                // Authentication
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                        isCloudAvailable = true;
+                        updateSyncStatus(true, "Cloud Database Connected & Live");
+                        setupCloudListener();
+                    } else {
+                        isCloudAvailable = false;
+                        updateSyncStatus(false, "Auth Disconnected");
+                    }
+                });
+            } catch (err) {
+                console.error("Firebase init failed:", err);
+                isCloudAvailable = false;
+                updateSyncStatus(false, "Cloud Error - Using Local Sync");
+                consolidatedList = [...localGuestList];
+                renderDashboardList();
+            }
+        }
+
+        // Realtime Firestore Listener (Rule 1 & Rule 2 compliant path)
+        function setupCloudListener() {
+            if (!db || !currentUser) return;
+            const publicCollection = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
+
+            onSnapshot(publicCollection, (snapshot) => {
+                const cloudItems = [];
+                snapshot.forEach(docSnap => {
+                    cloudItems.push(docSnap.data());
+                });
+
+                // Consolidate cloud items and local items (removing duplicates by id or name+mobile)
+                consolidatedList = mergeListsWithoutDuplicates(cloudItems, localGuestList);
+                renderDashboardList();
+            }, (error) => {
+                console.error("Firestore listener error:", error);
+                updateSyncStatus(false, "Cloud Listen Error");
+            });
+        }
+
+        function updateSyncStatus(isLive, message) {
+            if (syncDot && syncStatusText) {
+                syncStatusText.textContent = message;
+                if (isLive) {
+                    syncDot.className = "w-3 h-3 rounded-full bg-green-500 animate-ping";
+                } else {
+                    syncDot.className = "w-3 h-3 rounded-full bg-amber-500";
+                }
+            }
+        }
+
+        // Merge utility to avoid duplicates
+        function mergeListsWithoutDuplicates(primaryList, secondaryList) {
+            const map = new Map();
+
+            primaryList.forEach(item => {
+                const key = (item.id || (item.name + '_' + (item.mobile || ''))).toLowerCase().trim();
+                map.set(key, item);
+            });
+
+            secondaryList.forEach(item => {
+                const key = (item.id || (item.name + '_' + (item.mobile || ''))).toLowerCase().trim();
+                if (!map.has(key)) {
+                    map.set(key, item);
+                }
+            });
+
+            return Array.from(map.values());
+        }
+
+        // First interaction listener to dismiss landing cover and play audio
+        function handleFirstInteraction() {
+            if (bgMusic) {
+                bgMusic.currentTime = 0;
+                bgMusic.play().catch(e => console.log("Audio play blocked", e));
+            }
+
+            document.body.classList.remove('landing-active');
+            if (landing) {
+                landing.style.transition = 'opacity 0.5s ease';
+                landing.style.opacity = '0';
+                setTimeout(() => { landing.style.display = 'none'; }, 500);
+            }
+        }
+
+        if (landing) {
+            landing.addEventListener('click', handleFirstInteraction, { once: true });
+            landing.addEventListener('touchstart', handleFirstInteraction, { once: true });
+        }
+
+        // Update UI dynamic states for RSVP form
         function updateRSVPState() {
-            const attendance = document.getElementById('attendance').value;
+            const attendance = attendanceSelect.value;
             const plusOneContainer = document.getElementById('plusOneContainer');
             const submitBtn = document.getElementById('rsvpSubmitBtn');
             const messageArea = document.getElementById('message');
@@ -679,148 +619,306 @@
                 messageArea.required = false;
             } else {
                 plusOneContainer.style.display = 'none';
-                submitBtn.innerText = "I Apologize";
+                submitBtn.innerText = "Send Apology";
                 messageArea.placeholder = "Please leave a message or reason for declining (Required)...";
                 messageArea.required = true;
             }
         }
 
-        function handleRSVPSubmit() {
+        attendanceSelect.addEventListener('change', updateRSVPState);
+        updateRSVPState();
+
+        // RSVP Form Submit Handler
+        rsvpForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
             const name = document.getElementById('rsvpName').value.trim();
             const mobile = document.getElementById('rsvpMobile').value.trim();
-            const attendance = document.getElementById('attendance').value;
+            const attendance = attendanceSelect.value;
             const plusOneName = document.getElementById('plusOneNames').value.trim();
             const messageArea = document.getElementById('message').value.trim();
 
             if (!name) {
-                alert('Please enter your name before submitting.');
+                showToast("Please enter your name before submitting.");
                 return;
             }
 
             if (attendance === "Not Attending" && !messageArea) {
-                alert('Please leave a message or reason for declining before apologizing.');
+                showToast("Please leave a note or reason for declining.");
                 return;
             }
 
-            let plusOnesArr = [];
-            if (attendance === "Attending" && plusOneName) {
-                plusOnesArr.push(plusOneName);
-            }
-
-            guestList.push({
+            const responseId = 'rsvp_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+            const rsvpEntry = {
+                id: responseId,
                 name: name,
-                mobile: mobile,
+                mobile: mobile || 'N/A',
                 status: attendance,
-                plusOnes: plusOnesArr,
-                message: messageArea
-            });
-            saveToLocalStorage();
+                plusOnes: (attendance === "Attending" && plusOneName) ? [plusOneName] : [],
+                message: messageArea,
+                timestamp: new Date().toISOString(),
+                deviceId: navigator.userAgent.replace(/[^a-zA-Z0-9]/g, '').slice(0, 15)
+            };
 
-            const thankYouElem = document.getElementById('thankYouName');
-            const thankYouText = document.getElementById('thankYouMessageText');
-            if (thankYouElem) thankYouElem.innerText = name;
-            if (thankYouText) {
-                thankYouText.innerText = (attendance === "Attending") 
-                    ? "Your attendance has been confirmed." 
-                    : "Your apology and response have been received.";
+            // Save locally
+            localGuestList.push(rsvpEntry);
+            localStorage.setItem('weddingRSVPList', JSON.stringify(localGuestList));
+
+            // Sync to Cloud Firestore if connected
+            if (isCloudAvailable && db && currentUser) {
+                try {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'rsvps', responseId);
+                    await setDoc(docRef, rsvpEntry);
+                } catch (err) {
+                    console.error("Error saving to Firestore", err);
+                }
             }
 
+            // Update Thank You Section
+            document.getElementById('thankYouName').textContent = name;
+            document.getElementById('thankYouMessageText').textContent = (attendance === "Attending")
+                ? "Your attendance has been successfully confirmed!"
+                : "Your response and message have been received.";
+
+            // Scroll to Thank You
+            document.getElementById('thankYouSection').scrollIntoView({ behavior: 'smooth' });
+            showToast("RSVP Submitted Successfully!");
+
+            // Lock form controls
             document.getElementById('rsvpName').disabled = true;
             document.getElementById('rsvpMobile').disabled = true;
-            document.getElementById('attendance').disabled = true;
+            attendanceSelect.disabled = true;
             document.getElementById('plusOneNames').disabled = true;
             document.getElementById('message').disabled = true;
+            document.getElementById('rsvpSubmitBtn').disabled = true;
+            document.getElementById('rsvpSubmitBtn').classList.add('opacity-50', 'cursor-not-allowed');
+        });
 
-            const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
-            if (rsvpSubmitBtn) {
-                rsvpSubmitBtn.innerText = "Close / Done";
-                rsvpSubmitBtn.className = "close-btn";
-                // Remove old listeners and reassign click to scroll
-                const newBtn = rsvpSubmitBtn.cloneNode(true);
-                rsvpSubmitBtn.parentNode.replaceChild(newBtn, rsvpSubmitBtn);
-                newBtn.addEventListener('click', scrollToThankYou);
-            }
-
-            if (typeof submitRSVP === 'function') submitRSVP();
-        }
-
-        function scrollToThankYou() {
-            const thankYouSection = document.getElementById('thankYouSection');
-            if (thankYouSection) thankYouSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function verifyAdminAccess() {
+        // Verify Admin Access
+        adminAccessBtn.addEventListener('click', () => {
             const pin = prompt("Enter Admin PIN:");
             if (pin === "021093") {
-                openGuestListModal();
+                openDashboardModal();
             } else if (pin !== null) {
-                alert("Incorrect PIN.");
+                showToast("Incorrect Admin PIN.");
             }
+        });
+
+        function openDashboardModal() {
+            guestListModal.style.display = 'flex';
+            renderDashboardList();
         }
 
-        function openGuestListModal() {
-            const modal = document.getElementById('guestListModal');
-            const container = document.getElementById('guestListContainer');
-            
-            if (guestList.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color:#777;">No saved responses yet.</p>';
-            } else {
-                let html = '';
-                guestList.forEach((guest, index) => {
-                    html += `
-                    <div class="guest-item">
-                        <div class="guest-info">
-                            <span class="guest-item-name">• ${guest.name} (${guest.status})</span>
-                            <span class="guest-detail">Mobile: ${guest.mobile || 'N/A'}</span>
-                            ${guest.plusOnes && guest.plusOnes.length ? `<span class="plus-one-tag">+ Plus One: ${guest.plusOnes.join(', ')}</span>` : ''}
-                            ${guest.message ? `<span class="guest-detail">Note: "${guest.message}"</span>` : ''}
-                        </div>
-                        <button type="button" class="delete-btn" onclick="deleteEntry(${index})">Delete</button>
-                    </div>`;
-                });
-                container.innerHTML = html;
-            }
-            modal.style.display = 'flex';
-        }
+        closeModalBtn.addEventListener('click', () => {
+            guestListModal.style.display = 'none';
+        });
 
-        function closeGuestListModal() {
-            document.getElementById('guestListModal').style.display = 'none';
-        }
+        // Search & Filter Listeners
+        adminSearchInput.addEventListener('input', renderDashboardList);
+        adminStatusFilter.addEventListener('change', renderDashboardList);
 
-        function deleteEntry(index) {
-            guestList.splice(index, 1);
-            saveToLocalStorage();
-            openGuestListModal();
-        }
+        // Render Consolidated Dashboard List
+        function renderDashboardList() {
+            const searchTerm = adminSearchInput.value.toLowerCase().trim();
+            const filterStatus = adminStatusFilter.value;
 
-        function clearAllData() {
-            if (confirm("Are you sure you want to delete all saved RSVP data?")) {
-                guestList = [];
-                saveToLocalStorage();
-                openGuestListModal();
-            }
-        }
+            let filtered = consolidatedList.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || (item.mobile && item.mobile.includes(searchTerm));
+                const matchesStatus = (filterStatus === 'ALL') || (item.status === filterStatus);
+                return matchesSearch && matchesStatus;
+            });
 
-        function exportToCSV() {
-            if (guestList.length === 0) {
-                alert("No data to export.");
+            // Update stats
+            const totalCount = consolidatedList.length;
+            const attendingCount = consolidatedList.filter(i => i.status === 'Attending').length;
+            totalStatsText.textContent = `Total: ${totalCount} | Attending: ${attendingCount}`;
+
+            if (filtered.length === 0) {
+                guestListContainer.innerHTML = `<p class="text-center text-stone-500 py-8">No matching RSVP responses found.</p>`;
                 return;
             }
 
-            let csvContent = "data:text/csv;charset=utf-8,Name,Mobile,Status,Plus Ones,Message\n";
-            guestList.forEach(g => {
-                let row = `"${g.name}","${g.mobile || ''}","${g.status}","${g.plusOnes.join('; ')}","${g.message || ''}"`;
+            let html = '';
+            filtered.forEach((item, index) => {
+                const isAttending = item.status === 'Attending';
+                html += `
+                <div class="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div class="flex flex-col text-sm">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-base text-burgundy">${escapeHtml(item.name)}</span>
+                            <span class="px-2 py-0.5 text-xs font-semibold rounded-full ${isAttending ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                                ${item.status}
+                            </span>
+                        </div>
+                        <span class="text-stone-600">📱 Mobile: ${escapeHtml(item.mobile || 'N/A')}</span>
+                        ${item.plusOnes && item.plusOnes.length > 0 ? `<span class="text-amber-700 font-medium">👥 Plus One: ${escapeHtml(item.plusOnes.join(', '))}</span>` : ''}
+                        ${item.message ? `<span class="text-stone-500 italic mt-0.5">💬 "${escapeHtml(item.message)}"</span>` : ''}
+                    </div>
+                    <button data-id="${item.id}" class="delete-btn text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-md self-start sm:self-center transition">
+                        Delete
+                    </button>
+                </div>`;
+            });
+
+            guestListContainer.innerHTML = html;
+
+            // Attach individual delete event listeners
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idToDelete = e.target.getAttribute('data-id');
+                    deleteGuestEntry(idToDelete);
+                });
+            });
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>"']/g, (m) => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+            })[m]);
+        }
+
+        // Delete Single Entry
+        async function deleteGuestEntry(id) {
+            if (!confirm("Are you sure you want to delete this response?")) return;
+
+            // Remove from local memory and local storage
+            consolidatedList = consolidatedList.filter(item => item.id !== id);
+            localGuestList = localGuestList.filter(item => item.id !== id);
+            localStorage.setItem('weddingRSVPList', JSON.stringify(localGuestList));
+
+            // Remove from Cloud Firestore if available
+            if (isCloudAvailable && db && currentUser && id) {
+                try {
+                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'rsvps', id));
+                } catch (err) {
+                    console.error("Error deleting document from Firestore", err);
+                }
+            }
+
+            renderDashboardList();
+            showToast("Response deleted.");
+        }
+
+        // Clear All Data
+        clearDataBtn.addEventListener('click', async () => {
+            if (!confirm("WARNING: This will clear all local RSVP entries. Continue?")) return;
+
+            localGuestList = [];
+            localStorage.setItem('weddingRSVPList', JSON.stringify([]));
+            consolidatedList = [];
+            renderDashboardList();
+            showToast("All local RSVP records cleared.");
+        });
+
+        // Import JSON File & Merge Responses (Consolidation from another device export)
+        importJsonFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+                try {
+                    const importedData = JSON.parse(event.target.result);
+                    if (!Array.isArray(importedData)) {
+                        showToast("Invalid JSON file format. Must be an array of RSVPs.");
+                        return;
+                    }
+
+                    // Merge imported data into consolidated list
+                    const beforeCount = consolidatedList.length;
+                    consolidatedList = mergeListsWithoutDuplicates(consolidatedList, importedData);
+                    localGuestList = mergeListsWithoutDuplicates(localGuestList, importedData);
+                    localStorage.setItem('weddingRSVPList', JSON.stringify(localGuestList));
+
+                    // Upload new items to Cloud if connected
+                    if (isCloudAvailable && db && currentUser) {
+                        for (const item of importedData) {
+                            const itemId = item.id || ('rsvp_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5));
+                            const itemDoc = { ...item, id: itemId };
+                            await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'rsvps', itemId), itemDoc);
+                        }
+                    }
+
+                    const addedCount = consolidatedList.length - beforeCount;
+                    renderDashboardList();
+                    showToast(`Imported successfully! Added ${addedCount} new response(s).`);
+                } catch (err) {
+                    console.error("Import error", err);
+                    showToast("Failed to parse JSON file.");
+                }
+            };
+            reader.readAsText(file);
+            // Reset file input
+            importJsonFileInput.value = '';
+        });
+
+        // Export CSV
+        exportCsvBtn.addEventListener('click', () => {
+            if (consolidatedList.length === 0) {
+                showToast("No RSVP responses to export.");
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,ID,Name,Mobile,Status,Plus Ones,Message,Timestamp\n";
+            consolidatedList.forEach(g => {
+                const plusOneStr = g.plusOnes ? g.plusOnes.join('; ') : '';
+                const row = `"${g.id || ''}","${g.name || ''}","${g.mobile || ''}","${g.status || ''}","${plusOneStr}","${(g.message || '').replace(/"/g, '""')}","${g.timestamp || ''}"`;
                 csvContent += row + "\n";
             });
 
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "wedding_rsvps.csv");
+            link.setAttribute("download", "robert_diana_rsvps.csv");
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-        }
+            showToast("CSV file exported!");
+        });
+
+        // Export JSON (For merging into another admin device)
+        exportJsonBtn.addEventListener('click', () => {
+            if (consolidatedList.length === 0) {
+                showToast("No RSVP responses to export.");
+                return;
+            }
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(consolidatedList, null, 2));
+            const link = document.createElement("a");
+            link.setAttribute("href", dataStr);
+            link.setAttribute("download", "robert_diana_rsvps_backup.json");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast("JSON export downloaded!");
+        });
+
+        // Manual Refresh Button
+        manualRefreshBtn.addEventListener('click', async () => {
+            if (isCloudAvailable && db) {
+                try {
+                    const publicCollection = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
+                    const snapshot = await getDocs(publicCollection);
+                    const cloudItems = [];
+                    snapshot.forEach(docSnap => cloudItems.push(docSnap.data()));
+                    consolidatedList = mergeListsWithoutDuplicates(cloudItems, localGuestList);
+                    renderDashboardList();
+                    showToast("Refreshed from Cloud Database!");
+                } catch (e) {
+                    showToast("Refresh failed.");
+                }
+            } else {
+                consolidatedList = [...localGuestList];
+                renderDashboardList();
+                showToast("Refreshed from Local Storage.");
+            }
+        });
+
+        // Initialize Firebase on load
+        window.addEventListener('DOMContentLoaded', () => {
+            initFirebaseSync();
+        });
     </script>
 </body>
 </html>
