@@ -33,7 +33,7 @@
             --accent-gold: #c59b27;
             --soft-gold: #e5c158;
             --cream-bg: #fdfbf7;
-            --card-bg: rgba(255, 255, 255, 0.92);
+            --card-bg: rgba(255, 255, 255, 0.95);
             --text-dark: #2c221e;
         }
 
@@ -66,7 +66,7 @@
         }
 
         /* =================================
-            LANDING COVER
+            LANDING COVER (PINTEREST POP-UP MODAL)
         ================================= */
 
         #landing {
@@ -87,21 +87,32 @@
                 env(safe-area-inset-bottom)
                 env(safe-area-inset-left);
 
-            background: radial-gradient(
-                circle,
-                #ffffff 0%,
-                #f7f1e5 100%
-            );
+            background: rgba(44, 34, 30, 0.55);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
 
             z-index: 1000;
             cursor: pointer;
+            padding: 20px;
         }
 
         .welcome-box {
             position: relative;
 
             width: 100%;
-            height: 100%;
+            max-width: 440px;
+
+            background: var(--card-bg);
+
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            padding: 25px 20px 30px;
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.3);
 
             display: flex;
             flex-direction: column;
@@ -109,23 +120,32 @@
             justify-content: center;
             align-items: center;
 
-            padding: 15px 12px 100px;
+            gap: 20px;
+            text-align: center;
+
+            border: 1px solid rgba(197, 155, 39, 0.4);
+
+            animation: popUpScale 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes popUpScale {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .landing-cover-img {
-            width: auto;
+            width: 100%;
             height: auto;
 
-            max-width: min(95vw, 100%);
-            max-height: calc(100dvh - 125px);
+            max-height: 60vh;
 
             object-fit: contain;
             object-position: center;
 
-            border-radius: 12px;
+            border-radius: 14px;
 
             box-shadow:
-                0 10px 30px rgba(107, 20, 20, 0.15);
+                0 8px 25px rgba(107, 20, 20, 0.15);
 
             border: 1px solid rgba(197, 155, 39, 0.3);
         }
@@ -135,19 +155,30 @@
         ================================= */
 
         .action-bar {
-            position: absolute;
-
-            bottom: max(25px, env(safe-area-inset-bottom));
-
-            left: 0;
+            position: relative;
+            bottom: auto;
+            left: auto;
             width: 100%;
 
             display: flex;
             justify-content: center;
 
-            padding: 0 12px;
-
+            padding: 0;
             z-index: 1010;
+        }
+
+        /* =================================
+            BLURRED PREVIEW STATE FOR BACKGROUND
+        ================================= */
+
+        body.landing-active #invitationContent {
+            display: flex !important;
+            filter: blur(12px);
+            -webkit-filter: blur(12px);
+            opacity: 0.4;
+            pointer-events: none;
+            user-select: none;
+            transition: filter 0.6s ease, opacity 0.6s ease;
         }
 
         /* =================================
@@ -167,6 +198,7 @@
             align-items: center;
 
             gap: clamp(20px, 4vw, 40px);
+            transition: filter 0.6s ease, opacity 0.6s ease;
         }
 
         .scroll-section {
@@ -415,11 +447,6 @@
             .content-card {
                 padding: 25px 18px;
             }
-
-            .landing-cover-img {
-                max-width: 95vw;
-                max-height: calc(100dvh - 120px);
-            }
         }
 
         /* =================================
@@ -434,12 +461,8 @@
             }
 
             .welcome-box {
-                padding-bottom: 95px;
-            }
-
-            .landing-cover-img {
-                max-width: 96vw;
-                max-height: calc(100dvh - 115px);
+                padding: 20px 15px 25px;
+                max-width: 90vw;
             }
 
             .content-card {
@@ -469,10 +492,6 @@
                 max-width: 100%;
                 padding: 13px 18px;
             }
-
-            .action-bar {
-                padding: 0 20px;
-            }
         }
 
         /* =================================
@@ -482,16 +501,12 @@
         @media screen and (max-height: 500px) and (orientation: landscape) {
 
             .welcome-box {
-                padding: 8px 10px 65px;
+                padding: 10px 15px;
+                max-width: 400px;
             }
 
             .landing-cover-img {
-                max-height: calc(100dvh - 80px);
-                max-width: 80vw;
-            }
-
-            .action-bar {
-                bottom: 8px;
+                max-height: 45vh;
             }
 
             .open-btn {
@@ -532,7 +547,7 @@
     </style>
 </head>
 
-<body>
+<body class="landing-active">
 
     <!-- BACKGROUND MUSIC -->
 
@@ -541,7 +556,7 @@
         Your browser does not support the audio element.
     </audio>
 
-    <!-- LANDING COVER -->
+    <!-- LANDING COVER (PINTEREST POP-UP MODAL) -->
 
     <section id="landing">
 
@@ -565,9 +580,9 @@
 
     </section>
 
-    <!-- INVITATION CONTENT -->
+    <!-- INVITATION CONTENT (PREVIEWED IN BACKGROUND WITH BLUR) -->
 
-    <div id="invitationContent" style="display: none;">
+    <div id="invitationContent">
 
         <!-- INVITATION CARD -->
 
@@ -713,6 +728,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const landing = document.getElementById('landing');
+            const body = document.body;
 
             function handleFirstInteraction(event) {
                 const audio = document.getElementById('bgMusic');
@@ -723,17 +739,23 @@
                     });
                 }
 
-                // Trigger the open invitation logic
+                // Remove blur state and fade out modal
+                body.classList.remove('landing-active');
+                if (landing) {
+                    landing.style.transition = 'opacity 0.5s ease';
+                    landing.style.opacity = '0';
+                    setTimeout(() => {
+                        landing.style.display = 'none';
+                    }, 500);
+                }
+
+                // Trigger any custom openInvitation logic if defined in app.js
                 if (typeof openInvitation === 'function') {
                     openInvitation();
-                } else {
-                    if (landing) landing.style.display = 'none';
-                    const content = document.getElementById('invitationContent');
-                    if (content) content.style.display = 'block';
                 }
             }
 
-            // Attach listener to the landing section for both clicks and mobile touches
+            // Tap anywhere on landing screen triggers audio & reveals invitation
             if (landing) {
                 landing.addEventListener('click', handleFirstInteraction, { once: true });
                 landing.addEventListener('touchstart', handleFirstInteraction, { once: true });
