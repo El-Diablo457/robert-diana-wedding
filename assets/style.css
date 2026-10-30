@@ -1,55 +1,892 @@
-/* Make sure the body and html take up the full screen */
-html, body {
-    width: 100%;
-    height: 100%;
+
+/* =====================================================
+   ROBERT & DIANA
+   LUXURY ROMANTIC GARDEN WEDDING INVITATION
+   COMPLETE RESPONSIVE STYLESHEET
+===================================================== */
+
+
+/* =====================================================
+   1. ROOT VARIABLES
+===================================================== */
+
+:root {
+    --primary-burgundy: #6b1414;
+    --deep-burgundy: #520f0f;
+
+    --accent-gold: #c59b27;
+    --soft-gold: #e5c158;
+    --champagne: #e7d3a0;
+
+    --dusty-rose: #e8c6c9;
+    --soft-blush: #f8e9e7;
+
+    --cream-bg: #fffaf4;
+    --card-bg: rgba(255, 255, 255, 0.96);
+
+    --text-dark: #2c221e;
+    --text-soft: #70413e;
+
+    --shadow-soft: 0 12px 35px rgba(107, 20, 20, 0.09);
+}
+
+
+/* =====================================================
+   2. UNIVERSAL RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #faf6f0;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+
+    scroll-behavior: smooth;
+
+    overflow-x: clip;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
     font-family: 'Cormorant Garamond', serif;
-    overflow-x: hidden;
+
+    color: var(--text-dark);
+
+    background:
+        radial-gradient(
+            ellipse at 5% 10%,
+            rgba(232, 198, 201, 0.42),
+            transparent 35%
+        ),
+        radial-gradient(
+            ellipse at 95% 40%,
+            rgba(231, 211, 160, 0.25),
+            transparent 35%
+        ),
+        radial-gradient(
+            ellipse at 20% 90%,
+            rgba(248, 233, 231, 0.65),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #fffaf4,
+            #f9eeee,
+            #fffdf8
+        );
+
+    overflow-x: clip;
 }
 
-/* Make the invitation scroll container stretch full width */
-#invitationContent {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto;
-    padding: 0 !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+/* =====================================================
+   3. UNIVERSAL IMAGE RESPONSIVENESS
+===================================================== */
+
+img {
+    display: block;
+
+    max-width: 100%;
+    height: auto;
 }
 
-/* Force every section to span 100% of the screen width */
-.scroll-section {
-    width: 100% !important;
+
+/* =====================================================
+   4. LANDING COVER
+===================================================== */
+
+#landing {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+
     display: flex;
+
     justify-content: center;
     align-items: center;
-    padding: 20px 0;
-    box-sizing: border-box;
+
+    padding:
+        env(safe-area-inset-top)
+        env(safe-area-inset-right)
+        env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
+
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(232, 198, 201, 0.50),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(197, 155, 39, 0.22),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #fffaf4,
+            #f7e9e7,
+            #fffdf8
+        );
+
+    z-index: 1000;
 }
 
-/* Force invitation & entourage images to scale beautifully and fill screens */
-.content-img {
-    width: 100% !important;
-    max-width: 1000px !important; /* Controls max stretch on huge monitors */
-    height: auto !important;
-    display: block;
+
+/* Landing content */
+
+.welcome-box {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px 12px 100px;
+}
+
+
+/* Decorative floral ornaments */
+
+.welcome-box::before,
+.welcome-box::after {
+
+    position: absolute;
+
+    color: var(--accent-gold);
+
+    opacity: 0.35;
+
+    pointer-events: none;
+
+    font-family: serif;
+
+    content: "❀";
+}
+
+.welcome-box::before {
+    top: 7%;
+    left: 6%;
+
+    font-size: clamp(35px, 7vw, 75px);
+}
+
+.welcome-box::after {
+    bottom: 17%;
+    right: 6%;
+
+    font-size: clamp(30px, 6vw, 65px);
+}
+
+
+/* Landing cover image */
+
+.landing-cover-img {
+
+    width: auto;
+    height: auto;
+
+    max-width: min(95vw, 100%);
+    max-height: calc(100dvh - 125px);
+
     object-fit: contain;
-    border-radius: 0; /* Remove harsh borders for edge-to-edge flow if preferred */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    object-position: center;
+
+    border-radius: 12px;
+
+    border: 2px solid rgba(197, 155, 39, 0.35);
+
+    box-shadow:
+        0 12px 35px rgba(107, 20, 20, 0.10),
+        0 0 0 5px rgba(255, 255, 255, 0.55);
 }
 
-/* Content cards (Venue, RSVP) full width alignment */
-.content-card {
-    width: 90% !important;
-    max-width: 700px !important;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 40px 30px;
+
+/* =====================================================
+   5. LANDING ACTION BUTTON
+===================================================== */
+
+.action-bar {
+
+    position: absolute;
+
+    bottom: max(25px, env(safe-area-inset-bottom));
+
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    padding: 0 12px;
+
+    z-index: 1010;
+}
+
+
+/* =====================================================
+   6. MAIN INVITATION CONTENT
+===================================================== */
+
+#invitationContent {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: clamp(12px, 3vw, 35px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: clamp(20px, 4vw, 40px);
+
+    background:
+        radial-gradient(
+            circle at 0% 10%,
+            rgba(232, 198, 201, 0.20),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 100% 50%,
+            rgba(231, 211, 160, 0.18),
+            transparent 25%
+        );
+}
+
+
+/* =====================================================
+   7. SCROLL SECTIONS
+===================================================== */
+
+.scroll-section {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    isolation: isolate;
+}
+
+
+/* Decorative hearts */
+
+.scroll-section::before,
+.scroll-section::after {
+
+    position: absolute;
+
+    z-index: -1;
+
+    color: var(--accent-gold);
+
+    opacity: 0.25;
+
+    pointer-events: none;
+
+    font-family: serif;
+}
+
+.scroll-section::before {
+
+    content: "♡";
+
+    top: 8%;
+    left: 2%;
+
+    font-size: clamp(30px, 5vw, 55px);
+
+    transform: rotate(-15deg);
+}
+
+.scroll-section::after {
+
+    content: "✧";
+
+    bottom: 8%;
+    right: 2%;
+
+    font-size: clamp(30px, 5vw, 50px);
+}
+
+
+/* =====================================================
+   8. INVITATION AND ENTOURAGE IMAGES
+===================================================== */
+
+.content-img {
+
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: 100%;
+    max-height: none;
+
+    object-fit: contain;
+    object-position: center;
+
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(107, 20, 20, 0.08);
+
+    border: 2px solid rgba(197, 155, 39, 0.35);
+
+    box-shadow:
+        0 12px 35px rgba(107, 20, 20, 0.10),
+        0 0 0 5px rgba(255, 255, 255, 0.55);
+}
+
+
+/* =====================================================
+   9. LUXURY CONTENT CARDS
+===================================================== */
+
+.content-card {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 650px;
+
+    padding: clamp(20px, 5vw, 40px);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.97),
+            rgba(255, 247, 243, 0.96)
+        );
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    border: 1px solid rgba(197, 155, 39, 0.45);
+
+    border-radius: 16px;
+
     text-align: center;
-    border: 1px solid rgba(197, 155, 39, 0.3);
-    margin: 20px auto;
+
+    box-shadow:
+        0 15px 40px rgba(107, 20, 20, 0.08),
+        0 0 25px rgba(197, 155, 39, 0.09);
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================================
+   10. CARD HEADINGS
+===================================================== */
+
+.content-card h2 {
+
+    font-family: 'Cinzel Decorative', serif;
+
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+
+    color: var(--primary-burgundy);
+
+    margin-bottom: 15px;
+
+    letter-spacing: 1px;
+
+    line-height: 1.3;
+}
+
+
+/* Gold floral divider */
+
+.content-card h2::after {
+
+    content: "❧  ♡  ❧";
+
+    display: block;
+
+    margin-top: 10px;
+
+    font-family: serif;
+
+    font-size: 19px;
+
+    font-weight: normal;
+
+    letter-spacing: 5px;
+
+    color: var(--accent-gold);
+
+    opacity: 0.85;
+}
+
+
+/* Secondary headings */
+
+.content-card h3 {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: clamp(1.15rem, 3.5vw, 1.5rem);
+
+    font-weight: 600;
+
+    margin: 12px 0;
+
+    color: var(--text-soft);
+
+    line-height: 1.4;
+}
+
+
+/* Card paragraphs */
+
+.content-card p {
+
+    font-size: clamp(1rem, 3vw, 1.2rem);
+
+    color: #4a3e3d;
+
+    line-height: 1.6;
+
+    margin-bottom: 5px;
+}
+
+
+/* =====================================================
+   11. RSVP FORM
+===================================================== */
+
+.rsvp-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+    margin-top: 25px;
+
+    width: 100%;
+
+    min-width: 0;
+}
+
+
+/* RSVP fields */
+
+.rsvp-form input,
+.rsvp-form select,
+.rsvp-form textarea {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    min-width: 0;
+
+    padding: 14px 18px;
+
+    border: 1px solid rgba(197, 155, 39, 0.35);
+
+    border-radius: 8px;
+
+    font-family: 'Cormorant Garamond', serif;
+
+    font-size: 1.1rem;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    color: var(--text-dark);
+
+    outline: none;
+
+    transition: all 0.3s ease;
+}
+
+
+/* Input focus */
+
+.rsvp-form input:focus,
+.rsvp-form select:focus,
+.rsvp-form textarea:focus {
+
+    border-color: var(--accent-gold);
+
+    box-shadow:
+        0 0 8px rgba(197, 155, 39, 0.3);
+}
+
+
+/* Text area */
+
+.rsvp-form textarea {
+
+    resize: vertical;
+
+    min-height: 100px;
+}
+
+
+/* =====================================================
+   12. LUXURY BUTTON DESIGN
+===================================================== */
+
+.open-btn,
+.submit-btn,
+.venue-btn {
+
+    background: linear-gradient(
+        135deg,
+        #7a1c1c 0%,
+        #520f0f 100%
+    );
+
+    color: #ffffff;
+
+    font-family: 'Cormorant Garamond', serif;
+
+    font-size: clamp(1rem, 3vw, 1.25rem);
+
+    font-weight: 600;
+
+    letter-spacing: clamp(1px, 0.3vw, 2px);
+
+    text-transform: uppercase;
+
+    padding: 14px clamp(20px, 5vw, 40px);
+
+    border: 1px solid var(--champagne);
+
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 22px rgba(107, 20, 20, 0.22),
+        0 0 12px rgba(197, 155, 39, 0.15);
+
+    transition: all 0.3s ease;
+
+    text-decoration: none;
+
+    display: inline-flex;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    max-width: 100%;
+}
+
+
+/* Hover effects */
+
+.open-btn:hover,
+.submit-btn:hover,
+.venue-btn:hover {
+
+    background: linear-gradient(
+        135deg,
+        #942323 0%,
+        #7a1c1c 100%
+    );
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(122, 28, 28, 0.35);
+
+    border-color: var(--soft-gold);
+}
+
+
+/* RSVP submit button */
+
+.submit-btn {
+    width: 100%;
+}
+
+
+/* Venue button */
+
+.venue-btn {
+
+    margin-top: 18px;
+
+    padding: 12px 28px;
+
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
+}
+
+
+/* =====================================================
+   13. THANK YOU SECTION
+===================================================== */
+
+#thankYouName {
+
+    font-family: 'Playfair Display', serif;
+
+    color: var(--primary-burgundy);
+
+    font-size: clamp(1.3rem, 4vw, 1.6rem);
+
+    margin: 10px 0;
+
+    line-height: 1.4;
+}
+
+
+/* =====================================================
+   14. TABLET RESPONSIVENESS
+===================================================== */
+
+@media screen and (max-width: 768px) {
+
+    #invitationContent {
+
+        padding: 15px 12px 40px;
+
+        gap: 25px;
+    }
+
+    .content-card {
+
+        padding: 25px 18px;
+    }
+
+    .landing-cover-img {
+
+        max-width: 95vw;
+
+        max-height: calc(100dvh - 120px);
+    }
+
+}
+
+
+/* =====================================================
+   15. MOBILE RESPONSIVENESS
+===================================================== */
+
+@media screen and (max-width: 480px) {
+
+    #invitationContent {
+
+        padding: 10px 8px 35px;
+
+        gap: 20px;
+    }
+
+    .welcome-box {
+
+        padding-bottom: 95px;
+    }
+
+    .landing-cover-img {
+
+        max-width: 96vw;
+
+        max-height: calc(100dvh - 115px);
+    }
+
+    .content-card {
+
+        padding: 22px 15px;
+
+        border-radius: 14px;
+    }
+
+    .content-card h2 {
+
+        font-size: clamp(1.25rem, 6vw, 1.7rem);
+    }
+
+    .rsvp-form {
+
+        gap: 12px;
+    }
+
+    .rsvp-form input,
+    .rsvp-form select,
+    .rsvp-form textarea {
+
+        padding: 12px;
+
+        font-size: 16px;
+    }
+
+    .open-btn,
+    .submit-btn,
+    .venue-btn {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        padding: 13px 18px;
+    }
+
+    .action-bar {
+
+        padding: 0 20px;
+    }
+
+    .welcome-box::before {
+
+        top: 5%;
+        left: 3%;
+
+        font-size: 35px;
+    }
+
+    .welcome-box::after {
+
+        right: 3%;
+
+        font-size: 35px;
+    }
+
+    .scroll-section::before {
+
+        left: 0;
+
+        font-size: 30px;
+    }
+
+    .scroll-section::after {
+
+        right: 0;
+
+        font-size: 28px;
+    }
+
+}
+
+
+/* =====================================================
+   16. LANDSCAPE MODE
+===================================================== */
+
+@media screen and
+(max-height: 500px) and
+(orientation: landscape) {
+
+    .welcome-box {
+
+        padding: 8px 10px 65px;
+    }
+
+    .landing-cover-img {
+
+        max-height: calc(100dvh - 80px);
+
+        max-width: 80vw;
+    }
+
+    .action-bar {
+
+        bottom: 8px;
+    }
+
+    .open-btn {
+
+        padding: 8px 24px;
+    }
+
+}
+
+
+/* =====================================================
+   17. LARGE DESKTOP DISPLAYS
+===================================================== */
+
+@media screen and (min-width: 1200px) {
+
+    #invitationContent {
+
+        max-width: 1100px;
+    }
+
+    .content-card {
+
+        max-width: 700px;
+    }
+
+}
+
+
+/* =====================================================
+   18. ACCESSIBILITY AND REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+
+        transition-duration: 0.01ms !important;
+
+        animation-duration: 0.01ms !important;
+    }
+
+}
+
+
+/* =====================================================
+   19. PRINT FRIENDLY SETTINGS
+===================================================== */
+
+@media print {
+
+    body {
+
+        background: white !important;
+
+        color: black;
+    }
+
+    .open-btn,
+    .submit-btn,
+    .venue-btn {
+
+        box-shadow: none;
+    }
+
 }
