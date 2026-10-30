@@ -370,7 +370,10 @@
 
             <!-- Filter and Search Bar -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <input id="adminSearchInput" type="text" placeholder="Search by name..." class="p-2.5 border border-stone-300 rounded-lg text-sm outline-none focus:border-gold bg-white">
+                <div class="relative w-full">
+                    <input id="adminSearchInput" type="text" placeholder="Search name, mobile, note..." class="w-full p-2.5 pr-8 border border-stone-300 rounded-lg text-sm outline-none focus:border-gold bg-white">
+                    <button id="clearSearchBtn" type="button" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 text-sm font-bold" title="Clear Search">&times;</button>
+                </div>
                 <select id="adminStatusFilter" class="p-2.5 border border-stone-300 rounded-lg text-sm outline-none focus:border-gold bg-white">
                     <option value="ALL">All Statuses</option>
                     <option value="Attending">Attending Only</option>
@@ -445,6 +448,7 @@
         const totalStatsText = document.getElementById('totalStatsText');
         const guestListContainer = document.getElementById('guestListContainer');
         const adminSearchInput = document.getElementById('adminSearchInput');
+        const clearSearchBtn = document.getElementById('clearSearchBtn');
         const adminStatusFilter = document.getElementById('adminStatusFilter');
         const importJsonFileInput = document.getElementById('importJsonFileInput');
         const exportCsvBtn = document.getElementById('exportCsvBtn');
@@ -455,18 +459,11 @@
         const farewellOverlay = document.getElementById('farewellOverlay');
         const reopenInvitationBtn = document.getElementById('reopenInvitationBtn');
 
-        // Close Page Button Action with Browser Fallback
-        if (closePageBtn) {
-            closePageBtn.addEventListener('click', () => {
-                // Attempt window close
-                window.close();
-
-                // If window.close() is prevented/ignored by browser security rules:
-                setTimeout(() => {
-                    if (farewellOverlay) {
-                        farewellOverlay.style.display = 'flex';
-                    }
-                }, 150);
+        // Clear Search Action
+        if (clearSearchBtn) {
+            clearSearchBtn.addEventListener('click', () => {
+                adminSearchInput.value = '';
+                renderDashboardList();
             });
         }
 
@@ -720,7 +717,13 @@
             const filterStatus = adminStatusFilter.value;
 
             let filtered = consolidatedList.filter(item => {
-                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || (item.mobile && item.mobile.includes(searchTerm));
+                const nameMatch = (item.name || '').toLowerCase().includes(searchTerm);
+                const mobileMatch = (item.mobile || '').toLowerCase().includes(searchTerm);
+                const statusMatch = (item.status || '').toLowerCase().includes(searchTerm);
+                const msgMatch = (item.message || '').toLowerCase().includes(searchTerm);
+                const plusMatch = item.plusOnes && item.plusOnes.some(p => p.toLowerCase().includes(searchTerm));
+
+                const matchesSearch = !searchTerm || nameMatch || mobileMatch || statusMatch || msgMatch || plusMatch;
                 const matchesStatus = (filterStatus === 'ALL') || (item.status === filterStatus);
                 return matchesSearch && matchesStatus;
             });
@@ -731,12 +734,30 @@
             totalStatsText.textContent = `Total: ${totalCount} | Attending: ${attendingCount}`;
 
             if (filtered.length === 0) {
-                guestListContainer.innerHTML = `<p class="text-center text-stone-500 py-8">No matching RSVP responses found.</p>`;
+                if (totalCount > 0 && (searchTerm || filterStatus !== 'ALL')) {
+                    guestListContainer.innerHTML = `
+                        <div class="text-center py-8 flex flex-col items-center gap-2">
+                            <p class="text-stone-500">No responses match your search ("${escapeHtml(searchTerm)}").</p>
+                            <button id="resetFiltersBtn" type="button" class="text-xs text-burgundy font-semibold underline hover:text-black">
+                                Reset Search Filters
+                            </button>
+                        </div>`;
+                    const resetBtn = document.getElementById('resetFiltersBtn');
+                    if (resetBtn) {
+                        resetBtn.addEventListener('click', () => {
+                            adminSearchInput.value = '';
+                            adminStatusFilter.value = 'ALL';
+                            renderDashboardList();
+                        });
+                    }
+                } else {
+                    guestListContainer.innerHTML = `<p class="text-center text-stone-500 py-8">No RSVP responses saved yet.</p>`;
+                }
                 return;
             }
 
             let html = '';
-            filtered.forEach((item, index) => {
+            filtered.forEach((item) => {
                 const isAttending = item.status === 'Attending';
                 html += `
                 <div class="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
