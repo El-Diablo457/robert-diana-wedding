@@ -1,15 +1,55 @@
-/* Hide all pages by default */
-.page {
-    display: none;
+/* Make sure the body and html take up the full screen */
+html, body {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #faf6f0;
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+}
+
+/* Make the invitation scroll container stretch full width */
+#invitationContent {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Force every section to span 100% of the screen width */
+.scroll-section {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
     box-sizing: border-box;
 }
 
-/* Only show the page that has the 'active' class */
-.page.active {
-    display: flex; /* or 'block' depending on your layout */
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* Force invitation & entourage images to scale beautifully and fill screens */
+.content-img {
+    width: 100% !important;
+    max-width: 1000px !important; /* Controls max stretch on huge monitors */
+    height: auto !important;
+    display: block;
+    object-fit: contain;
+    border-radius: 0; /* Remove harsh borders for edge-to-edge flow if preferred */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Content cards (Venue, RSVP) full width alignment */
+.content-card {
+    width: 90% !important;
+    max-width: 700px !important;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(107, 20, 20, 0.08);
+    text-align: center;
+    border: 1px solid rgba(197, 155, 39, 0.3);
+    margin: 20px auto;
 }
