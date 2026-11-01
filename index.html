@@ -397,7 +397,8 @@
             </div>
         </section>
 
-        <section class="scroll-section">
+        <!-- RSVP FORM SECTION -->
+        <section id="rsvpSection" class="scroll-section">
             <div class="content-card">
                 <h2>RSVP</h2>
                 <p style="font-size: 1.05rem; margin-bottom: 5px;">Kindly confirm your attendance below.</p>
@@ -426,12 +427,13 @@
             </div>
         </section>
 
-        <section id="thankYouSection" class="scroll-section">
+        <!-- DYNAMIC THANK YOU SECTION (Hidden initially) -->
+        <section id="thankYouSection" class="scroll-section" style="display: none;">
             <div class="content-card">
-                <h2>Thank You</h2>
+                <h2 id="thankYouHeader">Thank You</h2>
                 <h1 id="thankYouName" style="font-size: clamp(1.3rem, 4vw, 1.6rem); color: var(--primary-burgundy); margin: 10px 0;"></h1>
-                <p id="thankYouMessageText">Your attendance has been confirmed.</p>
-                <p style="margin-bottom: 20px;">We look forward to celebrating our special day with you!</p>
+                <p id="thankYouMessageText" style="font-size: 1.1rem; margin-bottom: 10px;"></p>
+                <p id="thankYouSubtext" style="margin-bottom: 20px;"></p>
                 
                 <button type="button" class="submit-btn" id="exitInvitationBtn" style="background: linear-gradient(135deg, #c59b27 0%, #9e7b1a 100%);">
                     Close Invitation
@@ -589,21 +591,31 @@
                 }
             }
 
-            document.getElementById('thankYouName').innerText = name;
-            document.getElementById('thankYouMessageText').innerText = (attendance === "Attending") 
-                ? "Your attendance has been confirmed." 
-                : "Your apology and response have been received.";
+            // Hide RSVP section
+            document.getElementById('rsvpSection').style.display = 'none';
 
-            document.getElementById('rsvpName').disabled = true;
-            document.getElementById('rsvpMobile').disabled = true;
-            document.getElementById('attendance').disabled = true;
-            document.getElementById('plusOneNames').disabled = true;
-            document.getElementById('message').disabled = true;
+            // Populate conditional Thank You content
+            const thankYouHeader = document.getElementById('thankYouHeader');
+            const thankYouName = document.getElementById('thankYouName');
+            const thankYouMessageText = document.getElementById('thankYouMessageText');
+            const thankYouSubtext = document.getElementById('thankYouSubtext');
 
-            submitBtn.innerText = "Response Saved ✓";
-            submitBtn.style.background = "#2e7d32";
+            thankYouName.innerText = name;
 
-            document.getElementById('thankYouSection').scrollIntoView({ behavior: 'smooth' });
+            if (attendance === "Attending") {
+                thankYouHeader.innerText = "Thank You!";
+                thankYouMessageText.innerText = "Your attendance has been confirmed.";
+                thankYouSubtext.innerText = "We look forward to celebrating our special day with you!";
+            } else {
+                thankYouHeader.innerText = "We Will Miss You!";
+                thankYouMessageText.innerText = "Thank you for letting us know.";
+                thankYouSubtext.innerText = "We completely understand and appreciate your warm thoughts and message.";
+            }
+
+            // Reveal Thank You Section
+            const thankYouSection = document.getElementById('thankYouSection');
+            thankYouSection.style.display = 'flex';
+            thankYouSection.scrollIntoView({ behavior: 'smooth' });
         }
 
         function verifyAdminAccess() {
