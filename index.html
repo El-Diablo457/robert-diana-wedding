@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f9f6f0">
+    <meta name="theme-color" content="#f7f4ed">
     <meta name="description" content="Robert and Diana Wedding Invitation">
 
     <title>Robert & Diana Wedding Invitation</title>
@@ -25,10 +25,9 @@
             --deep-burgundy: #3f0a0a;
             --accent-gold: #b8860b;
             --soft-gold: #d4af37;
-            --pinterest-bg: #f5f2eb;
-            --card-bg: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.96);
             --text-dark: #231c18;
-            --subtle-border: rgba(184, 134, 11, 0.25);
+            --subtle-border: rgba(184, 134, 11, 0.3);
         }
 
         html {
@@ -42,7 +41,13 @@
             width: 100%;
             min-height: 100vh;
             min-height: 100dvh;
-            background-color: var(--pinterest-bg);
+            /* Pinterest-like Editorial Floral Theme Background */
+            background-color: #f7f4ed;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(184, 134, 11, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(90, 15, 15, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 60%),
+                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23b8860b' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M60 60c0-11.046 8.954-20 20-20s20 8.954 20 20-8.954 20-20 20-20-8.954-20-20zM20 20c0-11.046 8.954-20 20-20s20 8.954 20 20-8.954 20-20 20-20-8.954-20-20zM20 100c0-11.046 8.954-20 20-20s20 8.954 20 20-8.954 20-20 20-20-8.954-20-20zM100 20c0-11.046 8.954-20 20-20s20 8.954 20 20-8.954 20-20 20-20-8.954-20-20z'/%3E%3C/g%3E%3C/svg%3E");
             color: var(--text-dark);
             font-family: 'Cormorant Garamond', serif;
             overflow-x: clip;
@@ -132,16 +137,16 @@
             user-select: none;
         }
 
-        /* INVITATION CONTENT */
+        /* INVITATION CONTENT (SCROLLABLE) */
         #invitationContent {
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
-            padding: clamp(16px, 4vw, 45px);
+            padding: clamp(20px, 4vw, 50px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(24px, 5vw, 48px);
+            gap: clamp(30px, 6vw, 55px);
             transition: filter 0.6s ease, opacity 0.6s ease;
         }
 
@@ -156,19 +161,19 @@
             display: block;
             max-width: 100%;
             border-radius: 16px;
-            box-shadow: 0 15px 40px rgba(35, 28, 24, 0.1);
+            box-shadow: 0 15px 40px rgba(35, 28, 24, 0.12);
             border: 1px solid var(--subtle-border);
             background: var(--card-bg);
-            padding: 6px;
+            padding: 8px;
         }
 
         .content-card {
             width: 100%;
-            max-width: 620px;
+            max-width: 640px;
             background: var(--card-bg);
             padding: clamp(24px, 5vw, 44px);
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(35, 28, 24, 0.07);
+            box-shadow: 0 15px 35px rgba(35, 28, 24, 0.08);
             text-align: center;
             border: 1px solid var(--subtle-border);
         }
@@ -391,7 +396,7 @@
         #farewellOverlay {
             position: fixed;
             inset: 0;
-            background: var(--pinterest-bg);
+            background: #f7f4ed;
             z-index: 3000;
             display: flex;
             justify-content: center;
@@ -419,7 +424,7 @@
         </div>
     </section>
 
-    <!-- MAIN INVITATION -->
+    <!-- MAIN INVITATION (SCROLLABLE CONTENT) -->
     <main id="invitationContent">
         <section class="scroll-section">
             <img src="images/invitation.jfif" alt="Wedding Invitation Details" class="content-img">
