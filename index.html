@@ -1,6 +1,8 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="theme-color" content="#fdfbf7">
     <meta name="description" content="Robert and Diana Wedding Invitation">
 
@@ -12,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-- {
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -22,7 +24,7 @@
             --primary-burgundy: #6b1414;
             --accent-gold: #c59b27;
             --soft-gold: #e5c158;
-            --card-bg: rgba(255, 255, 255, 0.94);
+            --card-bg: rgba(255, 255, 255, 0.95);
             --text-dark: #2c221e;
         }
 
@@ -37,7 +39,6 @@
             width: 100%;
             min-height: 100vh;
             min-height: 100dvh;
-            /* Floral Theme Fixed Background */
             background-color: #fdfbf7;
             background-image: url('images/floral-bg.jpg');
             background-size: cover;
@@ -47,10 +48,12 @@
             color: var(--text-dark);
             font-family: 'Cormorant Garamond', serif;
             overflow-x: clip;
+            -webkit-text-size-adjust: 100%;
         }
 
         img {
             display: block;
+            width: 100%;
             max-width: 100%;
             height: auto;
         }
@@ -60,6 +63,7 @@
             position: fixed;
             inset: 0;
             width: 100%;
+            width: 100vw;
             height: 100vh;
             height: 100dvh;
             display: flex;
@@ -69,7 +73,7 @@
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             z-index: 1000;
-            padding: 20px;
+            padding: clamp(12px, 3vw, 24px);
         }
 
         #landing {
@@ -80,11 +84,14 @@
             position: relative;
             width: 100%;
             max-width: 440px;
+            max-height: 90vh;
+            max-height: 90dvh;
+            overflow-y: auto;
             background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 20px;
-            border-radius: 24px;
+            padding: clamp(16px, 4vw, 24px);
+            border-radius: 20px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
             display: flex;
             flex-direction: column;
@@ -111,17 +118,17 @@
 
         @keyframes tiltSway {
             0% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.03) rotate(-2deg); }
-            75% { transform: scale(1.03) rotate(2deg); }
+            25% { transform: scale(1.02) rotate(-1.5deg); }
+            75% { transform: scale(1.02) rotate(1.5deg); }
             100% { transform: scale(1) rotate(0deg); }
         }
 
         .landing-cover-img {
             width: 100%;
             height: auto;
-            max-height: 70vh;
+            max-height: 65vh;
             object-fit: contain;
-            border-radius: 14px;
+            border-radius: 12px;
             box-shadow: 0 8px 25px rgba(107, 20, 20, 0.15);
             border: 1px solid rgba(197, 155, 39, 0.3);
         }
@@ -134,16 +141,16 @@
             user-select: none;
         }
 
-        /* INVITATION CONTENT (SCROLLABLE WITH HIGH CONTRAST) */
+        /* INVITATION CONTENT (RESPONSIVE & SCROLLABLE) */
         #invitationContent {
             width: 100%;
-            max-width: 1050px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: clamp(20px, 4vw, 45px);
+            padding: clamp(12px, 3vw, 40px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(28px, 5vw, 50px);
+            gap: clamp(20px, 4vw, 45px);
             transition: filter 0.6s ease, opacity 0.6s ease;
         }
 
@@ -156,20 +163,21 @@
 
         .content-img {
             display: block;
+            width: 100%;
             max-width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(197, 155, 39, 0.3);
-            border: 8px solid rgba(255, 255, 255, 0.95);
+            border-radius: 14px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(197, 155, 39, 0.3);
+            border: clamp(4px, 1.5vw, 8px) solid rgba(255, 255, 255, 0.95);
             background: #fff;
         }
 
         .content-card {
             width: 100%;
-            max-width: 650px;
+            max-width: 620px;
             background: var(--card-bg);
-            padding: clamp(24px, 5vw, 44px);
-            border-radius: 20px;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+            padding: clamp(20px, 4.5vw, 40px);
+            border-radius: 18px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
             text-align: center;
             border: 1px solid rgba(197, 155, 39, 0.45);
             backdrop-filter: blur(8px);
@@ -178,23 +186,23 @@
 
         .content-card h2 {
             font-family: 'Cinzel Decorative', serif;
-            font-size: clamp(1.4rem, 5vw, 2.2rem);
+            font-size: clamp(1.3rem, 4.5vw, 2rem);
             color: var(--primary-burgundy);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .content-card h3 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.15rem, 3.5vw, 1.5rem);
-            margin: 12px 0;
+            font-size: clamp(1.1rem, 3.2vw, 1.4rem);
+            margin: 10px 0;
         }
 
         /* RSVP FORM */
         .rsvp-form {
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            margin-top: 25px;
+            gap: 14px;
+            margin-top: 20px;
             width: 100%;
         }
 
@@ -202,11 +210,11 @@
         .rsvp-form select,
         .rsvp-form textarea {
             width: 100%;
-            padding: 14px 18px;
+            padding: clamp(12px, 3vw, 15px) clamp(14px, 3vw, 18px);
             border: 1px solid #d5ccc0;
             border-radius: 8px;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
             background: #ffffff;
             color: var(--text-dark);
             outline: none;
@@ -222,7 +230,7 @@
 
         .rsvp-form textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 90px;
         }
 
         #plusOneContainer {
@@ -236,40 +244,41 @@
             background: linear-gradient(135deg, #7a1c1c 0%, #520f0f 100%);
             color: #ffffff;
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1rem, 3vw, 1.25rem);
+            font-size: clamp(0.95rem, 2.8vw, 1.2rem);
             font-weight: 600;
             text-transform: uppercase;
-            padding: 14px clamp(20px, 5vw, 40px);
+            padding: clamp(12px, 3vw, 14px) clamp(16px, 4vw, 35px);
             border: 1px solid var(--accent-gold);
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 8px 22px rgba(122, 28, 28, 0.4);
+            box-shadow: 0 6px 20px rgba(122, 28, 28, 0.35);
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
         }
 
-        .submit-btn:hover, .venue-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(122, 28, 28, 0.5);
+        @media (min-width: 600px) {
+            .submit-btn, .venue-btn, .close-btn {
+                width: auto;
+            }
         }
 
         .venue-btn {
-            margin-top: 18px;
-            padding: 12px 28px;
-            font-size: clamp(0.95rem, 3vw, 1.1rem);
+            margin-top: 15px;
         }
 
         .view-list-btn {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.75);
             color: #666;
             border: 1px dashed #dcd1c4;
-            margin-top: 15px;
+            margin-top: 12px;
             font-size: 0.85rem;
-            padding: 8px;
+            padding: 10px;
             box-shadow: none;
+            width: 100%;
         }
 
         .close-btn {
@@ -287,28 +296,29 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: clamp(10px, 3vw, 20px);
         }
 
         .guest-modal-content {
-            background: rgba(255, 255, 255, 0.97);
+            background: rgba(255, 255, 255, 0.98);
             border: 1px solid var(--accent-gold);
             border-radius: 16px;
             width: 100%;
             max-width: 650px;
-            max-height: 85vh;
-            padding: 25px;
+            max-height: 90vh;
+            max-height: 90dvh;
+            padding: clamp(16px, 4vw, 25px);
             box-shadow: 0 25px 50px rgba(0,0,0,0.35);
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 14px;
             position: relative;
         }
 
         .close-modal {
             position: absolute;
-            top: 15px;
-            right: 20px;
+            top: 12px;
+            right: 18px;
             font-size: 1.8rem;
             color: var(--primary-burgundy);
             cursor: pointer;
@@ -318,26 +328,26 @@
         .dashboard-metrics {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin: 10px 0;
+            gap: 8px;
+            margin: 5px 0;
         }
 
         .metric-card {
             background: #faf8f5;
             border: 1px solid rgba(197, 155, 39, 0.3);
             border-radius: 8px;
-            padding: 10px;
+            padding: 8px 4px;
             text-align: center;
         }
 
         .metric-card .num {
-            font-size: 1.4rem;
+            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
             font-weight: bold;
             color: var(--primary-burgundy);
         }
 
         .metric-card .label {
-            font-size: 0.75rem;
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
             color: #666;
             text-transform: uppercase;
         }
@@ -345,18 +355,18 @@
         /* RESPONSES TABLE */
         .guest-list-container {
             overflow-y: auto;
-            max-height: 45vh;
+            max-height: 40vh;
             text-align: left;
         }
 
         .response-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.95rem;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
         }
 
         .response-table th, .response-table td {
-            padding: 10px;
+            padding: 8px;
             border-bottom: 1px dashed #dcd1c4;
             text-align: left;
         }
@@ -365,13 +375,16 @@
             color: var(--primary-burgundy);
             font-family: 'Playfair Display', serif;
             border-bottom: 2px solid var(--accent-gold);
+            background: #fff;
+            position: sticky;
+            top: 0;
         }
 
         /* FAREWELL OVERLAY */
         #farewellOverlay {
             position: fixed;
             inset: 0;
-            background: rgba(253, 251, 247, 0.96);
+            background: rgba(253, 251, 247, 0.97);
             z-index: 3000;
             display: flex;
             justify-content: center;
@@ -382,7 +395,10 @@
         @media (max-width: 600px) {
             .dashboard-metrics { grid-template-columns: repeat(2, 1fr); }
         }
-    </style></head><body class="landing-active">
+    </style>
+</head>
+
+<body class="landing-active">
 
     <!-- BACKGROUND MUSIC -->
     <audio id="bgMusic" loop preload="auto">
@@ -451,11 +467,11 @@
     <!-- DYNAMIC THANK YOU POPUP -->
     <div id="thankYouPopup" style="display: none;">
         <div class="welcome-box">
-            <img src="images/thankyou.png" alt="Robert & Diana Thank You Cover" class="landing-cover-img" id="thankYouImg" style="display: none; margin-bottom: 15px;">
-            <h2 id="thankYouHeader" style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy); margin-bottom: 8px; text-align: center;">Thank You</h2>
-            <h1 id="thankYouName" style="font-size: clamp(1.2rem, 3.5vw, 1.5rem); color: var(--primary-burgundy); margin-bottom: 10px; text-align: center;"></h1>
-            <p id="thankYouMessageText" style="font-size: 1.05rem; text-align: center; margin-bottom: 6px;"></p>
-            <p id="thankYouSubtext" style="font-size: 0.95rem; text-align: center; color: #555; margin-bottom: 20px;"></p>
+            <img src="images/thankyou.png" alt="Robert & Diana Thank You Cover" class="landing-cover-img" id="thankYouImg" style="display: none; margin-bottom: 12px;">
+            <h2 id="thankYouHeader" style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy); margin-bottom: 6px; text-align: center;">Thank You</h2>
+            <h1 id="thankYouName" style="font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--primary-burgundy); margin-bottom: 8px; text-align: center;"></h1>
+            <p id="thankYouMessageText" style="font-size: 1rem; text-align: center; margin-bottom: 4px;"></p>
+            <p id="thankYouSubtext" style="font-size: 0.9rem; text-align: center; color: #555; margin-bottom: 16px;"></p>
             <button type="button" class="close-btn" id="exitInvitationBtn">
                 Close Invitation
             </button>
@@ -467,7 +483,7 @@
         <div class="guest-modal-content">
             <span class="close-modal" id="closeModalBtn">&times;</span>
             <h2 style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy);">Admin RSVP Dashboard</h2>
-            <p style="font-size: 0.85rem; color: #666; margin-top: -10px;">Live responses synced from Google Sheets</p>
+            <p style="font-size: 0.85rem; color: #666; margin-top: -6px;">Live responses synced from Google Sheets</p>
 
             <!-- SUMMARY CARDS -->
             <div class="dashboard-metrics">
@@ -733,4 +749,6 @@
                 alert("You may now safely close this tab or browser window.");
             }, 200);
         }
-    </script></body></html>
+    </script>
+</body>
+</html>
