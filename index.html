@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f7f4ed">
+    <meta name="theme-color" content="#fdfbf7">
     <meta name="description" content="Robert and Diana Wedding Invitation">
 
     <title>Robert & Diana Wedding Invitation</title>
@@ -21,13 +21,11 @@
         }
 
         :root {
-            --primary-burgundy: #5a0f0f;
-            --deep-burgundy: #3f0a0a;
-            --accent-gold: #b8860b;
-            --soft-gold: #d4af37;
-            --card-bg: rgba(255, 255, 255, 0.96);
-            --text-dark: #231c18;
-            --subtle-border: rgba(184, 134, 11, 0.3);
+            --primary-burgundy: #6b1414;
+            --accent-gold: #c59b27;
+            --soft-gold: #e5c158;
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --text-dark: #2c221e;
         }
 
         html {
@@ -41,13 +39,13 @@
             width: 100%;
             min-height: 100vh;
             min-height: 100dvh;
-            /* Pinterest-like Editorial Floral Theme Background */
-            background-color: #f7f4ed;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(184, 134, 11, 0.04) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(90, 15, 15, 0.05) 0%, transparent 45%),
-                radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 60%),
-                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23b8860b' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M60 60c0-11.046 8.954-20 20-20s20 8.954 20 20-8.954 20-20 20-20-8.954-20-20zM20 20c0-11.046 8.954-20 20-20s20 8.954 20 20-8.954 20-20 20-20-8.954-20-20zM20 100c0-11.046 8.954-20 20-20s20 8.954 20 20-8.954 20-20 20-20-8.954-20-20zM100 20c0-11.046 8.954-20 20-20s20 8.954 20 20-8.954 20-20 20-20-8.954-20-20z'/%3E%3C/g%3E%3C/svg%3E");
+            /* Floral Theme Background */
+            background-color: #fdfbf7;
+            background-image: url('images/floral-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
             color: var(--text-dark);
             font-family: 'Cormorant Garamond', serif;
             overflow-x: clip;
@@ -69,9 +67,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(35, 28, 24, 0.65);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(44, 34, 30, 0.55);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             z-index: 1000;
             padding: 20px;
         }
@@ -87,18 +85,19 @@
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 24px;
-            border-radius: 20px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--subtle-border);
+            padding: 20px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            border: 1px solid rgba(197, 155, 39, 0.4);
             transform-origin: center center;
             animation: 
-                popUpScale 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-                pulseGlow 1.2s ease-in-out infinite 0.35s, 
-                tiltSway 1.4s ease-in-out infinite 0.35s;
+                popUpScale 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                pulseGlow 1s ease-in-out infinite 0.3s, 
+                tiltSway 1.33s ease-in-out infinite 0.3s;
         }
 
         @keyframes popUpScale {
@@ -107,15 +106,15 @@
         }
 
         @keyframes pulseGlow {
-            0% { box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--subtle-border); }
-            50% { box-shadow: 0 35px 70px rgba(90, 15, 15, 0.45), 0 0 15px rgba(184, 134, 11, 0.3); }
-            100% { box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--subtle-border); }
+            0% { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
+            50% { box-shadow: 0 30px 60px rgba(107, 20, 20, 0.5); }
+            100% { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
         }
 
         @keyframes tiltSway {
             0% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.02) rotate(-1.5deg); }
-            75% { transform: scale(1.02) rotate(1.5deg); }
+            25% { transform: scale(1.03) rotate(-2deg); }
+            75% { transform: scale(1.03) rotate(2deg); }
             100% { transform: scale(1) rotate(0deg); }
         }
 
@@ -124,15 +123,15 @@
             height: auto;
             max-height: 70vh;
             object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(90, 15, 15, 0.12);
-            border: 1px solid var(--subtle-border);
+            border-radius: 14px;
+            box-shadow: 0 8px 25px rgba(107, 20, 20, 0.15);
+            border: 1px solid rgba(197, 155, 39, 0.3);
         }
 
         body.landing-active #invitationContent,
         body.popup-active #invitationContent {
-            filter: blur(14px);
-            opacity: 0.35;
+            filter: blur(12px);
+            opacity: 0.4;
             pointer-events: none;
             user-select: none;
         }
@@ -140,13 +139,13 @@
         /* INVITATION CONTENT (SCROLLABLE) */
         #invitationContent {
             width: 100%;
-            max-width: 950px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: clamp(20px, 4vw, 50px);
+            padding: clamp(16px, 3vw, 40px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(30px, 6vw, 55px);
+            gap: clamp(24px, 4vw, 45px);
             transition: filter 0.6s ease, opacity 0.6s ease;
         }
 
@@ -160,37 +159,37 @@
         .content-img {
             display: block;
             max-width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 15px 40px rgba(35, 28, 24, 0.12);
-            border: 1px solid var(--subtle-border);
-            background: var(--card-bg);
-            padding: 8px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(197, 155, 39, 0.35);
+            background: rgba(255, 255, 255, 0.8);
+            padding: 6px;
         }
 
         .content-card {
             width: 100%;
-            max-width: 640px;
+            max-width: 650px;
             background: var(--card-bg);
-            padding: clamp(24px, 5vw, 44px);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(35, 28, 24, 0.08);
+            padding: clamp(20px, 5vw, 40px);
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(107, 20, 20, 0.12);
             text-align: center;
-            border: 1px solid var(--subtle-border);
+            border: 1px solid rgba(197, 155, 39, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
         }
 
         .content-card h2 {
             font-family: 'Cinzel Decorative', serif;
             font-size: clamp(1.4rem, 5vw, 2.2rem);
             color: var(--primary-burgundy);
-            margin-bottom: 12px;
-            letter-spacing: 0.5px;
+            margin-bottom: 15px;
         }
 
         .content-card h3 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.15rem, 3.5vw, 1.5rem);
-            margin: 10px 0;
-            color: var(--text-dark);
+            margin: 12px 0;
         }
 
         /* RSVP FORM */
@@ -198,7 +197,7 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
-            margin-top: 24px;
+            margin-top: 25px;
             width: 100%;
         }
 
@@ -207,22 +206,13 @@
         .rsvp-form textarea {
             width: 100%;
             padding: 14px 18px;
-            border: 1px solid #d5ccc0;
-            border-radius: 10px;
+            border: 1px solid #dcd1c4;
+            border-radius: 8px;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
-            background: #faf8f5;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.95);
             color: var(--text-dark);
             outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .rsvp-form input:focus,
-        .rsvp-form select:focus,
-        .rsvp-form textarea:focus {
-            border-color: var(--accent-gold);
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.15);
         }
 
         .rsvp-form textarea {
@@ -238,29 +228,22 @@
 
         /* BUTTONS */
         .submit-btn, .venue-btn, .view-list-btn, .close-btn {
-            background: linear-gradient(135deg, var(--primary-burgundy) 0%, var(--deep-burgundy) 100%);
+            background: linear-gradient(135deg, #7a1c1c 0%, #520f0f 100%);
             color: #ffffff;
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1rem, 3vw, 1.2rem);
+            font-size: clamp(1rem, 3vw, 1.25rem);
             font-weight: 600;
-            letter-spacing: 1px;
             text-transform: uppercase;
-            padding: 15px clamp(20px, 5vw, 40px);
+            padding: 14px clamp(20px, 5vw, 40px);
             border: 1px solid var(--accent-gold);
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(90, 15, 15, 0.3);
+            box-shadow: 0 6px 20px rgba(122, 28, 28, 0.35);
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-flex;
             justify-content: center;
             align-items: center;
-        }
-
-        .submit-btn:hover, .venue-btn:hover, .close-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(90, 15, 15, 0.4);
-            filter: brightness(1.05);
         }
 
         .venue-btn {
@@ -272,32 +255,24 @@
         .view-list-btn {
             background: transparent;
             color: #777;
-            border: 1px dashed #d5ccc0;
+            border: 1px dashed #dcd1c4;
             margin-top: 15px;
             font-size: 0.85rem;
-            padding: 10px;
+            padding: 8px;
             box-shadow: none;
-            letter-spacing: 0.5px;
-        }
-
-        .view-list-btn:hover {
-            background: rgba(184, 134, 11, 0.05);
-            color: var(--primary-burgundy);
-            border-color: var(--accent-gold);
         }
 
         .close-btn {
-            background: linear-gradient(135deg, var(--accent-gold) 0%, #9a7008 100%);
+            background: linear-gradient(135deg, #c59b27 0%, #9e7b1a 100%);
             width: 100%;
-            border-color: #e5c158;
         }
 
         /* ADMIN DASHBOARD MODAL */
         .guest-modal {
             position: fixed;
             inset: 0;
-            background: rgba(35, 28, 24, 0.6);
-            backdrop-filter: blur(6px);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
             z-index: 2000;
             display: flex;
             justify-content: center;
@@ -308,50 +283,45 @@
         .guest-modal-content {
             background: var(--card-bg);
             border: 1px solid var(--accent-gold);
-            border-radius: 20px;
+            border-radius: 16px;
             width: 100%;
-            max-width: 680px;
+            max-width: 650px;
             max-height: 85vh;
-            padding: 30px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 15px;
             position: relative;
         }
 
         .close-modal {
             position: absolute;
-            top: 18px;
-            right: 22px;
+            top: 15px;
+            right: 20px;
             font-size: 1.8rem;
             color: var(--primary-burgundy);
             cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .close-modal:hover {
-            transform: scale(1.1);
         }
 
         /* DASHBOARD SUMMARY CARDS */
         .dashboard-metrics {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 10px;
             margin: 10px 0;
         }
 
         .metric-card {
-            background: #faf8f5;
-            border: 1px solid var(--subtle-border);
-            border-radius: 10px;
-            padding: 12px;
+            background: #fbf8f3;
+            border: 1px solid rgba(197, 155, 39, 0.3);
+            border-radius: 8px;
+            padding: 10px;
             text-align: center;
         }
 
         .metric-card .num {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: var(--primary-burgundy);
         }
@@ -360,8 +330,6 @@
             font-size: 0.75rem;
             color: #666;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
         }
 
         /* RESPONSES TABLE */
@@ -378,8 +346,8 @@
         }
 
         .response-table th, .response-table td {
-            padding: 12px;
-            border-bottom: 1px dashed #e2dad0;
+            padding: 10px;
+            border-bottom: 1px dashed #dcd1c4;
             text-align: left;
         }
 
@@ -387,16 +355,13 @@
             color: var(--primary-burgundy);
             font-family: 'Playfair Display', serif;
             border-bottom: 2px solid var(--accent-gold);
-            background: #faf8f5;
-            position: sticky;
-            top: 0;
         }
 
         /* FAREWELL OVERLAY */
         #farewellOverlay {
             position: fixed;
             inset: 0;
-            background: #f7f4ed;
+            background: rgba(253, 251, 247, 0.95);
             z-index: 3000;
             display: flex;
             justify-content: center;
@@ -449,7 +414,7 @@
         <section class="scroll-section">
             <div class="content-card">
                 <h2>RSVP</h2>
-                <p style="font-size: 1.1rem; margin-bottom: 6px; color: #555;">Kindly confirm your attendance below.</p>
+                <p style="font-size: 1.05rem; margin-bottom: 5px;">Kindly confirm your attendance below.</p>
                 <form class="rsvp-form" onsubmit="event.preventDefault();">
                     <input id="rsvpName" type="text" placeholder="Guest Name" required>
                     <input id="rsvpMobile" type="tel" placeholder="Mobile Number">
@@ -483,7 +448,7 @@
             <h2 id="thankYouHeader" style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy); margin-bottom: 8px; text-align: center;">Thank You</h2>
             <h1 id="thankYouName" style="font-size: clamp(1.2rem, 3.5vw, 1.5rem); color: var(--primary-burgundy); margin-bottom: 10px; text-align: center;"></h1>
             <p id="thankYouMessageText" style="font-size: 1.05rem; text-align: center; margin-bottom: 6px;"></p>
-            <p id="thankYouSubtext" style="font-size: 0.95rem; text-align: center; color: #666; margin-bottom: 20px;"></p>
+            <p id="thankYouSubtext" style="font-size: 0.95rem; text-align: center; color: #555; margin-bottom: 20px;"></p>
             <button type="button" class="close-btn" id="exitInvitationBtn">
                 Close Invitation
             </button>
@@ -495,7 +460,7 @@
         <div class="guest-modal-content">
             <span class="close-modal" id="closeModalBtn">&times;</span>
             <h2 style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy);">Admin RSVP Dashboard</h2>
-            <p style="font-size: 0.85rem; color: #666; margin-top: -8px;">Live responses synced from Google Sheets</p>
+            <p style="font-size: 0.85rem; color: #666; margin-top: -10px;">Live responses synced from Google Sheets</p>
 
             <!-- SUMMARY CARDS -->
             <div class="dashboard-metrics">
@@ -528,7 +493,7 @@
     <div id="farewellOverlay" style="display: none;">
         <div class="content-card">
             <h2>Thank You For Visiting!</h2>
-            <p style="margin: 15px 0; color: #555;">Your response has been saved. You may now safely close this browser window.</p>
+            <p style="margin: 15px 0;">Your response has been saved. You may now safely close this browser window.</p>
             <button type="button" class="venue-btn" onclick="handleCloseWindow()">Close Window</button>
         </div>
     </div>
