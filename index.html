@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fdfbf7">
@@ -14,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        * {
+- {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -24,7 +22,7 @@
             --primary-burgundy: #6b1414;
             --accent-gold: #c59b27;
             --soft-gold: #e5c158;
-            --card-bg: rgba(255, 255, 255, 0.92);
+            --card-bg: rgba(255, 255, 255, 0.94);
             --text-dark: #2c221e;
         }
 
@@ -39,7 +37,7 @@
             width: 100%;
             min-height: 100vh;
             min-height: 100dvh;
-            /* Floral Theme Background */
+            /* Floral Theme Fixed Background */
             background-color: #fdfbf7;
             background-image: url('images/floral-bg.jpg');
             background-size: cover;
@@ -67,9 +65,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(44, 34, 30, 0.55);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            background: rgba(44, 34, 30, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 1000;
             padding: 20px;
         }
@@ -82,17 +80,17 @@
             position: relative;
             width: 100%;
             max-width: 440px;
-            background: var(--card-bg);
+            background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             padding: 20px;
             border-radius: 24px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border: 1px solid rgba(197, 155, 39, 0.4);
+            border: 1px solid rgba(197, 155, 39, 0.5);
             transform-origin: center center;
             animation: 
                 popUpScale 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -136,16 +134,16 @@
             user-select: none;
         }
 
-        /* INVITATION CONTENT (SCROLLABLE) */
+        /* INVITATION CONTENT (SCROLLABLE WITH HIGH CONTRAST) */
         #invitationContent {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1050px;
             margin: 0 auto;
-            padding: clamp(16px, 3vw, 40px);
+            padding: clamp(20px, 4vw, 45px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(24px, 4vw, 45px);
+            gap: clamp(28px, 5vw, 50px);
             transition: filter 0.6s ease, opacity 0.6s ease;
         }
 
@@ -159,24 +157,23 @@
         .content-img {
             display: block;
             max-width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(197, 155, 39, 0.35);
-            background: rgba(255, 255, 255, 0.8);
-            padding: 6px;
+            border-radius: 16px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(197, 155, 39, 0.3);
+            border: 8px solid rgba(255, 255, 255, 0.95);
+            background: #fff;
         }
 
         .content-card {
             width: 100%;
             max-width: 650px;
             background: var(--card-bg);
-            padding: clamp(20px, 5vw, 40px);
-            border-radius: 16px;
-            box-shadow: 0 12px 35px rgba(107, 20, 20, 0.12);
+            padding: clamp(24px, 5vw, 44px);
+            border-radius: 20px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
             text-align: center;
-            border: 1px solid rgba(197, 155, 39, 0.4);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(197, 155, 39, 0.45);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .content-card h2 {
@@ -206,13 +203,21 @@
         .rsvp-form textarea {
             width: 100%;
             padding: 14px 18px;
-            border: 1px solid #dcd1c4;
+            border: 1px solid #d5ccc0;
             border-radius: 8px;
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
-            background: rgba(255, 255, 255, 0.95);
+            background: #ffffff;
             color: var(--text-dark);
             outline: none;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .rsvp-form input:focus,
+        .rsvp-form select:focus,
+        .rsvp-form textarea:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 2px rgba(197, 155, 39, 0.25);
         }
 
         .rsvp-form textarea {
@@ -238,12 +243,17 @@
             border: 1px solid var(--accent-gold);
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(122, 28, 28, 0.35);
+            box-shadow: 0 8px 22px rgba(122, 28, 28, 0.4);
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-flex;
             justify-content: center;
             align-items: center;
+        }
+
+        .submit-btn:hover, .venue-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(122, 28, 28, 0.5);
         }
 
         .venue-btn {
@@ -253,8 +263,8 @@
         }
 
         .view-list-btn {
-            background: transparent;
-            color: #777;
+            background: rgba(255, 255, 255, 0.7);
+            color: #666;
             border: 1px dashed #dcd1c4;
             margin-top: 15px;
             font-size: 0.85rem;
@@ -271,8 +281,8 @@
         .guest-modal {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(6px);
             z-index: 2000;
             display: flex;
             justify-content: center;
@@ -281,14 +291,14 @@
         }
 
         .guest-modal-content {
-            background: var(--card-bg);
+            background: rgba(255, 255, 255, 0.97);
             border: 1px solid var(--accent-gold);
             border-radius: 16px;
             width: 100%;
             max-width: 650px;
             max-height: 85vh;
             padding: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.35);
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -313,7 +323,7 @@
         }
 
         .metric-card {
-            background: #fbf8f3;
+            background: #faf8f5;
             border: 1px solid rgba(197, 155, 39, 0.3);
             border-radius: 8px;
             padding: 10px;
@@ -361,7 +371,7 @@
         #farewellOverlay {
             position: fixed;
             inset: 0;
-            background: rgba(253, 251, 247, 0.95);
+            background: rgba(253, 251, 247, 0.96);
             z-index: 3000;
             display: flex;
             justify-content: center;
@@ -372,10 +382,7 @@
         @media (max-width: 600px) {
             .dashboard-metrics { grid-template-columns: repeat(2, 1fr); }
         }
-    </style>
-</head>
-
-<body class="landing-active">
+    </style></head><body class="landing-active">
 
     <!-- BACKGROUND MUSIC -->
     <audio id="bgMusic" loop preload="auto">
@@ -726,6 +733,4 @@
                 alert("You may now safely close this tab or browser window.");
             }, 200);
         }
-    </script>
-</body>
-</html>
+    </script></body></html>
