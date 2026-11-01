@@ -8,7 +8,7 @@
 
     <title>Robert & Diana Wedding Invitation</title>
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts with Display Swap for instant text rendering -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -99,6 +99,7 @@
             align-items: center;
             border: 1px solid rgba(197, 155, 39, 0.5);
             transform-origin: center center;
+            will-change: transform, opacity, box-shadow;
             animation: 
                 popUpScale 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
                 pulseGlow 1s ease-in-out infinite 0.3s, 
@@ -401,8 +402,8 @@
 
 <body class="landing-active">
 
-    <!-- BACKGROUND MUSIC -->
-    <audio id="bgMusic" loop preload="auto">
+    <!-- BACKGROUND MUSIC OPTIMIZED FOR LAZY LOADING -->
+    <audio id="bgMusic" loop preload="none">
         <source src="bahandi.m4a" type="audio/mp4">
     </audio>
 
@@ -465,7 +466,7 @@
         </section>
     </main>
 
-    <!-- DYNAMIC THANK YOU POPUP WITH IMAGE -->
+    <!-- DYNAMIC THANK YOU POPUP -->
     <div id="thankYouPopup" style="display: none;">
         <div class="welcome-box">
             <img src="images/thank-you.jpg" alt="Robert & Diana Thank You Cover" class="landing-cover-img" id="thankYouImg" style="display: block; margin-bottom: 12px;">
