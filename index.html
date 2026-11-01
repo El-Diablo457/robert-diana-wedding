@@ -284,6 +284,7 @@
         .close-btn {
             background: linear-gradient(135deg, #c59b27 0%, #9e7b1a 100%);
             width: 100%;
+            margin-top: 10px;
         }
 
         /* ADMIN DASHBOARD MODAL */
@@ -464,10 +465,10 @@
         </section>
     </main>
 
-    <!-- DYNAMIC THANK YOU POPUP -->
+    <!-- DYNAMIC THANK YOU POPUP WITH IMAGE -->
     <div id="thankYouPopup" style="display: none;">
         <div class="welcome-box">
-            <img src="images/thankyou.png" alt="Robert & Diana Thank You Cover" class="landing-cover-img" id="thankYouImg" style="display: none; margin-bottom: 12px;">
+            <img src="images/thank-you.jpg" alt="Robert & Diana Thank You Cover" class="landing-cover-img" id="thankYouImg" style="display: block; margin-bottom: 12px;">
             <h2 id="thankYouHeader" style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy); margin-bottom: 6px; text-align: center;">Thank You</h2>
             <h1 id="thankYouName" style="font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--primary-burgundy); margin-bottom: 8px; text-align: center;"></h1>
             <p id="thankYouMessageText" style="font-size: 1rem; text-align: center; margin-bottom: 4px;"></p>
@@ -631,10 +632,8 @@
             const thankYouName = document.getElementById('thankYouName');
             const thankYouMessageText = document.getElementById('thankYouMessageText');
             const thankYouSubtext = document.getElementById('thankYouSubtext');
-            const thankYouImg = document.getElementById('thankYouImg');
 
             thankYouName.innerText = name;
-            thankYouImg.style.display = 'block';
 
             if (attendance === "Attending") {
                 thankYouHeader.innerText = "Thank You!";
