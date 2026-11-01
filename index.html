@@ -52,8 +52,8 @@
             height: auto;
         }
 
-        /* LANDING COVER */
-        #landing {
+        /* LANDING COVER & THANK YOU POPUP OVERLAY */
+        #landing, #thankYouPopup {
             position: fixed;
             inset: 0;
             width: 100%;
@@ -66,8 +66,11 @@
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
             z-index: 1000;
-            cursor: pointer;
             padding: 20px;
+        }
+
+        #landing {
+            cursor: pointer;
         }
 
         .welcome-box {
@@ -120,7 +123,8 @@
             border: 1px solid rgba(197, 155, 39, 0.3);
         }
 
-        body.landing-active #invitationContent {
+        body.landing-active #invitationContent,
+        body.popup-active #invitationContent {
             filter: blur(12px);
             opacity: 0.4;
             pointer-events: none;
@@ -398,7 +402,7 @@
         </section>
 
         <!-- RSVP FORM SECTION -->
-        <section id="rsvpSection" class="scroll-section">
+        <section class="scroll-section">
             <div class="content-card">
                 <h2>RSVP</h2>
                 <p style="font-size: 1.05rem; margin-bottom: 5px;">Kindly confirm your attendance below.</p>
@@ -426,21 +430,21 @@
                 </form>
             </div>
         </section>
-
-        <!-- DYNAMIC THANK YOU SECTION (Hidden initially) -->
-        <section id="thankYouSection" class="scroll-section" style="display: none;">
-            <div class="content-card">
-                <h2 id="thankYouHeader">Thank You</h2>
-                <h1 id="thankYouName" style="font-size: clamp(1.3rem, 4vw, 1.6rem); color: var(--primary-burgundy); margin: 10px 0;"></h1>
-                <p id="thankYouMessageText" style="font-size: 1.1rem; margin-bottom: 10px;"></p>
-                <p id="thankYouSubtext" style="margin-bottom: 20px;"></p>
-                
-                <button type="button" class="submit-btn" id="exitInvitationBtn" style="background: linear-gradient(135deg, #c59b27 0%, #9e7b1a 100%);">
-                    Close Invitation
-                </button>
-            </div>
-        </section>
     </main>
+
+    <!-- DYNAMIC THANK YOU POPUP (Matches Landing Page Behavior & Effect) -->
+    <div id="thankYouPopup" style="display: none;">
+        <div class="welcome-box">
+            <img src="images/thankyou.png" alt="Robert & Diana Thank You Cover" class="landing-cover-img" id="thankYouImg" style="display: none; margin-bottom: 15px;">
+            <h2 id="thankYouHeader" style="font-family: 'Cinzel Decorative', serif; color: var(--primary-burgundy); margin-bottom: 8px; text-align: center;">Thank You</h2>
+            <h1 id="thankYouName" style="font-size: clamp(1.2rem, 3.5vw, 1.5rem); color: var(--primary-burgundy); margin-bottom: 10px; text-align: center;"></h1>
+            <p id="thankYouMessageText" style="font-size: 1.05rem; text-align: center; margin-bottom: 6px;"></p>
+            <p id="thankYouSubtext" style="font-size: 0.95rem; text-align: center; color: #555; margin-bottom: 20px;"></p>
+            <button type="button" class="close-btn" id="exitInvitationBtn">
+                Close Invitation
+            </button>
+        </div>
+    </div>
 
     <!-- ADMIN DASHBOARD MODAL -->
     <div id="guestListModal" class="guest-modal" style="display: none;">
@@ -591,16 +595,17 @@
                 }
             }
 
-            // Hide RSVP section
-            document.getElementById('rsvpSection').style.display = 'none';
-
-            // Populate conditional Thank You content
+            // Populate conditional Thank You content & Image
             const thankYouHeader = document.getElementById('thankYouHeader');
             const thankYouName = document.getElementById('thankYouName');
             const thankYouMessageText = document.getElementById('thankYouMessageText');
             const thankYouSubtext = document.getElementById('thankYouSubtext');
+            const thankYouImg = document.getElementById('thankYouImg');
 
             thankYouName.innerText = name;
+
+            // Optional: If you save your provided image as images/thankyou.png, it will appear with the same frame effect
+            thankYouImg.style.display = 'block';
 
             if (attendance === "Attending") {
                 thankYouHeader.innerText = "Thank You!";
@@ -609,13 +614,22 @@
             } else {
                 thankYouHeader.innerText = "We Will Miss You!";
                 thankYouMessageText.innerText = "Thank you for letting us know.";
-                thankYouSubtext.innerText = "We completely understand and appreciate your warm thoughts and message.";
+                thankYouSubtext.innerText = "We completely understand and appreciate your warm thoughts.";
             }
 
-            // Reveal Thank You Section
-            const thankYouSection = document.getElementById('thankYouSection');
-            thankYouSection.style.display = 'flex';
-            thankYouSection.scrollIntoView({ behavior: 'smooth' });
+            // Disable form inputs
+            document.getElementById('rsvpName').disabled = true;
+            document.getElementById('rsvpMobile').disabled = true;
+            document.getElementById('attendance').disabled = true;
+            document.getElementById('plusOneNames').disabled = true;
+            document.getElementById('message').disabled = true;
+            submitBtn.innerText = "Response Saved ✓";
+            submitBtn.style.background = "#2e7d32";
+
+            // Trigger Pop-up Overlay with blur effect matching the landing page
+            document.body.classList.add('popup-active');
+            const popup = document.getElementById('thankYouPopup');
+            popup.style.display = 'flex';
         }
 
         function verifyAdminAccess() {
@@ -691,9 +705,8 @@
         }
 
         function handleExitInvitation() {
-            try {
-                window.close();
-            } catch (e) {}
+            document.getElementById('thankYouPopup').style.display = 'none';
+            document.body.classList.remove('popup-active');
             
             setTimeout(() => {
                 document.getElementById('farewellOverlay').style.display = 'flex';
